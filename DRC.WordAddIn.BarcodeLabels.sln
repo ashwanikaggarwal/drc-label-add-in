@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DRC.WordAddIn.BarcodeLabels", "DRC.WordAddIn.BarcodeLabels\DRC.WordAddIn.BarcodeLabels.csproj", "{1890C77C-2860-4A23-8C3A-E9CF763FE872}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1890C77C-2860-4A23-8C3A-E9CF763FE872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1890C77C-2860-4A23-8C3A-E9CF763FE872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1890C77C-2860-4A23-8C3A-E9CF763FE872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1890C77C-2860-4A23-8C3A-E9CF763FE872}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E6299AD-7E29-4848-95EB-8450975CAAA3}
+	EndGlobalSection
+EndGlobal
