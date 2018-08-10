@@ -16,8 +16,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
-            var myForm = new Form1();
-            myForm.Show();
+            //var myForm = new Form1();
+            //myForm.Show();
+            Globals.ThisAddIn.OpenLabels("30 Per Page");
         }
     }
 }

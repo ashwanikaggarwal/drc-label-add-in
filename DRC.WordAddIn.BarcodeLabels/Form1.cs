@@ -19,14 +19,18 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("beep boop");
-            //Microsoft.Office.Interop.Word.Application oWord;
-            //Microsoft.Office.Interop.Word.Document oDoc;
+            Globals.ThisAddIn.OpenLabels("30 Per Page");
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
