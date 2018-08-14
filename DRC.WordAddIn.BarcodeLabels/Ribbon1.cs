@@ -11,14 +11,18 @@ namespace DRC.WordAddIn.BarcodeLabels
     {
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-
+            
         }
 
-        private void button1_Click(object sender, RibbonControlEventArgs e)
+        private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
-            //var myForm = new Form1();
-            //myForm.Show();
-            Globals.ThisAddIn.OpenLabels("30 Per Page");
+            Globals.ThisAddIn.OpenLabels();
+        }
+
+        private void ViewLabelsButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            DataForm viewForm = new DataForm();
+            viewForm.Show();
         }
     }
 }

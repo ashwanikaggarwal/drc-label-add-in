@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.IO;
 using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
@@ -21,25 +22,18 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
         }
 
-        public void OpenLabels(String labelsName)
+        public void OpenLabels()
         {
-            Word.Document activeDocument = this.Application.ActiveDocument;       
+            Word.Document activeDocument = this.Application.ActiveDocument;
 
-            try {
-                String tempPath = System.IO.Path.GetTempFileName();
-                //System.IO.File.Create(tempPath);
-                activeDocument.MailMerge.CreateDataSource(tempPath,
+            try
+            {
+                activeDocument.MailMerge.CreateDataSource(activeDocument.FullName,
                                                            missing, missing, missing, missing, 
                                                            missing, missing, missing, missing);
-                System.IO.File.Delete(tempPath);
-            } catch (Exception e) {
-                MessageBox.Show(e.ToString());
-            }
-            
-
-            try {
                 this.Application.MailingLabel.LabelOptions();
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 MessageBox.Show(e.ToString());
             }
         }
