@@ -22,20 +22,60 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
         }
 
-        public void OpenLabels()
+        public void OpenLabels(string dataSource)
         {
-            Word.Document activeDocument = this.Application.ActiveDocument;
+            Word.Document activeDocument = Application.ActiveDocument;
 
             try
             {
-                activeDocument.MailMerge.CreateDataSource(activeDocument.FullName,
-                                                           missing, missing, missing, missing, 
-                                                           missing, missing, missing, missing);
-                this.Application.MailingLabel.LabelOptions();
+                activeDocument.MailMerge.CreateDataSource("datasource.docx",
+                                                          missing, missing, missing, missing, 
+                                                          missing, missing, missing, missing);
+                Application.MailingLabel.LabelOptions();
             } catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
+                //failed to create labels
             }
+        }
+
+        public void ProcessDataSource()
+        {
+            Word.Document activeDocument = Application.ActiveDocument;
+
+            try
+            {
+                activeDocument.MailMerge.OpenDataSource(GetDataFile(),
+                                                        missing, missing, missing, missing,
+                                                        missing, missing, missing, missing);
+            }
+            catch (Exception e)
+            {
+                //failed to import data
+            }
+        }
+
+        public string GetDataFile()
+        {
+            string dataPath = null;
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "CSV files (*.csv)|*.csv";
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                dataPath = fileDialog.FileName;
+            }
+            return dataPath;
+        }
+
+        public void DisplayStatus()
+        {
+            Word.Document activeDocument = this.Application.ActiveDocument;
+            string status = "";
+
+            status += "Mail Merge State: " + activeDocument.MailMerge.State.ToString() + "\n";
+            status += "Data Source: " + activeDocument.MailMerge.DataSource.Type.ToString() + "\n";
+
+            MessageBox.Show(status);
         }
 
         #region VSTO generated code

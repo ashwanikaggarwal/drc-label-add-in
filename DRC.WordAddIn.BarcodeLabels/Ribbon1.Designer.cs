@@ -40,9 +40,13 @@
             this.CreateLabelsButton = this.Factory.CreateRibbonButton();
             this.ViewDataButton = this.Factory.CreateRibbonButton();
             this.ImportDataButton = this.Factory.CreateRibbonButton();
+            this.AddInGroup = this.Factory.CreateRibbonGroup();
+            this.StatusButton = this.Factory.CreateRibbonButton();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
+            this.AddInGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -50,6 +54,7 @@
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.group1);
             this.tab1.Groups.Add(this.group2);
+            this.tab1.Groups.Add(this.AddInGroup);
             this.tab1.Label = "Labels";
             this.tab1.Name = "tab1";
             // 
@@ -88,6 +93,21 @@
             this.ImportDataButton.Label = "Import Data";
             this.ImportDataButton.Name = "ImportDataButton";
             this.ImportDataButton.ShowImage = true;
+            this.ImportDataButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ImportDataButton_Click);
+            // 
+            // AddInGroup
+            // 
+            this.AddInGroup.Items.Add(this.StatusButton);
+            this.AddInGroup.Label = "Add-In";
+            this.AddInGroup.Name = "AddInGroup";
+            // 
+            // StatusButton
+            // 
+            this.StatusButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.StatusButton.Label = "Status";
+            this.StatusButton.Name = "StatusButton";
+            this.StatusButton.ShowImage = true;
+            this.StatusButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.StatusButton_Click);
             // 
             // Ribbon1
             // 
@@ -101,6 +121,8 @@
             this.group1.PerformLayout();
             this.group2.ResumeLayout(false);
             this.group2.PerformLayout();
+            this.AddInGroup.ResumeLayout(false);
+            this.AddInGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -113,6 +135,9 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ViewDataButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ImportDataButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup AddInGroup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton StatusButton;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 
     partial class ThisRibbonCollection

@@ -16,13 +16,23 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.OpenLabels();
+            Globals.ThisAddIn.OpenLabels("datasource.csv");
         }
 
         private void ViewLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
             DataForm viewForm = new DataForm();
             viewForm.Show();
+        }
+
+        private void ImportDataButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            Globals.ThisAddIn.ProcessDataSource();
+        }
+
+        private void StatusButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            Globals.ThisAddIn.DisplayStatus();
         }
     }
 }
