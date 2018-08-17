@@ -100,6 +100,7 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -156,6 +157,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="CSVData.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="DataForm.cs">
       <SubType>Form</SubType>
@@ -178,10 +180,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Ribbon1.resx">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
+    <EmbeddedResource Include="AddInRibbon.resx">
+      <DependentUpon>AddInRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DRC.WordAddIn.BarcodeLabels_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\CSVData.datasource" />
+    <None Include="Properties\DataSources\Item.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -190,11 +194,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon1.cs">
+    <Compile Include="AddInRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Ribbon1.Designer.cs">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
+    <Compile Include="AddInRibbon.Designer.cs">
+      <DependentUpon>AddInRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>

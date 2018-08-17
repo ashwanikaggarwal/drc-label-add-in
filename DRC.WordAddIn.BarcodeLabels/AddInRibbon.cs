@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
-    public partial class Ribbon1
+    public partial class AddInRibbon
     {
-        private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
+        private void AddInRibbon_Load(object sender, RibbonUIEventArgs e)
         {
             
         }
@@ -27,7 +27,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void ImportDataButton_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.ProcessDataSource();
+            Globals.ThisAddIn.ImportData();
         }
 
         private void StatusButton_Click(object sender, RibbonControlEventArgs e)

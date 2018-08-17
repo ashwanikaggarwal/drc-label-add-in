@@ -1,13 +1,13 @@
 ﻿namespace DRC.WordAddIn.BarcodeLabels
 {
-    partial class Ribbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class AddInRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        public Ribbon1()
+        public AddInRibbon()
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
@@ -36,8 +36,8 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.group2 = this.Factory.CreateRibbonGroup();
             this.CreateLabelsButton = this.Factory.CreateRibbonButton();
+            this.group2 = this.Factory.CreateRibbonGroup();
             this.ViewDataButton = this.Factory.CreateRibbonButton();
             this.ImportDataButton = this.Factory.CreateRibbonButton();
             this.AddInGroup = this.Factory.CreateRibbonGroup();
@@ -64,13 +64,6 @@
             this.group1.Label = "Labels";
             this.group1.Name = "group1";
             // 
-            // group2
-            // 
-            this.group2.Items.Add(this.ViewDataButton);
-            this.group2.Items.Add(this.ImportDataButton);
-            this.group2.Label = "Data";
-            this.group2.Name = "group2";
-            // 
             // CreateLabelsButton
             // 
             this.CreateLabelsButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -78,6 +71,13 @@
             this.CreateLabelsButton.Name = "CreateLabelsButton";
             this.CreateLabelsButton.ShowImage = true;
             this.CreateLabelsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.CreateLabelsButton_Click);
+            // 
+            // group2
+            // 
+            this.group2.Items.Add(this.ViewDataButton);
+            this.group2.Items.Add(this.ImportDataButton);
+            this.group2.Label = "Data";
+            this.group2.Name = "group2";
             // 
             // ViewDataButton
             // 
@@ -109,12 +109,12 @@
             this.StatusButton.ShowImage = true;
             this.StatusButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.StatusButton_Click);
             // 
-            // Ribbon1
+            // AddInRibbon
             // 
-            this.Name = "Ribbon1";
+            this.Name = "AddInRibbon";
             this.RibbonType = "Microsoft.Word.Document";
             this.Tabs.Add(this.tab1);
-            this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
+            this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.AddInRibbon_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
             this.group1.ResumeLayout(false);
@@ -142,9 +142,9 @@
 
     partial class ThisRibbonCollection
     {
-        internal Ribbon1 Ribbon1
+        internal AddInRibbon Ribbon1
         {
-            get { return this.GetRibbon<Ribbon1>(); }
+            get { return this.GetRibbon<AddInRibbon>(); }
         }
     }
 }
