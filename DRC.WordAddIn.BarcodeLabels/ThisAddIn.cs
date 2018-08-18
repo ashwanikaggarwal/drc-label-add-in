@@ -71,7 +71,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             }
             catch (Exception e)
             {
-                //failed to import data
+				MessageBox.Show("Failed to process the data source.");
             }
         }
 

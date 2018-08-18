@@ -29,7 +29,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             ItemGrid.DataSource = itemSource;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void DataForm_Load(object sender, EventArgs e)
         {
             
         }
@@ -42,21 +42,66 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewCell cell in ItemGrid.SelectedCells)
+            foreach(DataGridViewRow row in ItemGrid.SelectedRows)
             {
-                if(cell.Selected)
+                if(row.Selected)
                 {
-                    int index = cell.RowIndex;
+                    int index = row.Index;
                     Globals.ThisAddIn.ItemsList.RemoveAt(index);
-                    ItemGrid.Rows.RemoveAt(index);
-                    ReloadBind();
                 }
             }
-        }
+			ReloadBind();
+		}
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+		private void AddButton_Click(object sender, EventArgs e)
+		{
+			string name = NameTextBox.Text;
+			string serialNum = SerialNumTextBox.Text;
+			string barcode = BarcodeTextBox.Text;
+
+			if(	String.IsNullOrWhiteSpace(name) &&
+				String.IsNullOrWhiteSpace(serialNum) &&
+				String.IsNullOrWhiteSpace(barcode))
+			{
+				MessageBox.Show("At least one field must have content.");
+				return;
+			}
+
+			Item newItem = new Item(name, serialNum, barcode);
+
+			Globals.ThisAddIn.ItemsList.Insert(0, newItem);
+			ReloadBind();
+			ValueControlTable.Refresh();
+		}
+
+		private void AddBlanksButton_Click(object sender, EventArgs e)
+		{
+			int amount = Convert.ToInt32(BlanksUpDown.Value);
+			for(int i = 0; i < amount; i++)
+			{
+				Item blankItem = new Item("", "", "", false);
+				Globals.ThisAddIn.ItemsList.Insert(0, blankItem);
+			}
+			ReloadBind();
+			BlanksUpDown.Value = 1;
+		}
+
+		private void ValueControlTable_Paint(object sender, PaintEventArgs e)
         {
-
+			
         }
-    }
+
+		private void ItemGrid_Paint(object sender, PaintEventArgs e)
+		{
+			foreach (DataGridViewRow row in ItemGrid.Rows)
+			{
+				row.DefaultCellStyle.BackColor = Globals.ThisAddIn.ItemsList[row.Index].ColorCode;
+			}
+		}
+
+		private void ItemGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
+	}
 }

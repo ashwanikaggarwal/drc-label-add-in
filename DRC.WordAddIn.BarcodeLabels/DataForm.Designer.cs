@@ -28,298 +28,420 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ManagementGroupBox = new System.Windows.Forms.GroupBox();
-            this.ImportButton = new System.Windows.Forms.Button();
-            this.ItemGrid = new System.Windows.Forms.DataGridView();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.AdditionGroupBox = new System.Windows.Forms.GroupBox();
-            this.ValueControlTable = new System.Windows.Forms.TableLayoutPanel();
-            this.NameLabel = new System.Windows.Forms.Label();
-            this.SerialNumLabel = new System.Windows.Forms.Label();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.SerialNumTextBox = new System.Windows.Forms.TextBox();
-            this.BarcodeLabel = new System.Windows.Forms.Label();
-            this.BarcodeTextBox = new System.Windows.Forms.TextBox();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.AddButton = new System.Windows.Forms.Button();
-            this.AddBlankButton = new System.Windows.Forms.Button();
-            this.BlankNumberPicker = new System.Windows.Forms.NumericUpDown();
-            this.ManagementGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.AdditionGroupBox.SuspendLayout();
-            this.ValueControlTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BlankNumberPicker)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // ManagementGroupBox
-            // 
-            this.ManagementGroupBox.Controls.Add(this.BlankNumberPicker);
-            this.ManagementGroupBox.Controls.Add(this.DeleteButton);
-            this.ManagementGroupBox.Controls.Add(this.AddBlankButton);
-            this.ManagementGroupBox.Controls.Add(this.ImportButton);
-            this.ManagementGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ManagementGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.ManagementGroupBox.Name = "ManagementGroupBox";
-            this.ManagementGroupBox.Size = new System.Drawing.Size(206, 154);
-            this.ManagementGroupBox.TabIndex = 3;
-            this.ManagementGroupBox.TabStop = false;
-            this.ManagementGroupBox.Text = "Item Management";
-            // 
-            // ImportButton
-            // 
-            this.ImportButton.AutoSize = true;
-            this.ImportButton.Location = new System.Drawing.Point(13, 26);
-            this.ImportButton.Name = "ImportButton";
-            this.ImportButton.Size = new System.Drawing.Size(138, 30);
-            this.ImportButton.TabIndex = 0;
-            this.ImportButton.Text = "Import from CSV";
-            this.ImportButton.UseVisualStyleBackColor = true;
-            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
-            // 
-            // ItemGrid
-            // 
-            this.ItemGrid.AllowUserToAddRows = false;
-            this.ItemGrid.AllowUserToDeleteRows = false;
-            this.ItemGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ItemGrid.Location = new System.Drawing.Point(0, 0);
-            this.ItemGrid.Name = "ItemGrid";
-            this.ItemGrid.ReadOnly = true;
-            this.ItemGrid.RowTemplate.Height = 28;
-            this.ItemGrid.Size = new System.Drawing.Size(800, 292);
-            this.ItemGrid.TabIndex = 4;
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.AutoSize = true;
-            this.DeleteButton.Location = new System.Drawing.Point(13, 62);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(177, 30);
-            this.DeleteButton.TabIndex = 1;
-            this.DeleteButton.Text = "Delete Selected Items";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.ItemGrid);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 154;
-            this.splitContainer1.TabIndex = 5;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.ManagementGroupBox);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.AdditionGroupBox);
-            this.splitContainer2.Size = new System.Drawing.Size(800, 154);
-            this.splitContainer2.SplitterDistance = 206;
-            this.splitContainer2.TabIndex = 4;
-            // 
-            // AdditionGroupBox
-            // 
-            this.AdditionGroupBox.Controls.Add(this.splitContainer3);
-            this.AdditionGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AdditionGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.AdditionGroupBox.Name = "AdditionGroupBox";
-            this.AdditionGroupBox.Size = new System.Drawing.Size(590, 154);
-            this.AdditionGroupBox.TabIndex = 0;
-            this.AdditionGroupBox.TabStop = false;
-            this.AdditionGroupBox.Text = "Add Items";
-            // 
-            // ValueControlTable
-            // 
-            this.ValueControlTable.ColumnCount = 2;
-            this.ValueControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ValueControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ValueControlTable.Controls.Add(this.NameLabel, 0, 0);
-            this.ValueControlTable.Controls.Add(this.SerialNumLabel, 0, 1);
-            this.ValueControlTable.Controls.Add(this.NameTextBox, 1, 0);
-            this.ValueControlTable.Controls.Add(this.SerialNumTextBox, 1, 1);
-            this.ValueControlTable.Controls.Add(this.BarcodeLabel, 0, 2);
-            this.ValueControlTable.Controls.Add(this.BarcodeTextBox, 1, 2);
-            this.ValueControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ValueControlTable.Location = new System.Drawing.Point(0, 0);
-            this.ValueControlTable.Name = "ValueControlTable";
-            this.ValueControlTable.RowCount = 3;
-            this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.ValueControlTable.Size = new System.Drawing.Size(412, 129);
-            this.ValueControlTable.TabIndex = 0;
-            this.ValueControlTable.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
-            // 
-            // NameLabel
-            // 
-            this.NameLabel.AutoSize = true;
-            this.NameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.NameLabel.Location = new System.Drawing.Point(3, 0);
-            this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(113, 42);
-            this.NameLabel.TabIndex = 0;
-            this.NameLabel.Text = "Item Name:";
-            this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // SerialNumLabel
-            // 
-            this.SerialNumLabel.AutoSize = true;
-            this.SerialNumLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SerialNumLabel.Location = new System.Drawing.Point(3, 42);
-            this.SerialNumLabel.Name = "SerialNumLabel";
-            this.SerialNumLabel.Size = new System.Drawing.Size(113, 42);
-            this.SerialNumLabel.TabIndex = 1;
-            this.SerialNumLabel.Text = "Serial Number:";
-            this.SerialNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // NameTextBox
-            // 
-            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTextBox.Location = new System.Drawing.Point(122, 8);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(287, 26);
-            this.NameTextBox.TabIndex = 2;
-            // 
-            // SerialNumTextBox
-            // 
-            this.SerialNumTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SerialNumTextBox.Location = new System.Drawing.Point(122, 50);
-            this.SerialNumTextBox.Name = "SerialNumTextBox";
-            this.SerialNumTextBox.Size = new System.Drawing.Size(287, 26);
-            this.SerialNumTextBox.TabIndex = 3;
-            // 
-            // BarcodeLabel
-            // 
-            this.BarcodeLabel.AutoSize = true;
-            this.BarcodeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BarcodeLabel.Location = new System.Drawing.Point(3, 84);
-            this.BarcodeLabel.Name = "BarcodeLabel";
-            this.BarcodeLabel.Size = new System.Drawing.Size(113, 45);
-            this.BarcodeLabel.TabIndex = 4;
-            this.BarcodeLabel.Text = "Barcode:";
-            this.BarcodeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // BarcodeTextBox
-            // 
-            this.BarcodeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.BarcodeTextBox.Location = new System.Drawing.Point(122, 93);
-            this.BarcodeTextBox.Name = "BarcodeTextBox";
-            this.BarcodeTextBox.Size = new System.Drawing.Size(287, 26);
-            this.BarcodeTextBox.TabIndex = 5;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(3, 22);
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.ValueControlTable);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.AddButton);
-            this.splitContainer3.Size = new System.Drawing.Size(584, 129);
-            this.splitContainer3.SplitterDistance = 412;
-            this.splitContainer3.TabIndex = 1;
-            // 
-            // AddButton
-            // 
-            this.AddButton.AutoSize = true;
-            this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AddButton.Location = new System.Drawing.Point(0, 0);
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(168, 129);
-            this.AddButton.TabIndex = 0;
-            this.AddButton.Text = "Add Item";
-            this.AddButton.UseVisualStyleBackColor = true;
-            // 
-            // AddBlankButton
-            // 
-            this.AddBlankButton.AutoSize = true;
-            this.AddBlankButton.Location = new System.Drawing.Point(13, 98);
-            this.AddBlankButton.Name = "AddBlankButton";
-            this.AddBlankButton.Size = new System.Drawing.Size(112, 30);
-            this.AddBlankButton.TabIndex = 1;
-            this.AddBlankButton.Text = "Insert Blanks";
-            this.AddBlankButton.UseVisualStyleBackColor = true;
-            // 
-            // BlankNumberPicker
-            // 
-            this.BlankNumberPicker.AutoSize = true;
-            this.BlankNumberPicker.Location = new System.Drawing.Point(140, 98);
-            this.BlankNumberPicker.Name = "BlankNumberPicker";
-            this.BlankNumberPicker.Size = new System.Drawing.Size(60, 26);
-            this.BlankNumberPicker.TabIndex = 2;
-            this.BlankNumberPicker.Value = new decimal(new int[] {
+			this.components = new System.ComponentModel.Container();
+			this.ManagementGroupBox = new System.Windows.Forms.GroupBox();
+			this.ItemControlTable = new System.Windows.Forms.TableLayoutPanel();
+			this.ImportButton = new System.Windows.Forms.Button();
+			this.DeleteButton = new System.Windows.Forms.Button();
+			this.BlankSplitContainer = new System.Windows.Forms.SplitContainer();
+			this.AddBlanksButton = new System.Windows.Forms.Button();
+			this.BlanksUpDown = new System.Windows.Forms.NumericUpDown();
+			this.ItemGrid = new System.Windows.Forms.DataGridView();
+			this.PrimarySplitContainer = new System.Windows.Forms.SplitContainer();
+			this.ControlSplitContainer = new System.Windows.Forms.SplitContainer();
+			this.AdditionGroupBox = new System.Windows.Forms.GroupBox();
+			this.AdditionSplitContainer = new System.Windows.Forms.SplitContainer();
+			this.ValueControlTable = new System.Windows.Forms.TableLayoutPanel();
+			this.NameLabel = new System.Windows.Forms.Label();
+			this.SerialNumLabel = new System.Windows.Forms.Label();
+			this.BarcodeLabel = new System.Windows.Forms.Label();
+			this.NameTextBox = new System.Windows.Forms.TextBox();
+			this.BarcodeTextBox = new System.Windows.Forms.TextBox();
+			this.SerialNumTextBox = new System.Windows.Forms.TextBox();
+			this.AddButton = new System.Windows.Forms.Button();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.barcodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.ManagementGroupBox.SuspendLayout();
+			this.ItemControlTable.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.BlankSplitContainer)).BeginInit();
+			this.BlankSplitContainer.Panel1.SuspendLayout();
+			this.BlankSplitContainer.Panel2.SuspendLayout();
+			this.BlankSplitContainer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.BlanksUpDown)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.ItemGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.PrimarySplitContainer)).BeginInit();
+			this.PrimarySplitContainer.Panel1.SuspendLayout();
+			this.PrimarySplitContainer.Panel2.SuspendLayout();
+			this.PrimarySplitContainer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.ControlSplitContainer)).BeginInit();
+			this.ControlSplitContainer.Panel1.SuspendLayout();
+			this.ControlSplitContainer.Panel2.SuspendLayout();
+			this.ControlSplitContainer.SuspendLayout();
+			this.AdditionGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.AdditionSplitContainer)).BeginInit();
+			this.AdditionSplitContainer.Panel1.SuspendLayout();
+			this.AdditionSplitContainer.Panel2.SuspendLayout();
+			this.AdditionSplitContainer.SuspendLayout();
+			this.ValueControlTable.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// ManagementGroupBox
+			// 
+			this.ManagementGroupBox.Controls.Add(this.ItemControlTable);
+			this.ManagementGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ManagementGroupBox.Location = new System.Drawing.Point(0, 0);
+			this.ManagementGroupBox.Margin = new System.Windows.Forms.Padding(2);
+			this.ManagementGroupBox.Name = "ManagementGroupBox";
+			this.ManagementGroupBox.Padding = new System.Windows.Forms.Padding(2);
+			this.ManagementGroupBox.Size = new System.Drawing.Size(165, 99);
+			this.ManagementGroupBox.TabIndex = 3;
+			this.ManagementGroupBox.TabStop = false;
+			this.ManagementGroupBox.Text = "Item Management";
+			// 
+			// ItemControlTable
+			// 
+			this.ItemControlTable.ColumnCount = 1;
+			this.ItemControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.ItemControlTable.Controls.Add(this.ImportButton, 0, 0);
+			this.ItemControlTable.Controls.Add(this.DeleteButton, 0, 1);
+			this.ItemControlTable.Controls.Add(this.BlankSplitContainer, 0, 2);
+			this.ItemControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ItemControlTable.Location = new System.Drawing.Point(2, 15);
+			this.ItemControlTable.Name = "ItemControlTable";
+			this.ItemControlTable.RowCount = 3;
+			this.ItemControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ItemControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ItemControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.ItemControlTable.Size = new System.Drawing.Size(161, 82);
+			this.ItemControlTable.TabIndex = 3;
+			// 
+			// ImportButton
+			// 
+			this.ImportButton.AutoSize = true;
+			this.ImportButton.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ImportButton.Location = new System.Drawing.Point(2, 2);
+			this.ImportButton.Margin = new System.Windows.Forms.Padding(2);
+			this.ImportButton.Name = "ImportButton";
+			this.ImportButton.Size = new System.Drawing.Size(157, 23);
+			this.ImportButton.TabIndex = 0;
+			this.ImportButton.Text = "Import from CSV";
+			this.ImportButton.UseVisualStyleBackColor = true;
+			this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
+			// 
+			// DeleteButton
+			// 
+			this.DeleteButton.AutoSize = true;
+			this.DeleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.DeleteButton.Location = new System.Drawing.Point(2, 29);
+			this.DeleteButton.Margin = new System.Windows.Forms.Padding(2);
+			this.DeleteButton.Name = "DeleteButton";
+			this.DeleteButton.Size = new System.Drawing.Size(157, 23);
+			this.DeleteButton.TabIndex = 1;
+			this.DeleteButton.Text = "Delete Selected Items";
+			this.DeleteButton.UseVisualStyleBackColor = true;
+			this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+			// 
+			// BlankSplitContainer
+			// 
+			this.BlankSplitContainer.Location = new System.Drawing.Point(3, 57);
+			this.BlankSplitContainer.Name = "BlankSplitContainer";
+			// 
+			// BlankSplitContainer.Panel1
+			// 
+			this.BlankSplitContainer.Panel1.Controls.Add(this.AddBlanksButton);
+			// 
+			// BlankSplitContainer.Panel2
+			// 
+			this.BlankSplitContainer.Panel2.Controls.Add(this.BlanksUpDown);
+			this.BlankSplitContainer.Size = new System.Drawing.Size(150, 22);
+			this.BlankSplitContainer.SplitterDistance = 97;
+			this.BlankSplitContainer.TabIndex = 2;
+			// 
+			// AddBlanksButton
+			// 
+			this.AddBlanksButton.AutoSize = true;
+			this.AddBlanksButton.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AddBlanksButton.Location = new System.Drawing.Point(0, 0);
+			this.AddBlanksButton.Margin = new System.Windows.Forms.Padding(2);
+			this.AddBlanksButton.Name = "AddBlanksButton";
+			this.AddBlanksButton.Size = new System.Drawing.Size(97, 22);
+			this.AddBlanksButton.TabIndex = 1;
+			this.AddBlanksButton.Text = "Insert Blanks";
+			this.AddBlanksButton.UseVisualStyleBackColor = true;
+			this.AddBlanksButton.Click += new System.EventHandler(this.AddBlanksButton_Click);
+			// 
+			// BlanksUpDown
+			// 
+			this.BlanksUpDown.AutoSize = true;
+			this.BlanksUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.BlanksUpDown.Location = new System.Drawing.Point(0, 0);
+			this.BlanksUpDown.Margin = new System.Windows.Forms.Padding(2);
+			this.BlanksUpDown.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+			this.BlanksUpDown.Name = "BlanksUpDown";
+			this.BlanksUpDown.Size = new System.Drawing.Size(49, 20);
+			this.BlanksUpDown.TabIndex = 2;
+			this.BlanksUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            // 
-            // DataForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.splitContainer1);
-            this.Name = "DataForm";
-            this.Text = "Data Viewer";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ManagementGroupBox.ResumeLayout(false);
-            this.ManagementGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemGrid)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.AdditionGroupBox.ResumeLayout(false);
-            this.ValueControlTable.ResumeLayout(false);
-            this.ValueControlTable.PerformLayout();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.BlankNumberPicker)).EndInit();
-            this.ResumeLayout(false);
+			// 
+			// ItemGrid
+			// 
+			this.ItemGrid.AllowUserToAddRows = false;
+			this.ItemGrid.AllowUserToDeleteRows = false;
+			this.ItemGrid.AutoGenerateColumns = false;
+			this.ItemGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.ItemGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+			this.ItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.ItemGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameDataGridViewTextBoxColumn,
+            this.serialNumberDataGridViewTextBoxColumn,
+            this.barcodeDataGridViewTextBoxColumn});
+			this.ItemGrid.DataSource = this.itemBindingSource;
+			this.ItemGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ItemGrid.Location = new System.Drawing.Point(0, 0);
+			this.ItemGrid.Margin = new System.Windows.Forms.Padding(2);
+			this.ItemGrid.Name = "ItemGrid";
+			this.ItemGrid.ReadOnly = true;
+			this.ItemGrid.RowTemplate.Height = 28;
+			this.ItemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.ItemGrid.Size = new System.Drawing.Size(533, 190);
+			this.ItemGrid.TabIndex = 4;
+			this.ItemGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemGrid_CellContentClick);
+			this.ItemGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.ItemGrid_Paint);
+			// 
+			// PrimarySplitContainer
+			// 
+			this.PrimarySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PrimarySplitContainer.Location = new System.Drawing.Point(0, 0);
+			this.PrimarySplitContainer.Margin = new System.Windows.Forms.Padding(2);
+			this.PrimarySplitContainer.Name = "PrimarySplitContainer";
+			this.PrimarySplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// PrimarySplitContainer.Panel1
+			// 
+			this.PrimarySplitContainer.Panel1.Controls.Add(this.ControlSplitContainer);
+			// 
+			// PrimarySplitContainer.Panel2
+			// 
+			this.PrimarySplitContainer.Panel2.Controls.Add(this.ItemGrid);
+			this.PrimarySplitContainer.Size = new System.Drawing.Size(533, 292);
+			this.PrimarySplitContainer.SplitterDistance = 99;
+			this.PrimarySplitContainer.SplitterWidth = 3;
+			this.PrimarySplitContainer.TabIndex = 5;
+			// 
+			// ControlSplitContainer
+			// 
+			this.ControlSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ControlSplitContainer.Location = new System.Drawing.Point(0, 0);
+			this.ControlSplitContainer.Margin = new System.Windows.Forms.Padding(2);
+			this.ControlSplitContainer.Name = "ControlSplitContainer";
+			// 
+			// ControlSplitContainer.Panel1
+			// 
+			this.ControlSplitContainer.Panel1.Controls.Add(this.ManagementGroupBox);
+			// 
+			// ControlSplitContainer.Panel2
+			// 
+			this.ControlSplitContainer.Panel2.Controls.Add(this.AdditionGroupBox);
+			this.ControlSplitContainer.Size = new System.Drawing.Size(533, 99);
+			this.ControlSplitContainer.SplitterDistance = 165;
+			this.ControlSplitContainer.SplitterWidth = 3;
+			this.ControlSplitContainer.TabIndex = 4;
+			// 
+			// AdditionGroupBox
+			// 
+			this.AdditionGroupBox.Controls.Add(this.AdditionSplitContainer);
+			this.AdditionGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AdditionGroupBox.Location = new System.Drawing.Point(0, 0);
+			this.AdditionGroupBox.Margin = new System.Windows.Forms.Padding(2);
+			this.AdditionGroupBox.Name = "AdditionGroupBox";
+			this.AdditionGroupBox.Padding = new System.Windows.Forms.Padding(2);
+			this.AdditionGroupBox.Size = new System.Drawing.Size(365, 99);
+			this.AdditionGroupBox.TabIndex = 0;
+			this.AdditionGroupBox.TabStop = false;
+			this.AdditionGroupBox.Text = "Add Items";
+			// 
+			// AdditionSplitContainer
+			// 
+			this.AdditionSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AdditionSplitContainer.Location = new System.Drawing.Point(2, 15);
+			this.AdditionSplitContainer.Margin = new System.Windows.Forms.Padding(2);
+			this.AdditionSplitContainer.Name = "AdditionSplitContainer";
+			// 
+			// AdditionSplitContainer.Panel1
+			// 
+			this.AdditionSplitContainer.Panel1.Controls.Add(this.ValueControlTable);
+			// 
+			// AdditionSplitContainer.Panel2
+			// 
+			this.AdditionSplitContainer.Panel2.Controls.Add(this.AddButton);
+			this.AdditionSplitContainer.Size = new System.Drawing.Size(361, 82);
+			this.AdditionSplitContainer.SplitterDistance = 279;
+			this.AdditionSplitContainer.SplitterWidth = 3;
+			this.AdditionSplitContainer.TabIndex = 1;
+			// 
+			// ValueControlTable
+			// 
+			this.ValueControlTable.ColumnCount = 2;
+			this.ValueControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.20443F));
+			this.ValueControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.79557F));
+			this.ValueControlTable.Controls.Add(this.NameLabel, 0, 0);
+			this.ValueControlTable.Controls.Add(this.SerialNumLabel, 0, 1);
+			this.ValueControlTable.Controls.Add(this.BarcodeLabel, 0, 2);
+			this.ValueControlTable.Controls.Add(this.NameTextBox, 1, 0);
+			this.ValueControlTable.Controls.Add(this.BarcodeTextBox, 1, 2);
+			this.ValueControlTable.Controls.Add(this.SerialNumTextBox, 1, 1);
+			this.ValueControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ValueControlTable.Location = new System.Drawing.Point(0, 0);
+			this.ValueControlTable.Margin = new System.Windows.Forms.Padding(2);
+			this.ValueControlTable.Name = "ValueControlTable";
+			this.ValueControlTable.RowCount = 3;
+			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.19838F));
+			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.43725F));
+			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.36437F));
+			this.ValueControlTable.Size = new System.Drawing.Size(279, 82);
+			this.ValueControlTable.TabIndex = 0;
+			this.ValueControlTable.Paint += new System.Windows.Forms.PaintEventHandler(this.ValueControlTable_Paint);
+			// 
+			// NameLabel
+			// 
+			this.NameLabel.AutoSize = true;
+			this.NameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.NameLabel.Location = new System.Drawing.Point(2, 0);
+			this.NameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.NameLabel.Name = "NameLabel";
+			this.NameLabel.Size = new System.Drawing.Size(91, 27);
+			this.NameLabel.TabIndex = 0;
+			this.NameLabel.Text = "Item Name:";
+			this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// SerialNumLabel
+			// 
+			this.SerialNumLabel.AutoSize = true;
+			this.SerialNumLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SerialNumLabel.Location = new System.Drawing.Point(2, 27);
+			this.SerialNumLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.SerialNumLabel.Name = "SerialNumLabel";
+			this.SerialNumLabel.Size = new System.Drawing.Size(91, 29);
+			this.SerialNumLabel.TabIndex = 1;
+			this.SerialNumLabel.Text = "Serial Number:";
+			this.SerialNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// BarcodeLabel
+			// 
+			this.BarcodeLabel.AutoSize = true;
+			this.BarcodeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.BarcodeLabel.Location = new System.Drawing.Point(2, 56);
+			this.BarcodeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.BarcodeLabel.Name = "BarcodeLabel";
+			this.BarcodeLabel.Size = new System.Drawing.Size(91, 26);
+			this.BarcodeLabel.TabIndex = 4;
+			this.BarcodeLabel.Text = "Barcode:";
+			this.BarcodeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// NameTextBox
+			// 
+			this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.NameTextBox.Location = new System.Drawing.Point(97, 3);
+			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2);
+			this.NameTextBox.Name = "NameTextBox";
+			this.NameTextBox.Size = new System.Drawing.Size(180, 20);
+			this.NameTextBox.TabIndex = 2;
+			// 
+			// BarcodeTextBox
+			// 
+			this.BarcodeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.BarcodeTextBox.Location = new System.Drawing.Point(97, 59);
+			this.BarcodeTextBox.Margin = new System.Windows.Forms.Padding(2);
+			this.BarcodeTextBox.Name = "BarcodeTextBox";
+			this.BarcodeTextBox.Size = new System.Drawing.Size(180, 20);
+			this.BarcodeTextBox.TabIndex = 5;
+			// 
+			// SerialNumTextBox
+			// 
+			this.SerialNumTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.SerialNumTextBox.Location = new System.Drawing.Point(97, 31);
+			this.SerialNumTextBox.Margin = new System.Windows.Forms.Padding(2);
+			this.SerialNumTextBox.Name = "SerialNumTextBox";
+			this.SerialNumTextBox.Size = new System.Drawing.Size(180, 20);
+			this.SerialNumTextBox.TabIndex = 3;
+			// 
+			// AddButton
+			// 
+			this.AddButton.AutoSize = true;
+			this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AddButton.Location = new System.Drawing.Point(0, 0);
+			this.AddButton.Margin = new System.Windows.Forms.Padding(2);
+			this.AddButton.Name = "AddButton";
+			this.AddButton.Size = new System.Drawing.Size(79, 82);
+			this.AddButton.TabIndex = 0;
+			this.AddButton.Text = "Add Item";
+			this.AddButton.UseVisualStyleBackColor = true;
+			this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Item Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// serialNumberDataGridViewTextBoxColumn
+			// 
+			this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
+			this.serialNumberDataGridViewTextBoxColumn.HeaderText = "Serial Number";
+			this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
+			this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// barcodeDataGridViewTextBoxColumn
+			// 
+			this.barcodeDataGridViewTextBoxColumn.DataPropertyName = "Barcode";
+			this.barcodeDataGridViewTextBoxColumn.HeaderText = "Barcode";
+			this.barcodeDataGridViewTextBoxColumn.Name = "barcodeDataGridViewTextBoxColumn";
+			this.barcodeDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// itemBindingSource
+			// 
+			this.itemBindingSource.DataSource = typeof(DRC.WordAddIn.BarcodeLabels.Item);
+			// 
+			// DataForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(533, 292);
+			this.Controls.Add(this.PrimarySplitContainer);
+			this.Margin = new System.Windows.Forms.Padding(2);
+			this.Name = "DataForm";
+			this.Text = "Data Viewer";
+			this.Load += new System.EventHandler(this.DataForm_Load);
+			this.ManagementGroupBox.ResumeLayout(false);
+			this.ItemControlTable.ResumeLayout(false);
+			this.ItemControlTable.PerformLayout();
+			this.BlankSplitContainer.Panel1.ResumeLayout(false);
+			this.BlankSplitContainer.Panel1.PerformLayout();
+			this.BlankSplitContainer.Panel2.ResumeLayout(false);
+			this.BlankSplitContainer.Panel2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.BlankSplitContainer)).EndInit();
+			this.BlankSplitContainer.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.BlanksUpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.ItemGrid)).EndInit();
+			this.PrimarySplitContainer.Panel1.ResumeLayout(false);
+			this.PrimarySplitContainer.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PrimarySplitContainer)).EndInit();
+			this.PrimarySplitContainer.ResumeLayout(false);
+			this.ControlSplitContainer.Panel1.ResumeLayout(false);
+			this.ControlSplitContainer.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.ControlSplitContainer)).EndInit();
+			this.ControlSplitContainer.ResumeLayout(false);
+			this.AdditionGroupBox.ResumeLayout(false);
+			this.AdditionSplitContainer.Panel1.ResumeLayout(false);
+			this.AdditionSplitContainer.Panel2.ResumeLayout(false);
+			this.AdditionSplitContainer.Panel2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.AdditionSplitContainer)).EndInit();
+			this.AdditionSplitContainer.ResumeLayout(false);
+			this.ValueControlTable.ResumeLayout(false);
+			this.ValueControlTable.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
+			this.ResumeLayout(false);
 
         }
 
@@ -329,8 +451,8 @@
         private System.Windows.Forms.Button ImportButton;
         private System.Windows.Forms.DataGridView ItemGrid;
         private System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer PrimarySplitContainer;
+        private System.Windows.Forms.SplitContainer ControlSplitContainer;
         private System.Windows.Forms.GroupBox AdditionGroupBox;
         private System.Windows.Forms.TableLayoutPanel ValueControlTable;
         private System.Windows.Forms.Label NameLabel;
@@ -339,9 +461,15 @@
         private System.Windows.Forms.TextBox SerialNumTextBox;
         private System.Windows.Forms.Label BarcodeLabel;
         private System.Windows.Forms.TextBox BarcodeTextBox;
-        private System.Windows.Forms.NumericUpDown BlankNumberPicker;
-        private System.Windows.Forms.Button AddBlankButton;
-        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.NumericUpDown BlanksUpDown;
+        private System.Windows.Forms.Button AddBlanksButton;
+        private System.Windows.Forms.SplitContainer AdditionSplitContainer;
         private System.Windows.Forms.Button AddButton;
-    }
+		private System.Windows.Forms.TableLayoutPanel ItemControlTable;
+		private System.Windows.Forms.SplitContainer BlankSplitContainer;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn serialNumberDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn barcodeDataGridViewTextBoxColumn;
+		private System.Windows.Forms.BindingSource itemBindingSource;
+	}
 }

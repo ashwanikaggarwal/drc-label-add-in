@@ -25,11 +25,6 @@ namespace DRC.WordAddIn.BarcodeLabels
             viewForm.Show();
         }
 
-        private void ImportDataButton_Click(object sender, RibbonControlEventArgs e)
-        {
-            Globals.ThisAddIn.ImportData();
-        }
-
         private void StatusButton_Click(object sender, RibbonControlEventArgs e)
         {
             Globals.ThisAddIn.DisplayStatus();

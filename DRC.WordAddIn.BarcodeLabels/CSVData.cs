@@ -44,7 +44,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             List<Item> items = new List<Item>();
 
             foreach(string[] row in Data) {
-                Item item = new Item(row[nameCol], row[serialNumCol], row[barcodeCol]);
+                Item item = new Item(row[nameCol], row[serialNumCol], row[barcodeCol], true);
                 items.Add(item);
             }
 
