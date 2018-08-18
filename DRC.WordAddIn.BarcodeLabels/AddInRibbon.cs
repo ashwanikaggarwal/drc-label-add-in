@@ -9,9 +9,11 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class AddInRibbon
     {
+		private ItemCache _items;
+
         private void AddInRibbon_Load(object sender, RibbonUIEventArgs e)
         {
-            
+			_items = new ItemCache();
         }
 
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
@@ -21,7 +23,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void ViewLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
-            DataForm viewForm = new DataForm();
+            DataForm viewForm = new DataForm(_items);
             viewForm.Show();
         }
 

@@ -8,7 +8,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
-    class CSVData
+    public class CSVData
     {
         public string FileName { get; }
         public List<string[]> Data { get; private set; }
@@ -37,18 +37,6 @@ namespace DRC.WordAddIn.BarcodeLabels
             Headers = rows[0];
             rows.RemoveAt(0);
             Data = rows;
-        }
-
-        public List<Item> AsItems(int nameCol, int serialNumCol, int barcodeCol)
-        {
-            List<Item> items = new List<Item>();
-
-            foreach(string[] row in Data) {
-                Item item = new Item(row[nameCol], row[serialNumCol], row[barcodeCol], true);
-                items.Add(item);
-            }
-
-            return items;
         }
     }
 }

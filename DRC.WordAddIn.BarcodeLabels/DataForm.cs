@@ -12,21 +12,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class DataForm : Form
     {
-        private BindingSource itemSource;
+		private ItemCache _items;
 
-        public DataForm()
+        public DataForm(ItemCache items)
         {
+			_items = items;
             InitializeComponent();
+			ItemGrid.DataSource = _items;
             ItemGrid.AllowUserToResizeRows = false;
             ItemGrid.AllowUserToResizeColumns = false;
-            ReloadBind();
-        }
-
-        public void ReloadBind()
-        {
-            BindingList<Item> bindingItems = new BindingList<Item>(Globals.ThisAddIn.ItemsList);
-            itemSource = new BindingSource(bindingItems, null);
-            ItemGrid.DataSource = itemSource;
         }
 
         private void DataForm_Load(object sender, EventArgs e)
@@ -36,8 +30,13 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
-            Globals.ThisAddIn.ImportData();
-            ReloadBind();
+			string dataPath = Globals.ThisAddIn.GetDataFile();
+			if(String.IsNullOrWhiteSpace(dataPath))
+			{
+				return;
+			}
+
+			_items.ImportCSVData(new CSVData(dataPath), 0, 2, 9);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -47,10 +46,9 @@ namespace DRC.WordAddIn.BarcodeLabels
                 if(row.Selected)
                 {
                     int index = row.Index;
-                    Globals.ThisAddIn.ItemsList.RemoveAt(index);
+					_items.RemoveAt(index);
                 }
             }
-			ReloadBind();
 		}
 
 		private void AddButton_Click(object sender, EventArgs e)
@@ -69,8 +67,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			Item newItem = new Item(name, serialNum, barcode);
 
-			Globals.ThisAddIn.ItemsList.Insert(0, newItem);
-			ReloadBind();
+			_items.Insert(0, newItem);
 			ValueControlTable.Refresh();
 		}
 
@@ -80,9 +77,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 			for(int i = 0; i < amount; i++)
 			{
 				Item blankItem = new Item("", "", "", false);
-				Globals.ThisAddIn.ItemsList.Insert(0, blankItem);
+				_items.Insert(0, blankItem);
 			}
-			ReloadBind();
 			BlanksUpDown.Value = 1;
 		}
 
@@ -95,7 +91,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			foreach (DataGridViewRow row in ItemGrid.Rows)
 			{
-				row.DefaultCellStyle.BackColor = Globals.ThisAddIn.ItemsList[row.Index].ColorCode;
+				row.DefaultCellStyle.BackColor = _items.GetItem(row.Index).ColorCode;
 			}
 		}
 

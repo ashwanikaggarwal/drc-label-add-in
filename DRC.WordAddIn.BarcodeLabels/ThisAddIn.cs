@@ -14,11 +14,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class ThisAddIn
     {
-        public List<Item> ItemsList { get; set; }
-
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            ItemsList = new List<Item>();
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -46,19 +43,6 @@ namespace DRC.WordAddIn.BarcodeLabels
             }
         }
 
-        public void ImportData()
-        {
-            string dataFile = Globals.ThisAddIn.GetDataFile();
-            if (String.IsNullOrEmpty(dataFile))
-            {
-                MessageBox.Show("Failed to import data.");
-                return;
-            }
-            CSVData data = new CSVData(dataFile);
-            ItemsList.AddRange(data.AsItems(0, 2, 9));
-            MessageBox.Show("Imported data from " + data.FileName);
-        }
-
         public void ProcessDataSource()
         {
             Word.Document activeDocument = Application.ActiveDocument;
@@ -77,18 +61,16 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         public string GetDataFile()
         {
-            string dataPath = null;
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "CSV files (*.csv)|*.csv";
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                dataPath = fileDialog.FileName;
+                return fileDialog.FileName;
             } else
             {
                 return null;
             }
-            return dataPath;
         }
 
         public void DisplayStatus()

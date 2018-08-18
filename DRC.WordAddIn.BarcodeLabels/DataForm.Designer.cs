@@ -37,6 +37,10 @@
 			this.AddBlanksButton = new System.Windows.Forms.Button();
 			this.BlanksUpDown = new System.Windows.Forms.NumericUpDown();
 			this.ItemGrid = new System.Windows.Forms.DataGridView();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.barcodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.PrimarySplitContainer = new System.Windows.Forms.SplitContainer();
 			this.ControlSplitContainer = new System.Windows.Forms.SplitContainer();
 			this.AdditionGroupBox = new System.Windows.Forms.GroupBox();
@@ -49,10 +53,6 @@
 			this.BarcodeTextBox = new System.Windows.Forms.TextBox();
 			this.SerialNumTextBox = new System.Windows.Forms.TextBox();
 			this.AddButton = new System.Windows.Forms.Button();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.serialNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.barcodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.ManagementGroupBox.SuspendLayout();
 			this.ItemControlTable.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BlankSplitContainer)).BeginInit();
@@ -61,6 +61,7 @@
 			this.BlankSplitContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BlanksUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ItemGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PrimarySplitContainer)).BeginInit();
 			this.PrimarySplitContainer.Panel1.SuspendLayout();
 			this.PrimarySplitContainer.Panel2.SuspendLayout();
@@ -75,7 +76,6 @@
 			this.AdditionSplitContainer.Panel2.SuspendLayout();
 			this.AdditionSplitContainer.SuspendLayout();
 			this.ValueControlTable.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ManagementGroupBox
@@ -207,6 +207,31 @@
 			this.ItemGrid.TabIndex = 4;
 			this.ItemGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemGrid_CellContentClick);
 			this.ItemGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.ItemGrid_Paint);
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Item Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// serialNumberDataGridViewTextBoxColumn
+			// 
+			this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
+			this.serialNumberDataGridViewTextBoxColumn.HeaderText = "Serial Number";
+			this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
+			this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// barcodeDataGridViewTextBoxColumn
+			// 
+			this.barcodeDataGridViewTextBoxColumn.DataPropertyName = "Barcode";
+			this.barcodeDataGridViewTextBoxColumn.HeaderText = "Barcode";
+			this.barcodeDataGridViewTextBoxColumn.Name = "barcodeDataGridViewTextBoxColumn";
+			this.barcodeDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// itemBindingSource
+			// 
+			this.itemBindingSource.DataSource = typeof(DRC.WordAddIn.BarcodeLabels.Item);
 			// 
 			// PrimarySplitContainer
 			// 
@@ -378,31 +403,6 @@
 			this.AddButton.UseVisualStyleBackColor = true;
 			this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Item Name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// serialNumberDataGridViewTextBoxColumn
-			// 
-			this.serialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber";
-			this.serialNumberDataGridViewTextBoxColumn.HeaderText = "Serial Number";
-			this.serialNumberDataGridViewTextBoxColumn.Name = "serialNumberDataGridViewTextBoxColumn";
-			this.serialNumberDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// barcodeDataGridViewTextBoxColumn
-			// 
-			this.barcodeDataGridViewTextBoxColumn.DataPropertyName = "Barcode";
-			this.barcodeDataGridViewTextBoxColumn.HeaderText = "Barcode";
-			this.barcodeDataGridViewTextBoxColumn.Name = "barcodeDataGridViewTextBoxColumn";
-			this.barcodeDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// itemBindingSource
-			// 
-			this.itemBindingSource.DataSource = typeof(DRC.WordAddIn.BarcodeLabels.Item);
-			// 
 			// DataForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,6 +424,7 @@
 			this.BlankSplitContainer.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.BlanksUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ItemGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
 			this.PrimarySplitContainer.Panel1.ResumeLayout(false);
 			this.PrimarySplitContainer.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.PrimarySplitContainer)).EndInit();
@@ -440,7 +441,6 @@
 			this.AdditionSplitContainer.ResumeLayout(false);
 			this.ValueControlTable.ResumeLayout(false);
 			this.ValueControlTable.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
         }
