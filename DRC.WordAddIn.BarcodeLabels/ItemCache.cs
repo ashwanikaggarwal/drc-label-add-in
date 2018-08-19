@@ -8,19 +8,58 @@ using System.Windows.Forms;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
-	public class ItemCache : BindingSource
+	public class ItemCache
 	{
-		[Browsable(false)]
-		public new List<Item> List { get; set; }
+		private BindingSource _source;
 
-		public ItemCache() : base()
+		public ItemCache()
 		{
-			this.DataSource = new List<Item>();
+			_source = new BindingSource
+			{
+				DataSource = new List<Item>()
+			};
 		}
 
-		public Item GetItem(int index)
+		public void Add(Item item)
 		{
-			return (Item)(this[index]);
+			_source.Add(item);
+		}
+
+		public void AddRange(List<Item> items)
+		{
+			foreach(Item item in items)
+			{
+				Add(item);
+			}
+		}
+
+		public void Insert(int index, Item item)
+		{
+			_source.Insert(index, item);
+		}
+
+		public void InsertRange(int index, List<Item> items)
+		{
+			foreach(Item item in items)
+			{
+				Insert(index, item);
+				index++;
+			}
+		}
+
+		public Item Get(int index)
+		{
+			return (Item)(_source[index]);
+		}
+
+		public void RemoveAt(int index)
+		{
+			_source.RemoveAt(index);
+		}
+
+		public object GetSource()
+		{
+			return _source;
 		}
 
 		public void ImportCSVData(CSVData csvData, int nameCol, int serialNumCol, int barcodeCol)

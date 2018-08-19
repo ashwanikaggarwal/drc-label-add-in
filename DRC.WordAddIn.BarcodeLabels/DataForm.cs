@@ -18,7 +18,7 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
 			_items = items;
             InitializeComponent();
-			ItemGrid.DataSource = _items;
+			ItemGrid.DataSource = _items.GetSource();
             ItemGrid.AllowUserToResizeRows = false;
             ItemGrid.AllowUserToResizeColumns = false;
         }
@@ -45,8 +45,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             {
                 if(row.Selected)
                 {
-                    int index = row.Index;
-					_items.RemoveAt(index);
+					_items.RemoveAt(row.Index);
                 }
             }
 		}
@@ -91,7 +90,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			foreach (DataGridViewRow row in ItemGrid.Rows)
 			{
-				row.DefaultCellStyle.BackColor = _items.GetItem(row.Index).ColorCode;
+				row.DefaultCellStyle.BackColor = _items.Get(row.Index).ColorCode;
 			}
 		}
 
