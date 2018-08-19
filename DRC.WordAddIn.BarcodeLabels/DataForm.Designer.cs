@@ -411,7 +411,7 @@
 			this.Controls.Add(this.PrimarySplitContainer);
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "DataForm";
-			this.Text = "Data Viewer";
+			this.Text = "Data Manager";
 			this.Load += new System.EventHandler(this.DataForm_Load);
 			this.ManagementGroupBox.ResumeLayout(false);
 			this.ItemControlTable.ResumeLayout(false);

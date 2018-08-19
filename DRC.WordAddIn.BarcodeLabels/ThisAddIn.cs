@@ -22,11 +22,6 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
         }
 
-        public void ShowMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
         public void OpenLabels(string dataSource)
         {
             Word.Document activeDocument = Application.ActiveDocument;
@@ -34,12 +29,12 @@ namespace DRC.WordAddIn.BarcodeLabels
             try
             {
                 activeDocument.MailMerge.CreateDataSource("datasource.docx",
-                                                          missing, missing, missing, missing, 
+                                                          missing, missing, missing, missing,
                                                           missing, missing, missing, missing);
                 Application.MailingLabel.LabelOptions();
             } catch (Exception e)
             {
-                //failed to create labels
+				MessageBox.Show(e.StackTrace);
             }
         }
 
@@ -55,16 +50,18 @@ namespace DRC.WordAddIn.BarcodeLabels
             }
             catch (Exception e)
             {
-				MessageBox.Show("Failed to process the data source.");
+				MessageBox.Show(e.StackTrace);
             }
         }
 
         public string GetDataFile()
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "CSV files (*.csv)|*.csv";
+			OpenFileDialog fileDialog = new OpenFileDialog
+			{
+				Filter = "CSV files (*.csv)|*.csv"
+			};
 
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+			if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 return fileDialog.FileName;
             } else

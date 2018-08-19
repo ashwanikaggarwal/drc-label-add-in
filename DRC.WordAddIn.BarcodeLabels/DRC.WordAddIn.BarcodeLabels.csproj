@@ -158,6 +158,12 @@
   -->
   <ItemGroup>
     <Compile Include="CSVData.cs" />
+    <Compile Include="ImportControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportControlForm.Designer.cs">
+      <DependentUpon>ImportControlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="DataForm.cs">
       <SubType>Form</SubType>
@@ -173,6 +179,9 @@
     </Compile>
     <EmbeddedResource Include="DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportControlForm.resx">
+      <DependentUpon>ImportControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
