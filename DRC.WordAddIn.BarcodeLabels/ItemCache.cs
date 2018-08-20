@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
+	[System.ComponentModel.DesignerCategory("Code")]
 	public class ItemCache
 	{
 		private BindingSource _source;
@@ -62,13 +63,14 @@ namespace DRC.WordAddIn.BarcodeLabels
 			return _source;
 		}
 
-		public void ImportCSVData(CSVData csvData, int nameCol, int serialNumCol, int barcodeCol)
+		public List<Item> GetList()
 		{
-			foreach(string[] row in csvData.Data)
-			{
-				Item item = new Item(row[nameCol], row[serialNumCol], row[barcodeCol], true);
-				Add(item);
-			}
+			return (List<Item>)(_source.DataSource);
+		}
+
+		public bool IsEmpty()
+		{
+			return (_source.Count <= 0);
 		}
 	}
 }

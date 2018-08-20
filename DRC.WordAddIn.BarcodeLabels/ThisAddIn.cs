@@ -28,7 +28,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
             try
             {
-                activeDocument.MailMerge.CreateDataSource("datasource.docx",
+                activeDocument.MailMerge.CreateDataSource(dataSource,
                                                           missing, missing, missing, missing,
                                                           missing, missing, missing, missing);
                 Application.MailingLabel.LabelOptions();
@@ -44,29 +44,13 @@ namespace DRC.WordAddIn.BarcodeLabels
 
             try
             {
-                activeDocument.MailMerge.OpenDataSource(GetDataFile(),
+                activeDocument.MailMerge.OpenDataSource("datasource.csv",
                                                         missing, missing, missing, missing,
                                                         missing, missing, missing, missing);
             }
             catch (Exception e)
             {
 				MessageBox.Show(e.StackTrace);
-            }
-        }
-
-        public string GetDataFile()
-        {
-			OpenFileDialog fileDialog = new OpenFileDialog
-			{
-				Filter = "CSV files (*.csv)|*.csv"
-			};
-
-			if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                return fileDialog.FileName;
-            } else
-            {
-                return null;
             }
         }
 

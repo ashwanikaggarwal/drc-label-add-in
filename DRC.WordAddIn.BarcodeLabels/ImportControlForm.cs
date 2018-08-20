@@ -27,7 +27,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void ImportControlForm_Load(object sender, EventArgs e)
 		{
-			//comboboxes sharing a common datasource will update simultaneously
+			//prevents comboboxes from simultaneosly updating
 			NameCBox.DataSource			= new List<string>(_headers);
 			SerialNumCBox.DataSource	= new List<string>(_headers);
 			BarcodeCBox.DataSource		= new List<string>(_headers);
@@ -36,9 +36,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void AutoSelectDefaults()
 		{
-			int nameIndex = Array.IndexOf(_headers, "Name");
-			int serialNumIndex = Array.IndexOf(_headers, "SerialNumber");
-			int barcodeIndex = Array.IndexOf(_headers, "Barcode");
+			int nameIndex				= Array.IndexOf(_headers, "Name");
+			int serialNumIndex			= Array.IndexOf(_headers, "SerialNumber");
+			int barcodeIndex			= Array.IndexOf(_headers, "Barcode");
 			//if appropriate index not found, set default to 0
 			NameCBox.SelectedIndex		= (nameIndex		>= 0)	? nameIndex			: 0;
 			SerialNumCBox.SelectedIndex = (serialNumIndex	>= 0)	? serialNumIndex	: 0;

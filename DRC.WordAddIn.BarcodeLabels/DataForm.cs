@@ -25,7 +25,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void DataForm_Load(object sender, EventArgs e)
         {
-            
         }
 
 		private void ProcessImport(string dataPath)
@@ -37,10 +36,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 			
 			if(result == DialogResult.OK)
 			{
-				_items.ImportCSVData(	data,
-										importCF.NameIndex,
-										importCF.SerialNumIndex,
-										importCF.BarcodeIndex);
+				_items.AddRange(data.GetItems(	importCF.NameIndex,
+												importCF.SerialNumIndex,
+												importCF.BarcodeIndex));
 			} else
 			{
 				data = null;
@@ -49,7 +47,18 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
-			string dataPath = Globals.ThisAddIn.GetDataFile();
+			string dataPath = null;
+
+			OpenFileDialog fileDialog = new OpenFileDialog
+			{
+				Filter = "CSV files (*.csv)|*.csv"
+			};
+
+			if (fileDialog.ShowDialog() == DialogResult.OK)
+			{
+				dataPath = fileDialog.FileName;
+			}
+
 			if(String.IsNullOrWhiteSpace(dataPath))
 			{
 				return;
