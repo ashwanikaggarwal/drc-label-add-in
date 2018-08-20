@@ -12,13 +12,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class DataForm : Form
     {
-		private ItemCache _items;
+		private DataCache _data;
+		private DataModel _model;
 
-        public DataForm(ItemCache items)
+        public DataForm(DataCache items)
         {
-			_items = items;
+			_data = items;
             InitializeComponent();
-			ItemGrid.DataSource = _items.GetSource();
+			//ItemGrid.DataSource = _data.GetSource();
+			_model = new DataModel();
             ItemGrid.AllowUserToResizeRows = false;
             ItemGrid.AllowUserToResizeColumns = false;
         }
@@ -29,41 +31,41 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void ProcessImport(string dataPath)
 		{
-			CSVData data = new CSVData(dataPath);
+			_model.ImportData(dataPath, null);
 
-			ImportControlForm importCF = new ImportControlForm(data.Headers);
+			ImportControlForm importCF = new ImportControlForm(_model.GetDataTable());
 			DialogResult result = importCF.ShowDialog();
-			
-			if(result == DialogResult.OK)
+
+			if (result == DialogResult.OK)
 			{
-				_items.AddRange(data.GetItems(	importCF.NameIndex,
-												importCF.SerialNumIndex,
-												importCF.BarcodeIndex));
-			} else
-			{
-				data = null;
+				_model.ImportData(dataPath, importCF.Headers);
 			}
 		}
 
-        private void ImportButton_Click(object sender, EventArgs e)
-        {
+		private void ImportButton_Click(object sender, EventArgs e)
+		{
 			string dataPath = null;
 
-			OpenFileDialog fileDialog = new OpenFileDialog
+			try
 			{
-				Filter = "CSV files (*.csv)|*.csv"
-			};
+				OpenFileDialog fileDialog = new OpenFileDialog
+				{
+					Filter = "CSV files (*.csv)|*.csv",
+					ValidateNames = true
+				};
 
-			if (fileDialog.ShowDialog() == DialogResult.OK)
+				if (fileDialog.ShowDialog() == DialogResult.OK)
+					dataPath = fileDialog.FileName;
+			} catch (Exception ex)
 			{
-				dataPath = fileDialog.FileName;
+				MessageBox.Show(ex.Message);
 			}
 
-			if(String.IsNullOrWhiteSpace(dataPath))
-			{
+			if (String.IsNullOrWhiteSpace(dataPath))
 				return;
-			}
+
 			ProcessImport(dataPath);
+			ItemGrid.DataSource = _model.GetDataTable();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -72,7 +74,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             {
                 if(row.Selected)
                 {
-					_items.RemoveAt(row.Index);
+					_data.RemoveAt(row.Index);
                 }
             }
 		}
@@ -91,10 +93,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 				return;
 			}
 
-			Item newItem = new Item(name, serialNum, barcode);
-
-			_items.Insert(0, newItem);
-			ValueControlTable.Refresh();
+			//add to recordset
 		}
 
 		private void AddBlanksButton_Click(object sender, EventArgs e)
@@ -102,28 +101,21 @@ namespace DRC.WordAddIn.BarcodeLabels
 			int amount = Convert.ToInt32(BlanksUpDown.Value);
 			for(int i = 0; i < amount; i++)
 			{
-				Item blankItem = new Item("", "", "", false);
-				_items.Insert(0, blankItem);
+				//add blanks to recordset
 			}
 			BlanksUpDown.Value = 1;
 		}
 
 		private void ValueControlTable_Paint(object sender, PaintEventArgs e)
         {
-			
         }
 
 		private void ItemGrid_Paint(object sender, PaintEventArgs e)
 		{
-			foreach (DataGridViewRow row in ItemGrid.Rows)
-			{
-				row.DefaultCellStyle.BackColor = _items.Get(row.Index).ColorCode;
-			}
 		}
 
 		private void ItemGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-
 		}
 	}
 }

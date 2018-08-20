@@ -16,8 +16,8 @@ namespace DRC.WordAddIn.BarcodeLabels
         [System.ComponentModel.DisplayName("Serial Number")]
         public string SerialNumber { get; set; }
 
-        [System.ComponentModel.DisplayName("Barcode")]
-        public string Barcode { get; set; }
+        [System.ComponentModel.DisplayName("Value")]
+        public string Value { get; set; }
 
 		[System.ComponentModel.Browsable(false)]
 		public Color ColorCode { get; set; } = Color.Empty;
@@ -26,14 +26,14 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
             Name = name;
             SerialNumber = serialNumber;
-            Barcode = barcode;
+            Value = barcode;
         }
 
 		public Item(string name, string serialNumber, string barcode, bool colorSetting)
 		{
 			Name = name;
 			SerialNumber = serialNumber;
-			Barcode = barcode;
+			Value = barcode;
 			//colorSetting true is for imported items, false for blanks
 			ColorCode = colorSetting ? Color.LightGreen : Color.LightYellow;
 		}

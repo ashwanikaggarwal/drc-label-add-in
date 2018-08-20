@@ -13,32 +13,39 @@ namespace DRC.WordAddIn.BarcodeLabels
 	public partial class ImportControlForm : Form
 	{
 		//user-selected indices of the headers array
-		public int NameIndex		{ get; set; }
-		public int SerialNumIndex	{ get; set; }
-		public int BarcodeIndex		{ get; set; }
+		public string	NameField		{ get; private set; }
+		public string	SerialNumField	{ get; private set; }
+		public string	BarcodeField	{ get; private set; }
+		public string[] Headers			{ get; private set; }
 
-		private string[] _headers;
-
-		public ImportControlForm(string[] headers)
+		public ImportControlForm(DataTable table)
 		{
 			InitializeComponent();
-			_headers = headers;
+			List<string> headers = new List<string>();
+
+			foreach(DataColumn column in table.Columns)
+			{
+				headers.Add(column.ColumnName);
+			}
+			Headers = headers.ToArray();
+
+			//providing unique lists prevents every combobox from updating together
+			NameCBox.DataSource			= new List<string>(Headers);
+			SerialNumCBox.DataSource	= new List<string>(Headers);
+			BarcodeCBox.DataSource		= new List<string>(Headers);
+
+			AutoSelectDefaults();
 		}
 
 		private void ImportControlForm_Load(object sender, EventArgs e)
 		{
-			//prevents comboboxes from simultaneosly updating
-			NameCBox.DataSource			= new List<string>(_headers);
-			SerialNumCBox.DataSource	= new List<string>(_headers);
-			BarcodeCBox.DataSource		= new List<string>(_headers);
-			AutoSelectDefaults();
 		}
 
 		private void AutoSelectDefaults()
 		{
-			int nameIndex				= Array.IndexOf(_headers, "Name");
-			int serialNumIndex			= Array.IndexOf(_headers, "SerialNumber");
-			int barcodeIndex			= Array.IndexOf(_headers, "Barcode");
+			int nameIndex				= Array.IndexOf(Headers, "Name"			);
+			int serialNumIndex			= Array.IndexOf(Headers, "SerialNumber"	);
+			int barcodeIndex			= Array.IndexOf(Headers, "Barcode"		);
 			//if appropriate index not found, set default to 0
 			NameCBox.SelectedIndex		= (nameIndex		>= 0)	? nameIndex			: 0;
 			SerialNumCBox.SelectedIndex = (serialNumIndex	>= 0)	? serialNumIndex	: 0;
@@ -47,9 +54,11 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void AcceptButton_Click(object sender, EventArgs e)
 		{
-			NameIndex = NameCBox.SelectedIndex;
-			SerialNumIndex = SerialNumCBox.SelectedIndex;
-			BarcodeIndex = BarcodeCBox.SelectedIndex;
+			NameField		= NameCBox.SelectedText;
+			SerialNumField	= SerialNumCBox.SelectedText;
+			BarcodeField	= BarcodeCBox.SelectedText;
+
+			Headers = new string[] { NameField, SerialNumField, BarcodeField };
 
 			DialogResult = DialogResult.OK;
 			Close();

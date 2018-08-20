@@ -52,7 +52,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			foreach(Item item in items)
 			{
-				Data.Add(new string[]{ item.Name, item.SerialNumber, item.Barcode });
+				Data.Add(new string[]{ item.Name, item.SerialNumber, item.Value });
 			}
 		}
 

@@ -9,11 +9,11 @@ using System.Windows.Forms;
 namespace DRC.WordAddIn.BarcodeLabels
 {
 	[System.ComponentModel.DesignerCategory("Code")]
-	public class ItemCache
+	public class DataCache
 	{
 		private BindingSource _source;
 
-		public ItemCache()
+		public DataCache()
 		{
 			_source = new BindingSource
 			{

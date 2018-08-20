@@ -14,13 +14,13 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class LabelMerger
 	{
-		private ItemCache _items;
+		private DataCache _items;
 		private Word.Application _app;
 		private Word.Document _doc;
 
 		private object missing = System.Reflection.Missing.Value;
 
-		public LabelMerger(ItemCache items)
+		public LabelMerger(DataCache items)
 		{
 			_items = items;
 			_app = Globals.ThisAddIn.Application;

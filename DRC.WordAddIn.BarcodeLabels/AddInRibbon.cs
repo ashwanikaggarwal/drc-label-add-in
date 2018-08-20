@@ -9,12 +9,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class AddInRibbon
     {
-		private ItemCache _items;
+		private DataCache _items;
 		private LabelMerger _merger;
 
         private void AddInRibbon_Load(object sender, RibbonUIEventArgs e)
         {
-			_items = new ItemCache();
+			_items = new DataCache();
 			UpdateButton.Enabled = false;
         }
 
