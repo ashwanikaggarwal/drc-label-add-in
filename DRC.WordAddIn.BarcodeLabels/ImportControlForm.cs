@@ -21,6 +21,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public ImportControlForm(DataTable table)
 		{
 			InitializeComponent();
+			TableViewer.DataSource = table;
+
 			List<string> headers = new List<string>();
 
 			foreach(DataColumn column in table.Columns)
@@ -54,9 +56,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void AcceptButton_Click(object sender, EventArgs e)
 		{
-			NameField		= NameCBox.SelectedText;
-			SerialNumField	= SerialNumCBox.SelectedText;
-			BarcodeField	= BarcodeCBox.SelectedText;
+			NameField		= (string) NameCBox.SelectedValue;
+			SerialNumField	= (string) SerialNumCBox.SelectedValue;
+			BarcodeField	= (string) BarcodeCBox.SelectedValue;
 
 			Headers = new string[] { NameField, SerialNumField, BarcodeField };
 

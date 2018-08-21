@@ -31,15 +31,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void ProcessImport(string dataPath)
 		{
-			_model.ImportData(dataPath, null);
-
-			ImportControlForm importCF = new ImportControlForm(_model.GetDataTable());
-			DialogResult result = importCF.ShowDialog();
-
-			if (result == DialogResult.OK)
-			{
-				_model.ImportData(dataPath, importCF.Headers);
-			}
+			_model.LoadImport(dataPath);
 		}
 
 		private void ImportButton_Click(object sender, EventArgs e)
