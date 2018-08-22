@@ -12,13 +12,18 @@ namespace DRC.WordAddIn.BarcodeLabels
 	public class DataModel
 	{
 		private DataSet _data;
+		private DataTable _items;
+
 		private Recordset _rs;
 		private Connection _conn;
 		private OleDbDataAdapter _adapter;
 
 		public DataModel()
 		{
-			_data = new DataSet();
+			_data = new DataSet("data");
+			_items = new DataTable("items");
+			_data.Tables.Add(_items);
+
 			_rs = new Recordset();
 			_conn = new Connection();
 			_adapter = new OleDbDataAdapter();
@@ -45,17 +50,16 @@ namespace DRC.WordAddIn.BarcodeLabels
 			_adapter.Fill(fullTable, _rs);
 			string strFields = GetFields(fullTable);
 
-			_rs.Close();
 			string queryFields = "SELECT " + strFields + " FROM [" + System.IO.Path.GetFileName(strFileName) + "]";
 
+			_rs.Close();
 			_rs.Open(	queryFields,
 						_conn,
 						CursorTypeEnum.adOpenForwardOnly,
 						LockTypeEnum.adLockReadOnly,
 						-1);
 
-			DataTable selectionsTable = new DataTable();
-			_adapter.Fill(_data, _rs, System.IO.Path.GetFileName(strFileName));
+			_adapter.Fill(_items, _rs);
 			_conn.Close();
 		}
 
@@ -75,11 +79,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 			return selection;
 		}
 
-		public DataTable GetDataTable()
+		public DataTable GetItemsTable()
 		{
-			DataTable table = new DataTable();
-			_adapter.Fill(table, _rs);
-			return table;
+			return _items;
 		}
 	}
 }

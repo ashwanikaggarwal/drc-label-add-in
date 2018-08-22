@@ -32,6 +32,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 		private void ProcessImport(string dataPath)
 		{
 			_model.LoadImport(dataPath);
+			ItemGrid.DataSource = _model.GetItemsTable();
 		}
 
 		private void ImportButton_Click(object sender, EventArgs e)
@@ -57,7 +58,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 				return;
 
 			ProcessImport(dataPath);
-			ItemGrid.DataSource = _model.GetDataTable();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)

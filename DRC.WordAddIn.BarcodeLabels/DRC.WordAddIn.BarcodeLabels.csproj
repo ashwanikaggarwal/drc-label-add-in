@@ -195,6 +195,7 @@
     <EmbeddedResource Include="AddInRibbon.resx">
       <DependentUpon>AddInRibbon.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DRC.WordAddIn.BarcodeLabels_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\CSVData.datasource" />
     <None Include="Properties\DataSources\Item.datasource" />
     <None Include="Properties\Settings.settings">
@@ -244,7 +245,10 @@
     <ManifestKeyFile>DRC.WordAddIn.BarcodeLabels_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>20C810017A0845DA57E1BB318E02A9BCFADE1782</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>ACBA0BF7A48DD8553F1633C15FE0499364B688B0</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
