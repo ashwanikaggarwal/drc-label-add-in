@@ -12,8 +12,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 	public class DataModel
 	{
 		private DataSet _data;
-		private DataTable _items;
-
 		private Recordset _rs;
 		private Connection _conn;
 		private OleDbDataAdapter _adapter;
@@ -21,46 +19,54 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public DataModel()
 		{
 			_data = new DataSet("data");
-			_items = new DataTable("items");
-			_data.Tables.Add(_items);
+			_data.Tables.Add(CreateItemsTable());
 
 			_rs = new Recordset();
 			_conn = new Connection();
 			_adapter = new OleDbDataAdapter();
 		}
 
-		public void LoadImport(string strFileName)
+		private DataTable CreateItemsTable()
 		{
-			_conn.Open(	"Provider=Microsoft.Jet.OleDb.4.0; Data Source = " +
-						System.IO.Path.GetDirectoryName(strFileName) +
-						"; Extended Properties = \"Text;HDR=YES;FMT=Delimited\";",
-						"",
-						"",
-						0);
+			DataTable table = new DataTable("items");
+			table.Columns.Add("Name", typeof(string));
+			table.Columns.Add("SerialNumber", typeof(string));
+			table.Columns.Add("Barcode", typeof(string));
+			return table;
+		}
 
-			string queryAll = "SELECT * FROM [" + System.IO.Path.GetFileName(strFileName) + "]";
+		public void LoadImport(string fileName)
+		{
+			DataTable items = _data.Tables["items"];
+			string strDir = System.IO.Path.GetDirectoryName(fileName);
+			string strFile = System.IO.Path.GetFileName(fileName);
 
-			_rs.Open(	queryAll,
-						_conn,
-						CursorTypeEnum.adOpenForwardOnly,
-						LockTypeEnum.adLockReadOnly,
-						-1);
+			OleDbConnection conn = new OleDbConnection
+			{
+				ConnectionString = $"Provider=Microsoft.Jet.OleDb.4.0; Data Source = {strDir}; Extended Properties = \"Text;HDR=YES;FMT=Delimited\";"
+			};
+			conn.Open();
 
-			DataTable fullTable = new DataTable();
-			_adapter.Fill(fullTable, _rs);
-			string strFields = GetFields(fullTable);
+			OleDbCommand cmdSelectAll = new OleDbCommand($"SELECT * FROM [{strFile}]");
 
-			string queryFields = "SELECT " + strFields + " FROM [" + System.IO.Path.GetFileName(strFileName) + "]";
+			string selection;
+			using (OleDbDataAdapter adapter = new OleDbDataAdapter(cmdSelectAll.CommandText, conn))
+			using (DataTable importTable = new DataTable("ImportTable"))
+			{
+				adapter.Fill(importTable);
+				selection = GetFields(importTable);
+			}
 
-			_rs.Close();
-			_rs.Open(	queryFields,
-						_conn,
-						CursorTypeEnum.adOpenForwardOnly,
-						LockTypeEnum.adLockReadOnly,
-						-1);
+			string itemCols = $"{items.Columns[0].ColumnName}, {items.Columns[1].ColumnName}, {items.Columns[2].ColumnName}";
+			
+			//table name for "insert into" is the problem here
+			OleDbCommand cmdInsertInto = new OleDbCommand($"INSERT INTO [{items.TableName}] ({itemCols}) SELECT {selection} FROM [{strFile}]", conn);
 
-			_adapter.Fill(_items, _rs);
-			_conn.Close();
+			using (OleDbDataAdapter adapter = new OleDbDataAdapter(cmdInsertInto.CommandText, conn))
+			{
+				//FIND A WAY TO FILL THE ITEMS TABLE
+			}
+			conn.Close();
 		}
 
 		private string GetFields(DataTable table)
@@ -81,7 +87,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public DataTable GetItemsTable()
 		{
-			return _items;
+			return _data.Tables["items"];
 		}
 	}
 }
