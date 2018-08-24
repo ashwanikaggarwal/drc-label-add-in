@@ -19,18 +19,13 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public const string COL_BARCODE = "Barcode";
 
 		private DataSet _data;
-		private Recordset _rs;
-		private Connection _conn;
-		private OleDbDataAdapter _adapter;
+		private DataTable _items;
 
 		public DataModel()
 		{
 			_data = new DataSet(SET_MAIN);
-			_data.Tables.Add(CreateItemsTable());
-
-			_rs = new Recordset();
-			_conn = new Connection();
-			_adapter = new OleDbDataAdapter();
+			_items = CreateItemsTable();
+			_data.Tables.Add(_items);
 		}
 
 		private DataTable CreateItemsTable()
@@ -42,6 +37,48 @@ namespace DRC.WordAddIn.BarcodeLabels
 			return table;
 		}
 
+		public bool IsEmpty()
+		{
+			return _items == null || _items.Rows.Count <= 0;
+		}
+
+		public void Add(string name, string serialNum, string barcode, int index)
+		{
+			DataRow row = _items.NewRow();
+			row[COL_NAME] = name;
+			row[COL_SERIALNUM] = serialNum;
+			row[COL_BARCODE] = barcode;
+			_items.Rows.InsertAt(row, index);
+		}
+
+		public void Add(string name, string serialNum, string barcode)
+		{
+			Add(name, serialNum, barcode, _items.Rows.Count);
+		}
+
+		public void RemoveAt(int index)
+		{
+			_items.Rows.RemoveAt(index);
+		}
+
+		public void WriteToFile(string path)
+		{
+			List<string> lines = new List<string>();
+			List<string> columns = new List<string>();
+
+			foreach(DataColumn column in _items.Columns)
+			{
+				columns.Add(column.ColumnName);
+			}
+			lines.Add(string.Join(",", columns));
+			
+			foreach(DataRow row in _items.Rows)
+			{
+				lines.Add(string.Join(",", row.ItemArray));
+			}
+			System.IO.File.WriteAllLines(path, lines);
+		}
+
 		public void LoadImport(string fileName)
 		{
 			string strDir = System.IO.Path.GetDirectoryName(fileName);
@@ -49,7 +86,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			OleDbConnection conn = new OleDbConnection
 			{
-				ConnectionString = $"Provider=Microsoft.Jet.OleDb.4.0; Data Source = {strDir}; Extended Properties = \"Text;HDR=YES;FMT=Delimited\";"
+				//Microsoft.Jet.OleDB.4.0 is not registered on most devices
+				ConnectionString = $"Provider=Microsoft.ACE.OLEDB.12.0; Data Source = {strDir}; Extended Properties = \"Text;HDR=YES;FMT=Delimited\";"
 			};
 			conn.Open();
 
@@ -106,9 +144,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 				var result = importCF.ShowDialog();
 				if (result == System.Windows.Forms.DialogResult.OK)
 				{
-					selection = importCF.NameField		+ ", " +
-								importCF.SerialNumField + ", " +
-								importCF.BarcodeField;
+					selection = $"{importCF.NameField}, {importCF.SerialNumField}, {importCF.BarcodeField}";
 				}
 			}
 			return selection;
@@ -116,7 +152,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public DataTable GetItemsTable()
 		{
-			return _data.Tables["items"];
+			return _data.Tables[TABLE_MAIN];
 		}
 	}
 }

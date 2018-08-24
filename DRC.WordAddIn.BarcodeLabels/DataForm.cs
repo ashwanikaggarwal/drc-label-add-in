@@ -12,17 +12,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class DataForm : Form
     {
-		private DataCache _data;
 		private DataModel _model;
 
-        public DataForm(DataCache items)
+        public DataForm(DataModel model)
         {
-			_data = items;
             InitializeComponent();
-			//ItemGrid.DataSource = _data.GetSource();
-			_model = new DataModel();
+			_model = model;
             ItemGrid.AllowUserToResizeRows = false;
             ItemGrid.AllowUserToResizeColumns = false;
+			ItemGrid.DataSource = _model.GetItemsTable();
         }
 
         private void DataForm_Load(object sender, EventArgs e)
@@ -32,7 +30,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 		private void ProcessImport(string dataPath)
 		{
 			_model.LoadImport(dataPath);
-			ItemGrid.DataSource = _model.GetItemsTable();
 		}
 
 		private void ImportButton_Click(object sender, EventArgs e)
@@ -66,7 +63,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             {
                 if(row.Selected)
                 {
-					_data.RemoveAt(row.Index);
+					_model.RemoveAt(row.Index);
                 }
             }
 		}
@@ -85,7 +82,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 				return;
 			}
 
-			//add to recordset
+			_model.Add(name, serialNum, barcode);
+			ItemGrid.FirstDisplayedScrollingRowIndex = ItemGrid.RowCount - 1;
 		}
 
 		private void AddBlanksButton_Click(object sender, EventArgs e)
@@ -93,9 +91,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 			int amount = Convert.ToInt32(BlanksUpDown.Value);
 			for(int i = 0; i < amount; i++)
 			{
-				//add blanks to recordset
+				_model.Add("", "", "", 0);
 			}
+			ItemGrid.FirstDisplayedScrollingRowIndex = 0;
 			BlanksUpDown.Value = 1;
+		}
+
+		private void DataForm_Close(object sender, FormClosedEventArgs e)
+		{
+			
 		}
 
 		private void ValueControlTable_Paint(object sender, PaintEventArgs e)

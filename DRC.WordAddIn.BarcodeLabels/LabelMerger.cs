@@ -14,17 +14,17 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class LabelMerger
 	{
-		private DataCache _items;
+		private DataModel _model;
 		private Word.Application _app;
 		private Word.Document _doc;
 
 		private object missing = System.Reflection.Missing.Value;
 
-		public LabelMerger(DataCache items)
+		public LabelMerger(DataModel model, Word.Application app, Word.Document doc)
 		{
-			_items = items;
-			_app = Globals.ThisAddIn.Application;
-			_doc = Globals.ThisAddIn.Application.ActiveDocument;
+			_model = model;
+			_app = app;
+			_doc = doc;
 		}
 
 		public void GenerateLabels()
@@ -35,16 +35,16 @@ namespace DRC.WordAddIn.BarcodeLabels
 				_app.MailingLabel.LabelOptions();
 			} catch (Exception e)
 			{
-				MessageBox.Show(e.StackTrace);
+				MessageBox.Show(e.Message);
 			}
 		}
 
 		private string GetSource()
 		{
-			string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\datasource.csv";
+			string fileName = @"\datasource.csv";
+			string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + fileName;
 			File.Create(sourcePath).Close();
-			CSVData dataSource = new CSVData(sourcePath, _items.GetList());
-			dataSource.AppendToFile(sourcePath);
+			_model.WriteToFile(sourcePath);
 			return sourcePath;
 		}
 
@@ -52,10 +52,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			try
 			{
-				GetSource();
-				_doc.MailMerge.OpenDataSource(	GetSource(),
-												missing, missing, missing, missing,
-												missing, missing, missing, missing);
+				_doc.MailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
 				//_doc.Fields.ToggleShowCodes();
 			} catch(Exception e)
 			{

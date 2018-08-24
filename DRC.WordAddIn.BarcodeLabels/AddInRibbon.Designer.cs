@@ -36,16 +36,16 @@
         {
 			this.LabelsTab = this.Factory.CreateRibbonTab();
 			this.DataGroup = this.Factory.CreateRibbonGroup();
-			this.group1 = this.Factory.CreateRibbonGroup();
-			this.AddInGroup = this.Factory.CreateRibbonGroup();
-			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.DataButton = this.Factory.CreateRibbonButton();
+			this.LabelsGroup = this.Factory.CreateRibbonGroup();
 			this.CreateLabelsButton = this.Factory.CreateRibbonButton();
 			this.UpdateButton = this.Factory.CreateRibbonButton();
+			this.AddInGroup = this.Factory.CreateRibbonGroup();
 			this.StatusButton = this.Factory.CreateRibbonButton();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.LabelsTab.SuspendLayout();
 			this.DataGroup.SuspendLayout();
-			this.group1.SuspendLayout();
+			this.LabelsGroup.SuspendLayout();
 			this.AddInGroup.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -53,7 +53,7 @@
 			// 
 			this.LabelsTab.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
 			this.LabelsTab.Groups.Add(this.DataGroup);
-			this.LabelsTab.Groups.Add(this.group1);
+			this.LabelsTab.Groups.Add(this.LabelsGroup);
 			this.LabelsTab.Groups.Add(this.AddInGroup);
 			this.LabelsTab.Label = "Labels";
 			this.LabelsTab.Name = "LabelsTab";
@@ -64,19 +64,6 @@
 			this.DataGroup.Label = "Data";
 			this.DataGroup.Name = "DataGroup";
 			// 
-			// group1
-			// 
-			this.group1.Items.Add(this.CreateLabelsButton);
-			this.group1.Items.Add(this.UpdateButton);
-			this.group1.Label = "Labels";
-			this.group1.Name = "group1";
-			// 
-			// AddInGroup
-			// 
-			this.AddInGroup.Items.Add(this.StatusButton);
-			this.AddInGroup.Label = "Add-In";
-			this.AddInGroup.Name = "AddInGroup";
-			// 
 			// DataButton
 			// 
 			this.DataButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -84,6 +71,13 @@
 			this.DataButton.Name = "DataButton";
 			this.DataButton.ShowImage = true;
 			this.DataButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.DataButton_Click);
+			// 
+			// LabelsGroup
+			// 
+			this.LabelsGroup.Items.Add(this.CreateLabelsButton);
+			this.LabelsGroup.Items.Add(this.UpdateButton);
+			this.LabelsGroup.Label = "Labels";
+			this.LabelsGroup.Name = "LabelsGroup";
 			// 
 			// CreateLabelsButton
 			// 
@@ -100,6 +94,12 @@
 			this.UpdateButton.Name = "UpdateButton";
 			this.UpdateButton.ShowImage = true;
 			this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
+			// 
+			// AddInGroup
+			// 
+			this.AddInGroup.Items.Add(this.StatusButton);
+			this.AddInGroup.Label = "Add-In";
+			this.AddInGroup.Name = "AddInGroup";
 			// 
 			// StatusButton
 			// 
@@ -119,8 +119,8 @@
 			this.LabelsTab.PerformLayout();
 			this.DataGroup.ResumeLayout(false);
 			this.DataGroup.PerformLayout();
-			this.group1.ResumeLayout(false);
-			this.group1.PerformLayout();
+			this.LabelsGroup.ResumeLayout(false);
+			this.LabelsGroup.PerformLayout();
 			this.AddInGroup.ResumeLayout(false);
 			this.AddInGroup.PerformLayout();
 			this.ResumeLayout(false);
@@ -130,7 +130,7 @@
         #endregion
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab LabelsTab;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup LabelsGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton CreateLabelsButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton DataButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup DataGroup;
