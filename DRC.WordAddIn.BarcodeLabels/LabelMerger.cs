@@ -31,62 +31,67 @@ namespace DRC.WordAddIn.BarcodeLabels
 			{
 				_mailMerge.MainDocumentType = WdMailMergeMainDocType.wdMailingLabels;
 				_mailMerge.Application.MailingLabel.LabelOptions();
-				//InsertFields();
+				_mailMerge.Application.ActiveDocument.Tables[1].set_Style("Table Grid");
 			} catch (Exception e)
 			{
 				MessageBox.Show(e.Message);
 			}
 		}
 
-		public void InsertFields()
+		public void AddFields()
 		{
+			string[] fieldText = {  @"MERGEFIELD Name",
+									@"MERGEFIELD SerialNumber",
+									@"MERGEBARCODE Barcode CODE128 \t" };
+
 			Word.Document doc = Globals.ThisAddIn.Application.ActiveDocument;
 
-			for(int i = 0; i < 3; i++)
-			{
-				Word.Paragraph paragraph = doc.Paragraphs.Add();
-				paragraph.Range.Fields.Add(paragraph.Range, missing, missing, missing);
-				paragraph.Space1();
-				paragraph.SpaceAfter = 0f;
-				paragraph.Range.InsertParagraphAfter();
-			}
+			Word.Range range = doc.Tables[1].Range.Cells[1].Range;
+			range.Collapse(WdCollapseDirection.wdCollapseStart);
 
-			doc.Fields[1].Code.Text = @"MERGEFIELD Name";
-			doc.Fields[2].Code.Text = @"MERGEFIELD SerialNumber";
-			doc.Fields[3].Code.Text = @"MERGEBARCODE Barcode CODE128 \t";
-
-			Globals.ThisAddIn.Application.ActiveDocument.Fields.ToggleShowCodes();
+			InsertFields(range);
+			doc.Fields.ToggleShowCodes();
 		}
 
-		public void InsertFields(bool temp)
+		private void InsertFields(Word.Range range)
 		{
-			Word.Document doc = _mailMerge.Application.ActiveDocument;
-			Word.Range range = doc.Tables[1].Range.Cells[1].Range;
+			Word.Document doc = range.Document;
 
-			range.Collapse(WdCollapseDirection.wdCollapseStart);
-			doc.Fields.Add(range, missing, missing, missing);
-			range.Next(WdUnits.wdWord, 1);
+			Word.Field field = doc.Fields.Add(range, missing, missing, missing);
+			field.Code.Text = @"MERGEBARCODE Barcode CODE128 \t";
+		}
 
-			range.Collapse(WdCollapseDirection.wdCollapseEnd);
-			doc.Fields.Add(range, missing, missing, missing);
-			range.Next(WdUnits.wdWord, 1);
+		//doesn't work
+		private void InsertFields(Word.Range range, string[] fieldText)
+		{
+			Word.Document doc = range.Document;
 
-			range.Collapse(WdCollapseDirection.wdCollapseEnd);
-			doc.Fields.Add(range, missing, missing, missing);
+			for (int i = 1; i <= 3; i++)
+			{
+				doc.Fields.Add(range, missing, missing, missing);
+				doc.Fields[i].Code.Text = fieldText[i - 1];
 
-			doc.Tables[1].Range.Fields[1].Code.Text = @"MERGEFIELD Name";
-			doc.Tables[1].Range.Fields[2].Code.Text = @"MERGEFIELD SerialNumber";
-			doc.Tables[1].Range.Fields[3].Code.Text = @"MERGEBARCODE Barcode CODE128 \t";
+				range.EndOf(WdUnits.wdParagraph, WdMovementType.wdMove);
 
-			_mailMerge.Application.ActiveDocument.Fields.ToggleShowCodes();
+				Word.Paragraph paragraph = range.Paragraphs.Add();
+				paragraph.Space1();
+				paragraph.SpaceAfter = 0f;
+
+				range = range.Next(WdUnits.wdParagraph, missing);
+				range.Collapse(WdCollapseDirection.wdCollapseEnd);
+			}
+
+			doc.Paragraphs.Last.Range.Delete();
 		}
 
 		private string GetSource()
 		{
 			string fileName = @"\datasource.csv";
 			string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + fileName;
+
 			File.Create(sourcePath).Close();
 			_model.WriteToFile(sourcePath);
+
 			return sourcePath;
 		}
 
@@ -94,11 +99,22 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			try
 			{
-				_mailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
+				if(!_model.IsEmpty())
+				{
+					_mailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
+				} else
+				{
+					MessageBox.Show("Please add items by clicking \"Manage Data\".");
+				}
 			} catch(Exception e)
 			{
 				MessageBox.Show(e.Message);
 			}
+		}
+
+		public void Execute()
+		{
+			_mailMerge.Execute(true);
 		}
 	}
 }

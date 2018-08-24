@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+//temp imports
+using Word = Microsoft.Office.Interop.Word;
+using Office = Microsoft.Office.Core;
+using Microsoft.Office.Tools.Word;
+using Microsoft.Office.Interop.Word;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
@@ -16,6 +21,8 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
 			_model = new DataModel();
 			UpdateButton.Enabled = false;
+			InsertFieldsButton.Enabled = false;
+			ExecuteButton.Enabled = false;
 		}
 
 		private void DataButton_Click(object sender, RibbonControlEventArgs e)
@@ -27,8 +34,13 @@ namespace DRC.WordAddIn.BarcodeLabels
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
 			_merger = new LabelMerger(_model, Globals.ThisAddIn.Application.ActiveDocument.MailMerge);
+
 			UpdateButton.Enabled = true;
+			InsertFieldsButton.Enabled = true;
+			ExecuteButton.Enabled = true;
+
 			_merger.GenerateLabels();
+			_merger.AddFields();
         }
 		
 		private void UpdateButton_Click(object sender, RibbonControlEventArgs e)
@@ -46,15 +58,19 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			try
 			{
-				//_merger = new LabelMerger(_model, Globals.ThisAddIn.Application.ActiveDocument.MailMerge);
-				_merger.InsertFields();
+				_merger.AddFields();
 			} catch(Exception ex)
 			{
-				MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+				MessageBox.Show($"{ex.ToString()}: {ex.Message}\n\n{ex.StackTrace}");
 			}
 		}
 
-        private void StatusButton_Click(object sender, RibbonControlEventArgs e)
+		private void ExecuteButton_Click(object sender, RibbonControlEventArgs e)
+		{
+			_merger.Execute();
+		}
+
+		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
         {
             Globals.ThisAddIn.DisplayStatus();
         }
