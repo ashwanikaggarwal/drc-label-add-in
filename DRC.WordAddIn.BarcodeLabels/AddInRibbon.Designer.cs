@@ -36,13 +36,14 @@
         {
 			this.LabelsTab = this.Factory.CreateRibbonTab();
 			this.DataGroup = this.Factory.CreateRibbonGroup();
-			this.DataButton = this.Factory.CreateRibbonButton();
 			this.LabelsGroup = this.Factory.CreateRibbonGroup();
+			this.AddInGroup = this.Factory.CreateRibbonGroup();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.DataButton = this.Factory.CreateRibbonButton();
 			this.CreateLabelsButton = this.Factory.CreateRibbonButton();
 			this.UpdateButton = this.Factory.CreateRibbonButton();
-			this.AddInGroup = this.Factory.CreateRibbonGroup();
+			this.InsertFieldsButton = this.Factory.CreateRibbonButton();
 			this.StatusButton = this.Factory.CreateRibbonButton();
-			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.LabelsTab.SuspendLayout();
 			this.DataGroup.SuspendLayout();
 			this.LabelsGroup.SuspendLayout();
@@ -64,6 +65,20 @@
 			this.DataGroup.Label = "Data";
 			this.DataGroup.Name = "DataGroup";
 			// 
+			// LabelsGroup
+			// 
+			this.LabelsGroup.Items.Add(this.CreateLabelsButton);
+			this.LabelsGroup.Items.Add(this.UpdateButton);
+			this.LabelsGroup.Items.Add(this.InsertFieldsButton);
+			this.LabelsGroup.Label = "Labels";
+			this.LabelsGroup.Name = "LabelsGroup";
+			// 
+			// AddInGroup
+			// 
+			this.AddInGroup.Items.Add(this.StatusButton);
+			this.AddInGroup.Label = "Add-In";
+			this.AddInGroup.Name = "AddInGroup";
+			// 
 			// DataButton
 			// 
 			this.DataButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -71,13 +86,6 @@
 			this.DataButton.Name = "DataButton";
 			this.DataButton.ShowImage = true;
 			this.DataButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.DataButton_Click);
-			// 
-			// LabelsGroup
-			// 
-			this.LabelsGroup.Items.Add(this.CreateLabelsButton);
-			this.LabelsGroup.Items.Add(this.UpdateButton);
-			this.LabelsGroup.Label = "Labels";
-			this.LabelsGroup.Name = "LabelsGroup";
 			// 
 			// CreateLabelsButton
 			// 
@@ -95,11 +103,13 @@
 			this.UpdateButton.ShowImage = true;
 			this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
 			// 
-			// AddInGroup
+			// InsertFieldsButton
 			// 
-			this.AddInGroup.Items.Add(this.StatusButton);
-			this.AddInGroup.Label = "Add-In";
-			this.AddInGroup.Name = "AddInGroup";
+			this.InsertFieldsButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+			this.InsertFieldsButton.Label = "Insert Fields";
+			this.InsertFieldsButton.Name = "InsertFieldsButton";
+			this.InsertFieldsButton.ShowImage = true;
+			this.InsertFieldsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.InsertFieldsButton_Click);
 			// 
 			// StatusButton
 			// 
@@ -138,6 +148,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton StatusButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton UpdateButton;
+		internal Microsoft.Office.Tools.Ribbon.RibbonButton InsertFieldsButton;
 	}
 
 	partial class ThisRibbonCollection

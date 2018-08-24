@@ -22,38 +22,6 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
         }
 
-        public void OpenLabels(string dataSource)
-        {
-            Word.Document activeDocument = Application.ActiveDocument;
-
-            try
-            {
-                activeDocument.MailMerge.CreateDataSource(dataSource,
-                                                          missing, missing, missing, missing,
-                                                          missing, missing, missing, missing);
-                Application.MailingLabel.LabelOptions();
-            } catch (Exception e)
-            {
-				MessageBox.Show(e.StackTrace);
-            }
-        }
-
-        public void ProcessDataSource()
-        {
-            Word.Document activeDocument = Application.ActiveDocument;
-
-            try
-            {
-                activeDocument.MailMerge.OpenDataSource("datasource.csv",
-                                                        missing, missing, missing, missing,
-                                                        missing, missing, missing, missing);
-            }
-            catch (Exception e)
-            {
-				MessageBox.Show(e.StackTrace);
-            }
-        }
-
         public void DisplayStatus()
         {
             Word.Document activeDocument = this.Application.ActiveDocument;
