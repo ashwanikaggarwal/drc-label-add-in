@@ -14,6 +14,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class LabelMerger
 	{
+		public const int FIELD_FONT_SIZE = 8;
+
 		private DataModel _model;
 		private Word.MailMerge _mailMerge;
 
@@ -40,48 +42,144 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public void AddFields()
 		{
-			string[] fieldText = {  @"MERGEFIELD Name",
-									@"MERGEFIELD SerialNumber",
-									@"MERGEBARCODE Barcode CODE128 \t" };
+			Word.Document doc = _mailMerge.Application.ActiveDocument;
+			Word.Cell cell = doc.Tables[1].Range.Cells[1];
 
-			Word.Document doc = Globals.ThisAddIn.Application.ActiveDocument;
+			InsertIntoCell(cell, false);
+		}
 
-			Word.Range range = doc.Tables[1].Range.Cells[1].Range;
+		//work in progress
+		private void InsertIntoCell(Word.Cell cell, bool insertNextField, bool temp)
+		{
+			char pBreak = '\u00B6';
+
+			string[] fieldCodes = { @"NEXT",
+									@"MERGEFIELD Name",
+									@"MERGEFIELD SerialNumber \b "": """,
+									$"MERGEBARCODE Barcode CODE128 \\b {pBreak}" };
+
+			cell.Range.Delete();
+			Word.Range range = cell.Range;
+
 			range.Collapse(WdCollapseDirection.wdCollapseStart);
 
+			foreach(string fieldCode in fieldCodes)
+			{
+				if(!insertNextField)
+				{
+					insertNextField = true;
+					continue;
+				}
+
+				Word.Field field = cell.Range.Fields.Add(range, missing, missing, missing);
+				field.Code.Text = fieldCode;
+
+				range = field.Result;
+				range.Collapse(WdCollapseDirection.wdCollapseEnd);
+			}
+			
+			cell.Range.Font.Size = FIELD_FONT_SIZE;
+			cell.Range.Fields.Update();
+		}
+
+		private void InsertIntoCell(Word.Cell cell, bool insertNextField)
+		{
+			Word.Range range = cell.Range;
+
+			//purge existing paragraphs in range
+			foreach (Paragraph p in range.Paragraphs)
+			{
+				p.Range.Delete();
+			}
+
 			InsertFields(range);
-			doc.Fields.ToggleShowCodes();
+
+			if(insertNextField)
+			{
+				//insert "next record" field at start
+				range.Collapse(WdCollapseDirection.wdCollapseStart);
+				Word.Field nextField = range.Fields.Add(range, missing, missing, missing);
+				nextField.Code.Text = @"NEXT";
+			}
+
+			//enforce single spacing in each paragraph
+			foreach (Paragraph p in cell.Range.Paragraphs)
+			{
+				p.SpaceBefore = 0f;
+				p.SpaceAfter = 0f;
+				p.Space1();
+			}
+
+			cell.Range.Font.Size = FIELD_FONT_SIZE;
+			cell.Range.Fields.Update();
 		}
 
 		private void InsertFields(Word.Range range)
 		{
-			Word.Document doc = range.Document;
+			//create top paragraph
+			Word.Paragraph paragraph1 = range.Paragraphs.Add();
+			range.Collapse(WdCollapseDirection.wdCollapseStart);
 
-			Word.Field field = doc.Fields.Add(range, missing, missing, missing);
-			field.Code.Text = @"MERGEBARCODE Barcode CODE128 \t";
+			//create name field
+			Word.Field nameField = range.Fields.Add(range, missing, missing, missing);
+			nameField.Code.Text = @"MERGEFIELD Name";
+			range = nameField.Result;
+			range.Collapse(WdCollapseDirection.wdCollapseEnd);
+
+			//create serial number field
+			Word.Field serialNumField = range.Fields.Add(range, missing, missing, missing);
+			serialNumField.Code.Text = @"MERGEFIELD SerialNumber \b "": """;
+
+			//set up range for next paragraph
+			range = serialNumField.Result;
+			range.Collapse(WdCollapseDirection.wdCollapseEnd);
+			range.InsertParagraphAfter();
+
+			//create next paragraph
+			Word.Paragraph paragraph2 = range.Paragraphs.Add();
+			range = paragraph2.Range;
+
+			//create barcode field
+			Word.Field barcodeField = paragraph2.Range.Fields.Add(range, missing, missing, missing);
+			barcodeField.Code.Text = @"MERGEBARCODE Barcode CODE128";
 		}
 
-		//doesn't work
-		private void InsertFields(Word.Range range, string[] fieldText)
+		public void UpdateLabels()
 		{
-			Word.Document doc = range.Document;
-
-			for (int i = 1; i <= 3; i++)
+			if(!_model.IsEmpty())
 			{
-				doc.Fields.Add(range, missing, missing, missing);
-				doc.Fields[i].Code.Text = fieldText[i - 1];
-
-				range.EndOf(WdUnits.wdParagraph, WdMovementType.wdMove);
-
-				Word.Paragraph paragraph = range.Paragraphs.Add();
-				paragraph.Space1();
-				paragraph.SpaceAfter = 0f;
-
-				range = range.Next(WdUnits.wdParagraph, missing);
-				range.Collapse(WdCollapseDirection.wdCollapseEnd);
+				try
+				{
+					_mailMerge.DataSource.Close();
+				}
+				catch { /*silence*/ }
+				
+				_mailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
+				UpdateFields();
+			} else
+			{
+				MessageBox.Show("Please add items by clicking \"Manage Data\".");
 			}
+		}
 
-			doc.Paragraphs.Last.Range.Delete();
+		private void UpdateFields()
+		{
+			Word.Document doc = _mailMerge.Application.ActiveDocument;
+			Word.Range tableRange = doc.Tables[1].Range;
+
+			InsertIntoCell(tableRange.Cells[1], false);
+
+			foreach (Word.Cell cell in tableRange.Cells)
+			{
+				foreach (Word.Field field in cell.Range.Fields)
+				{
+					if (field.Code.Text.Contains("NEXT"))
+					{
+						InsertIntoCell(cell, true);
+						break;
+					}
+				}
+			}
 		}
 
 		private string GetSource()
@@ -93,23 +191,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 			_model.WriteToFile(sourcePath);
 
 			return sourcePath;
-		}
-
-		public void UpdateLabels()
-		{
-			try
-			{
-				if(!_model.IsEmpty())
-				{
-					_mailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
-				} else
-				{
-					MessageBox.Show("Please add items by clicking \"Manage Data\".");
-				}
-			} catch(Exception e)
-			{
-				MessageBox.Show(e.Message);
-			}
 		}
 
 		public void Execute()

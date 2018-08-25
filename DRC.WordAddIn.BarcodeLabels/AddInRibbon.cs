@@ -4,11 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-//temp imports
-using Word = Microsoft.Office.Interop.Word;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Word;
-using Microsoft.Office.Interop.Word;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
@@ -40,7 +35,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			ExecuteButton.Enabled = true;
 
 			_merger.GenerateLabels();
-			_merger.AddFields();
+			//_merger.AddFields();
         }
 		
 		private void UpdateButton_Click(object sender, RibbonControlEventArgs e)
@@ -72,7 +67,13 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.DisplayStatus();
+			MessageBox.Show("" + '\u00B6');
+            //Globals.ThisAddIn.DisplayStatus();
         }
-    }
+
+		private void ToggleButton_Click(object sender, RibbonControlEventArgs e)
+		{
+			Globals.ThisAddIn.Application.ActiveDocument.Fields.ToggleShowCodes();
+		}
+	}
 }

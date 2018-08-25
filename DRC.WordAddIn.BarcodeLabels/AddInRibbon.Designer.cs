@@ -41,10 +41,11 @@
 			this.CreateLabelsButton = this.Factory.CreateRibbonButton();
 			this.UpdateButton = this.Factory.CreateRibbonButton();
 			this.InsertFieldsButton = this.Factory.CreateRibbonButton();
+			this.ExecuteButton = this.Factory.CreateRibbonButton();
 			this.AddInGroup = this.Factory.CreateRibbonGroup();
 			this.StatusButton = this.Factory.CreateRibbonButton();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-			this.ExecuteButton = this.Factory.CreateRibbonButton();
+			this.ToggleButton = this.Factory.CreateRibbonButton();
 			this.LabelsTab.SuspendLayout();
 			this.DataGroup.SuspendLayout();
 			this.LabelsGroup.SuspendLayout();
@@ -107,9 +108,18 @@
 			this.InsertFieldsButton.ShowImage = true;
 			this.InsertFieldsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.InsertFieldsButton_Click);
 			// 
+			// ExecuteButton
+			// 
+			this.ExecuteButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+			this.ExecuteButton.Label = "Finish Labels";
+			this.ExecuteButton.Name = "ExecuteButton";
+			this.ExecuteButton.ShowImage = true;
+			this.ExecuteButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExecuteButton_Click);
+			// 
 			// AddInGroup
 			// 
 			this.AddInGroup.Items.Add(this.StatusButton);
+			this.AddInGroup.Items.Add(this.ToggleButton);
 			this.AddInGroup.Label = "Add-In";
 			this.AddInGroup.Name = "AddInGroup";
 			// 
@@ -121,13 +131,13 @@
 			this.StatusButton.ShowImage = true;
 			this.StatusButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.StatusButton_Click);
 			// 
-			// ExecuteButton
+			// ToggleButton
 			// 
-			this.ExecuteButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-			this.ExecuteButton.Label = "Finish Labels";
-			this.ExecuteButton.Name = "ExecuteButton";
-			this.ExecuteButton.ShowImage = true;
-			this.ExecuteButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExecuteButton_Click);
+			this.ToggleButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+			this.ToggleButton.Label = "Toggle Field View";
+			this.ToggleButton.Name = "ToggleButton";
+			this.ToggleButton.ShowImage = true;
+			this.ToggleButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ToggleButton_Click);
 			// 
 			// AddInRibbon
 			// 
@@ -160,6 +170,7 @@
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton UpdateButton;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton InsertFieldsButton;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton ExecuteButton;
+		internal Microsoft.Office.Tools.Ribbon.RibbonButton ToggleButton;
 	}
 
 	partial class ThisRibbonCollection
