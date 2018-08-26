@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -46,8 +47,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
 		{
-            Globals.ThisAddIn.DisplayStatus();
-        }
+			Globals.ThisAddIn.DisplayStatus();
+		}
 
 		private void ToggleButton_Click(object sender, RibbonControlEventArgs e)
 		{
