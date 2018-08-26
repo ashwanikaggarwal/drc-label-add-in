@@ -80,8 +80,10 @@
 			this.ManagementGroupBox.Controls.Add(this.ItemControlTable);
 			this.ManagementGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ManagementGroupBox.Location = new System.Drawing.Point(0, 0);
+			this.ManagementGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ManagementGroupBox.Name = "ManagementGroupBox";
-			this.ManagementGroupBox.Size = new System.Drawing.Size(246, 150);
+			this.ManagementGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ManagementGroupBox.Size = new System.Drawing.Size(163, 97);
 			this.ManagementGroupBox.TabIndex = 3;
 			this.ManagementGroupBox.TabStop = false;
 			this.ManagementGroupBox.Text = "Item Management";
@@ -94,23 +96,23 @@
 			this.ItemControlTable.Controls.Add(this.DeleteButton, 0, 1);
 			this.ItemControlTable.Controls.Add(this.BlankSplitContainer, 0, 2);
 			this.ItemControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ItemControlTable.Location = new System.Drawing.Point(3, 22);
-			this.ItemControlTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.ItemControlTable.Location = new System.Drawing.Point(2, 15);
 			this.ItemControlTable.Name = "ItemControlTable";
 			this.ItemControlTable.RowCount = 3;
 			this.ItemControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.ItemControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.ItemControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.ItemControlTable.Size = new System.Drawing.Size(240, 125);
+			this.ItemControlTable.Size = new System.Drawing.Size(159, 80);
 			this.ItemControlTable.TabIndex = 3;
 			// 
 			// ImportButton
 			// 
 			this.ImportButton.AutoSize = true;
 			this.ImportButton.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ImportButton.Location = new System.Drawing.Point(3, 3);
+			this.ImportButton.Location = new System.Drawing.Point(2, 2);
+			this.ImportButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ImportButton.Name = "ImportButton";
-			this.ImportButton.Size = new System.Drawing.Size(234, 35);
+			this.ImportButton.Size = new System.Drawing.Size(155, 22);
 			this.ImportButton.TabIndex = 0;
 			this.ImportButton.Text = "Import from CSV";
 			this.ImportButton.UseVisualStyleBackColor = true;
@@ -120,9 +122,10 @@
 			// 
 			this.DeleteButton.AutoSize = true;
 			this.DeleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.DeleteButton.Location = new System.Drawing.Point(3, 44);
+			this.DeleteButton.Location = new System.Drawing.Point(2, 28);
+			this.DeleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.DeleteButton.Name = "DeleteButton";
-			this.DeleteButton.Size = new System.Drawing.Size(234, 35);
+			this.DeleteButton.Size = new System.Drawing.Size(155, 22);
 			this.DeleteButton.TabIndex = 1;
 			this.DeleteButton.Text = "Delete Selected Items";
 			this.DeleteButton.UseVisualStyleBackColor = true;
@@ -130,8 +133,7 @@
 			// 
 			// BlankSplitContainer
 			// 
-			this.BlankSplitContainer.Location = new System.Drawing.Point(4, 87);
-			this.BlankSplitContainer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.BlankSplitContainer.Location = new System.Drawing.Point(3, 55);
 			this.BlankSplitContainer.Name = "BlankSplitContainer";
 			// 
 			// BlankSplitContainer.Panel1
@@ -141,9 +143,8 @@
 			// BlankSplitContainer.Panel2
 			// 
 			this.BlankSplitContainer.Panel2.Controls.Add(this.BlanksUpDown);
-			this.BlankSplitContainer.Size = new System.Drawing.Size(225, 29);
-			this.BlankSplitContainer.SplitterDistance = 144;
-			this.BlankSplitContainer.SplitterWidth = 6;
+			this.BlankSplitContainer.Size = new System.Drawing.Size(150, 19);
+			this.BlankSplitContainer.SplitterDistance = 96;
 			this.BlankSplitContainer.TabIndex = 2;
 			// 
 			// AddBlanksButton
@@ -151,8 +152,9 @@
 			this.AddBlanksButton.AutoSize = true;
 			this.AddBlanksButton.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AddBlanksButton.Location = new System.Drawing.Point(0, 0);
+			this.AddBlanksButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.AddBlanksButton.Name = "AddBlanksButton";
-			this.AddBlanksButton.Size = new System.Drawing.Size(144, 29);
+			this.AddBlanksButton.Size = new System.Drawing.Size(96, 19);
 			this.AddBlanksButton.TabIndex = 1;
 			this.AddBlanksButton.Text = "Insert Blanks";
 			this.AddBlanksButton.UseVisualStyleBackColor = true;
@@ -160,16 +162,16 @@
 			// 
 			// BlanksUpDown
 			// 
-			this.BlanksUpDown.AutoSize = true;
 			this.BlanksUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.BlanksUpDown.Location = new System.Drawing.Point(0, 0);
+			this.BlanksUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.BlanksUpDown.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
 			this.BlanksUpDown.Name = "BlanksUpDown";
-			this.BlanksUpDown.Size = new System.Drawing.Size(75, 26);
+			this.BlanksUpDown.Size = new System.Drawing.Size(50, 20);
 			this.BlanksUpDown.TabIndex = 2;
 			this.BlanksUpDown.Value = new decimal(new int[] {
             1,
@@ -186,11 +188,12 @@
 			this.ItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.ItemGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ItemGrid.Location = new System.Drawing.Point(0, 0);
+			this.ItemGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ItemGrid.Name = "ItemGrid";
 			this.ItemGrid.ReadOnly = true;
 			this.ItemGrid.RowTemplate.Height = 28;
 			this.ItemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.ItemGrid.Size = new System.Drawing.Size(800, 294);
+			this.ItemGrid.Size = new System.Drawing.Size(533, 192);
 			this.ItemGrid.TabIndex = 4;
 			this.ItemGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemGrid_CellContentClick);
 			this.ItemGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.ItemGrid_Paint);
@@ -199,6 +202,7 @@
 			// 
 			this.PrimarySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PrimarySplitContainer.Location = new System.Drawing.Point(0, 0);
+			this.PrimarySplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.PrimarySplitContainer.Name = "PrimarySplitContainer";
 			this.PrimarySplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -209,15 +213,16 @@
 			// PrimarySplitContainer.Panel2
 			// 
 			this.PrimarySplitContainer.Panel2.Controls.Add(this.ItemGrid);
-			this.PrimarySplitContainer.Size = new System.Drawing.Size(800, 449);
-			this.PrimarySplitContainer.SplitterDistance = 150;
-			this.PrimarySplitContainer.SplitterWidth = 5;
+			this.PrimarySplitContainer.Size = new System.Drawing.Size(533, 292);
+			this.PrimarySplitContainer.SplitterDistance = 97;
+			this.PrimarySplitContainer.SplitterWidth = 3;
 			this.PrimarySplitContainer.TabIndex = 5;
 			// 
 			// ControlSplitContainer
 			// 
 			this.ControlSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ControlSplitContainer.Location = new System.Drawing.Point(0, 0);
+			this.ControlSplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ControlSplitContainer.Name = "ControlSplitContainer";
 			// 
 			// ControlSplitContainer.Panel1
@@ -227,8 +232,9 @@
 			// ControlSplitContainer.Panel2
 			// 
 			this.ControlSplitContainer.Panel2.Controls.Add(this.AdditionGroupBox);
-			this.ControlSplitContainer.Size = new System.Drawing.Size(800, 150);
-			this.ControlSplitContainer.SplitterDistance = 246;
+			this.ControlSplitContainer.Size = new System.Drawing.Size(533, 97);
+			this.ControlSplitContainer.SplitterDistance = 163;
+			this.ControlSplitContainer.SplitterWidth = 3;
 			this.ControlSplitContainer.TabIndex = 4;
 			// 
 			// AdditionGroupBox
@@ -236,8 +242,10 @@
 			this.AdditionGroupBox.Controls.Add(this.AdditionSplitContainer);
 			this.AdditionGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AdditionGroupBox.Location = new System.Drawing.Point(0, 0);
+			this.AdditionGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.AdditionGroupBox.Name = "AdditionGroupBox";
-			this.AdditionGroupBox.Size = new System.Drawing.Size(550, 150);
+			this.AdditionGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AdditionGroupBox.Size = new System.Drawing.Size(367, 97);
 			this.AdditionGroupBox.TabIndex = 0;
 			this.AdditionGroupBox.TabStop = false;
 			this.AdditionGroupBox.Text = "Add Items";
@@ -245,7 +253,8 @@
 			// AdditionSplitContainer
 			// 
 			this.AdditionSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AdditionSplitContainer.Location = new System.Drawing.Point(3, 22);
+			this.AdditionSplitContainer.Location = new System.Drawing.Point(2, 15);
+			this.AdditionSplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.AdditionSplitContainer.Name = "AdditionSplitContainer";
 			// 
 			// AdditionSplitContainer.Panel1
@@ -255,12 +264,14 @@
 			// AdditionSplitContainer.Panel2
 			// 
 			this.AdditionSplitContainer.Panel2.Controls.Add(this.AddButton);
-			this.AdditionSplitContainer.Size = new System.Drawing.Size(544, 125);
-			this.AdditionSplitContainer.SplitterDistance = 419;
+			this.AdditionSplitContainer.Size = new System.Drawing.Size(363, 80);
+			this.AdditionSplitContainer.SplitterDistance = 279;
+			this.AdditionSplitContainer.SplitterWidth = 3;
 			this.AdditionSplitContainer.TabIndex = 1;
 			// 
 			// ValueControlTable
 			// 
+			this.ValueControlTable.AutoSize = true;
 			this.ValueControlTable.ColumnCount = 2;
 			this.ValueControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.20443F));
 			this.ValueControlTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.79557F));
@@ -272,12 +283,13 @@
 			this.ValueControlTable.Controls.Add(this.SerialNumTextBox, 1, 1);
 			this.ValueControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ValueControlTable.Location = new System.Drawing.Point(0, 0);
+			this.ValueControlTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.ValueControlTable.Name = "ValueControlTable";
 			this.ValueControlTable.RowCount = 3;
 			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.19838F));
 			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.43725F));
 			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.36437F));
-			this.ValueControlTable.Size = new System.Drawing.Size(419, 125);
+			this.ValueControlTable.Size = new System.Drawing.Size(279, 80);
 			this.ValueControlTable.TabIndex = 0;
 			this.ValueControlTable.Paint += new System.Windows.Forms.PaintEventHandler(this.ValueControlTable_Paint);
 			// 
@@ -285,9 +297,10 @@
 			// 
 			this.NameLabel.AutoSize = true;
 			this.NameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.NameLabel.Location = new System.Drawing.Point(3, 0);
+			this.NameLabel.Location = new System.Drawing.Point(2, 0);
+			this.NameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.NameLabel.Name = "NameLabel";
-			this.NameLabel.Size = new System.Drawing.Size(137, 41);
+			this.NameLabel.Size = new System.Drawing.Size(91, 26);
 			this.NameLabel.TabIndex = 0;
 			this.NameLabel.Text = "Item Name:";
 			this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -296,9 +309,10 @@
 			// 
 			this.SerialNumLabel.AutoSize = true;
 			this.SerialNumLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SerialNumLabel.Location = new System.Drawing.Point(3, 41);
+			this.SerialNumLabel.Location = new System.Drawing.Point(2, 26);
+			this.SerialNumLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.SerialNumLabel.Name = "SerialNumLabel";
-			this.SerialNumLabel.Size = new System.Drawing.Size(137, 45);
+			this.SerialNumLabel.Size = new System.Drawing.Size(91, 29);
 			this.SerialNumLabel.TabIndex = 1;
 			this.SerialNumLabel.Text = "Serial Number:";
 			this.SerialNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -307,9 +321,10 @@
 			// 
 			this.BarcodeLabel.AutoSize = true;
 			this.BarcodeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BarcodeLabel.Location = new System.Drawing.Point(3, 86);
+			this.BarcodeLabel.Location = new System.Drawing.Point(2, 55);
+			this.BarcodeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.BarcodeLabel.Name = "BarcodeLabel";
-			this.BarcodeLabel.Size = new System.Drawing.Size(137, 39);
+			this.BarcodeLabel.Size = new System.Drawing.Size(91, 25);
 			this.BarcodeLabel.TabIndex = 4;
 			this.BarcodeLabel.Text = "Barcode:";
 			this.BarcodeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -317,33 +332,37 @@
 			// NameTextBox
 			// 
 			this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.NameTextBox.Location = new System.Drawing.Point(146, 7);
+			this.NameTextBox.Location = new System.Drawing.Point(97, 3);
+			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.NameTextBox.Name = "NameTextBox";
-			this.NameTextBox.Size = new System.Drawing.Size(270, 26);
+			this.NameTextBox.Size = new System.Drawing.Size(180, 20);
 			this.NameTextBox.TabIndex = 2;
 			// 
 			// BarcodeTextBox
 			// 
 			this.BarcodeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.BarcodeTextBox.Location = new System.Drawing.Point(146, 92);
+			this.BarcodeTextBox.Location = new System.Drawing.Point(97, 57);
+			this.BarcodeTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.BarcodeTextBox.Name = "BarcodeTextBox";
-			this.BarcodeTextBox.Size = new System.Drawing.Size(270, 26);
+			this.BarcodeTextBox.Size = new System.Drawing.Size(180, 20);
 			this.BarcodeTextBox.TabIndex = 5;
 			// 
 			// SerialNumTextBox
 			// 
 			this.SerialNumTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.SerialNumTextBox.Location = new System.Drawing.Point(146, 50);
+			this.SerialNumTextBox.Location = new System.Drawing.Point(97, 30);
+			this.SerialNumTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.SerialNumTextBox.Name = "SerialNumTextBox";
-			this.SerialNumTextBox.Size = new System.Drawing.Size(270, 26);
+			this.SerialNumTextBox.Size = new System.Drawing.Size(180, 20);
 			this.SerialNumTextBox.TabIndex = 3;
 			// 
 			// AddButton
 			// 
 			this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AddButton.Location = new System.Drawing.Point(0, 0);
+			this.AddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.AddButton.Name = "AddButton";
-			this.AddButton.Size = new System.Drawing.Size(121, 125);
+			this.AddButton.Size = new System.Drawing.Size(81, 80);
 			this.AddButton.TabIndex = 0;
 			this.AddButton.Text = "Add Item";
 			this.AddButton.UseVisualStyleBackColor = true;
@@ -356,10 +375,11 @@
 			// 
 			// DataForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 449);
+			this.ClientSize = new System.Drawing.Size(533, 292);
 			this.Controls.Add(this.PrimarySplitContainer);
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "DataForm";
 			this.Text = "Data Manager";
 			this.Load += new System.EventHandler(this.DataForm_Load);
@@ -369,7 +389,6 @@
 			this.BlankSplitContainer.Panel1.ResumeLayout(false);
 			this.BlankSplitContainer.Panel1.PerformLayout();
 			this.BlankSplitContainer.Panel2.ResumeLayout(false);
-			this.BlankSplitContainer.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BlankSplitContainer)).EndInit();
 			this.BlankSplitContainer.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.BlanksUpDown)).EndInit();
@@ -384,6 +403,7 @@
 			this.ControlSplitContainer.ResumeLayout(false);
 			this.AdditionGroupBox.ResumeLayout(false);
 			this.AdditionSplitContainer.Panel1.ResumeLayout(false);
+			this.AdditionSplitContainer.Panel1.PerformLayout();
 			this.AdditionSplitContainer.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.AdditionSplitContainer)).EndInit();
 			this.AdditionSplitContainer.ResumeLayout(false);

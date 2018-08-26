@@ -45,14 +45,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 				MessageBox.Show(e.Message);
 			}
 		}
-
-		public void AddFields()
-		{
-			Word.Document doc = _mailMerge.Application.ActiveDocument;
-			Word.Cell cell = doc.Tables[1].Range.Cells[1];
-
-			InsertIntoCell(cell, _fieldCodes, false);
-		}
 		
 		private void InsertIntoCell(Word.Cell cell, string[] fieldCodes, bool insertNextField)
 		{
@@ -95,24 +87,10 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public void UpdateLabels()
 		{
-			if(!_model.IsEmpty())
-			{
-				try
-				{
-					_mailMerge.DataSource.Close();
-				}
-				catch { /*silence*/ }
-				
-				_mailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
-
-				UpdateFields();
-			} else
-			{
-				MessageBox.Show("Please add items by clicking \"Manage Data\".");
-			}
+			
 		}
 
-		private void UpdateFields()
+		public void WriteFields()
 		{
 			Word.Document doc = _mailMerge.Application.ActiveDocument;
 			Word.Range tableRange = doc.Tables[1].Range;
@@ -122,21 +100,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 			List<Word.Cell> cells = new List<Cell>();
 
 			foreach (Word.Cell cell in tableRange.Cells)
-			{
 				foreach (Word.Field field in cell.Range.Fields)
-				{
 					if (field.Code.Text.Equals(@" NEXT "))
 					{
 						cells.Add(cell);
 						break;
 					}
-				}
-			}
 
 			foreach(Word.Cell cell in cells)
-			{
 				InsertIntoCell(cell, _fieldCodes, true);
-			}
 		}
 
 		private string GetSource()
@@ -152,7 +124,21 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public void Execute()
 		{
-			_mailMerge.Execute(true);
+			if (!_model.IsEmpty())
+			{
+				try
+				{
+					_mailMerge.DataSource.Close();
+				}
+				catch { /*silence*/ }
+
+				_mailMerge.OpenDataSource(GetSource(), WdOpenFormat.wdOpenFormatAuto);
+				_mailMerge.Execute(true);
+			}
+			else
+			{
+				MessageBox.Show("Please add items by clicking \"Manage Data\".");
+			}
 		}
 	}
 }

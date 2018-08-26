@@ -15,8 +15,6 @@ namespace DRC.WordAddIn.BarcodeLabels
         private void AddInRibbon_Load(object sender, RibbonUIEventArgs e)
         {
 			_model = new DataModel();
-			UpdateButton.Enabled = false;
-			InsertFieldsButton.Enabled = false;
 			ExecuteButton.Enabled = false;
 		}
 
@@ -28,35 +26,16 @@ namespace DRC.WordAddIn.BarcodeLabels
 
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
-			_merger = new LabelMerger(_model, Globals.ThisAddIn.Application.ActiveDocument.MailMerge);
-
-			UpdateButton.Enabled = true;
-			InsertFieldsButton.Enabled = true;
-			ExecuteButton.Enabled = true;
-
-			_merger.GenerateLabels();
-			//_merger.AddFields();
-        }
-		
-		private void UpdateButton_Click(object sender, RibbonControlEventArgs e)
-		{
 			try
 			{
-				_merger.UpdateLabels();
+				_merger = new LabelMerger(_model, Globals.ThisAddIn.Application.ActiveDocument.MailMerge);
+				_merger.GenerateLabels();
+				_merger.WriteFields();
+
+				ExecuteButton.Enabled = true;
 			} catch(Exception ex)
 			{
 				MessageBox.Show(ex.Message);
-			}
-		}
-
-		private void InsertFieldsButton_Click(object sender, RibbonControlEventArgs e)
-		{
-			try
-			{
-				_merger.AddFields();
-			} catch(Exception ex)
-			{
-				MessageBox.Show($"{ex.ToString()}: {ex.Message}\n\n{ex.StackTrace}");
 			}
 		}
 
