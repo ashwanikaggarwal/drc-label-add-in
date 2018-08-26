@@ -66,9 +66,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 		}
 
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
-        {
-			MessageBox.Show("" + '\u00B6');
-            //Globals.ThisAddIn.DisplayStatus();
+		{
+            Globals.ThisAddIn.DisplayStatus();
         }
 
 		private void ToggleButton_Click(object sender, RibbonControlEventArgs e)
