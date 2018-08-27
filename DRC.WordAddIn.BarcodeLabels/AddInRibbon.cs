@@ -10,39 +10,34 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class AddInRibbon
     {
-		private DataModel _model;
-		private LabelMerger _merger;
+		private DocumentController _controller;
 
         private void AddInRibbon_Load(object sender, RibbonUIEventArgs e)
         {
-			_model = new DataModel();
-			ExecuteButton.Enabled = false;
+			_controller = new DocumentController(Globals.ThisAddIn.Application);
+		}
+
+		private void HandleResult(string result)
+		{
+			if (!result.Equals("OK"))
+			{
+				MessageBox.Show(result);
+			}
 		}
 
 		private void DataButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			DataForm viewForm = new DataForm(_model);
-			viewForm.Show();
+			_controller.DataForm.Show();
 		}
 
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
-			try
-			{
-				_merger = new LabelMerger(_model, Globals.ThisAddIn.Application.ActiveDocument.MailMerge);
-				_merger.GenerateLabels();
-				_merger.WriteFields();
-
-				ExecuteButton.Enabled = true;
-			} catch(Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+			HandleResult(_controller.CreateLabels());
 		}
 
 		private void ExecuteButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			_merger.Execute();
+			HandleResult(_controller.FinishLabels());
 		}
 
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)

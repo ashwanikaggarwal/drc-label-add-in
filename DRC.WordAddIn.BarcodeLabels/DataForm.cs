@@ -99,7 +99,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void DataForm_Close(object sender, FormClosedEventArgs e)
 		{
-			
 		}
 
 		private void ValueControlTable_Paint(object sender, PaintEventArgs e)

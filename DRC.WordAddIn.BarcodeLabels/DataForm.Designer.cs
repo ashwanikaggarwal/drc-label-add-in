@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.ManagementGroupBox = new System.Windows.Forms.GroupBox();
 			this.ItemControlTable = new System.Windows.Forms.TableLayoutPanel();
 			this.ImportButton = new System.Windows.Forms.Button();
@@ -49,7 +48,6 @@
 			this.BarcodeTextBox = new System.Windows.Forms.TextBox();
 			this.SerialNumTextBox = new System.Windows.Forms.TextBox();
 			this.AddButton = new System.Windows.Forms.Button();
-			this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.ManagementGroupBox.SuspendLayout();
 			this.ItemControlTable.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.BlankSplitContainer)).BeginInit();
@@ -72,7 +70,6 @@
 			this.AdditionSplitContainer.Panel2.SuspendLayout();
 			this.AdditionSplitContainer.SuspendLayout();
 			this.ValueControlTable.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ManagementGroupBox
@@ -80,9 +77,9 @@
 			this.ManagementGroupBox.Controls.Add(this.ItemControlTable);
 			this.ManagementGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ManagementGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.ManagementGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ManagementGroupBox.Margin = new System.Windows.Forms.Padding(2);
 			this.ManagementGroupBox.Name = "ManagementGroupBox";
-			this.ManagementGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ManagementGroupBox.Padding = new System.Windows.Forms.Padding(2);
 			this.ManagementGroupBox.Size = new System.Drawing.Size(163, 97);
 			this.ManagementGroupBox.TabIndex = 3;
 			this.ManagementGroupBox.TabStop = false;
@@ -110,7 +107,7 @@
 			this.ImportButton.AutoSize = true;
 			this.ImportButton.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ImportButton.Location = new System.Drawing.Point(2, 2);
-			this.ImportButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ImportButton.Margin = new System.Windows.Forms.Padding(2);
 			this.ImportButton.Name = "ImportButton";
 			this.ImportButton.Size = new System.Drawing.Size(155, 22);
 			this.ImportButton.TabIndex = 0;
@@ -123,7 +120,7 @@
 			this.DeleteButton.AutoSize = true;
 			this.DeleteButton.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.DeleteButton.Location = new System.Drawing.Point(2, 28);
-			this.DeleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.DeleteButton.Margin = new System.Windows.Forms.Padding(2);
 			this.DeleteButton.Name = "DeleteButton";
 			this.DeleteButton.Size = new System.Drawing.Size(155, 22);
 			this.DeleteButton.TabIndex = 1;
@@ -152,7 +149,7 @@
 			this.AddBlanksButton.AutoSize = true;
 			this.AddBlanksButton.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AddBlanksButton.Location = new System.Drawing.Point(0, 0);
-			this.AddBlanksButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddBlanksButton.Margin = new System.Windows.Forms.Padding(2);
 			this.AddBlanksButton.Name = "AddBlanksButton";
 			this.AddBlanksButton.Size = new System.Drawing.Size(96, 19);
 			this.AddBlanksButton.TabIndex = 1;
@@ -164,7 +161,7 @@
 			// 
 			this.BlanksUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.BlanksUpDown.Location = new System.Drawing.Point(0, 0);
-			this.BlanksUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.BlanksUpDown.Margin = new System.Windows.Forms.Padding(2);
 			this.BlanksUpDown.Maximum = new decimal(new int[] {
             99,
             0,
@@ -188,7 +185,7 @@
 			this.ItemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.ItemGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ItemGrid.Location = new System.Drawing.Point(0, 0);
-			this.ItemGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ItemGrid.Margin = new System.Windows.Forms.Padding(2);
 			this.ItemGrid.Name = "ItemGrid";
 			this.ItemGrid.ReadOnly = true;
 			this.ItemGrid.RowTemplate.Height = 28;
@@ -202,7 +199,7 @@
 			// 
 			this.PrimarySplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PrimarySplitContainer.Location = new System.Drawing.Point(0, 0);
-			this.PrimarySplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.PrimarySplitContainer.Margin = new System.Windows.Forms.Padding(2);
 			this.PrimarySplitContainer.Name = "PrimarySplitContainer";
 			this.PrimarySplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -222,7 +219,7 @@
 			// 
 			this.ControlSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ControlSplitContainer.Location = new System.Drawing.Point(0, 0);
-			this.ControlSplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ControlSplitContainer.Margin = new System.Windows.Forms.Padding(2);
 			this.ControlSplitContainer.Name = "ControlSplitContainer";
 			// 
 			// ControlSplitContainer.Panel1
@@ -242,9 +239,9 @@
 			this.AdditionGroupBox.Controls.Add(this.AdditionSplitContainer);
 			this.AdditionGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AdditionGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.AdditionGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AdditionGroupBox.Margin = new System.Windows.Forms.Padding(2);
 			this.AdditionGroupBox.Name = "AdditionGroupBox";
-			this.AdditionGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AdditionGroupBox.Padding = new System.Windows.Forms.Padding(2);
 			this.AdditionGroupBox.Size = new System.Drawing.Size(367, 97);
 			this.AdditionGroupBox.TabIndex = 0;
 			this.AdditionGroupBox.TabStop = false;
@@ -254,7 +251,7 @@
 			// 
 			this.AdditionSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AdditionSplitContainer.Location = new System.Drawing.Point(2, 15);
-			this.AdditionSplitContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AdditionSplitContainer.Margin = new System.Windows.Forms.Padding(2);
 			this.AdditionSplitContainer.Name = "AdditionSplitContainer";
 			// 
 			// AdditionSplitContainer.Panel1
@@ -283,7 +280,7 @@
 			this.ValueControlTable.Controls.Add(this.SerialNumTextBox, 1, 1);
 			this.ValueControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ValueControlTable.Location = new System.Drawing.Point(0, 0);
-			this.ValueControlTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.ValueControlTable.Margin = new System.Windows.Forms.Padding(2);
 			this.ValueControlTable.Name = "ValueControlTable";
 			this.ValueControlTable.RowCount = 3;
 			this.ValueControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.19838F));
@@ -333,7 +330,7 @@
 			// 
 			this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.NameTextBox.Location = new System.Drawing.Point(97, 3);
-			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.NameTextBox.Margin = new System.Windows.Forms.Padding(2);
 			this.NameTextBox.Name = "NameTextBox";
 			this.NameTextBox.Size = new System.Drawing.Size(180, 20);
 			this.NameTextBox.TabIndex = 2;
@@ -342,7 +339,7 @@
 			// 
 			this.BarcodeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.BarcodeTextBox.Location = new System.Drawing.Point(97, 57);
-			this.BarcodeTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.BarcodeTextBox.Margin = new System.Windows.Forms.Padding(2);
 			this.BarcodeTextBox.Name = "BarcodeTextBox";
 			this.BarcodeTextBox.Size = new System.Drawing.Size(180, 20);
 			this.BarcodeTextBox.TabIndex = 5;
@@ -351,7 +348,7 @@
 			// 
 			this.SerialNumTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.SerialNumTextBox.Location = new System.Drawing.Point(97, 30);
-			this.SerialNumTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.SerialNumTextBox.Margin = new System.Windows.Forms.Padding(2);
 			this.SerialNumTextBox.Name = "SerialNumTextBox";
 			this.SerialNumTextBox.Size = new System.Drawing.Size(180, 20);
 			this.SerialNumTextBox.TabIndex = 3;
@@ -360,7 +357,7 @@
 			// 
 			this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.AddButton.Location = new System.Drawing.Point(0, 0);
-			this.AddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.AddButton.Margin = new System.Windows.Forms.Padding(2);
 			this.AddButton.Name = "AddButton";
 			this.AddButton.Size = new System.Drawing.Size(81, 80);
 			this.AddButton.TabIndex = 0;
@@ -368,18 +365,13 @@
 			this.AddButton.UseVisualStyleBackColor = true;
 			this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
-			// itemBindingSource
-			// 
-			this.itemBindingSource.AllowNew = false;
-			this.itemBindingSource.DataSource = typeof(DRC.WordAddIn.BarcodeLabels.Item);
-			// 
 			// DataForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(533, 292);
 			this.Controls.Add(this.PrimarySplitContainer);
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "DataForm";
 			this.Text = "Data Manager";
 			this.Load += new System.EventHandler(this.DataForm_Load);
@@ -409,7 +401,6 @@
 			this.AdditionSplitContainer.ResumeLayout(false);
 			this.ValueControlTable.ResumeLayout(false);
 			this.ValueControlTable.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -436,6 +427,5 @@
         private System.Windows.Forms.Button AddButton;
 		private System.Windows.Forms.TableLayoutPanel ItemControlTable;
 		private System.Windows.Forms.SplitContainer BlankSplitContainer;
-		private System.Windows.Forms.BindingSource itemBindingSource;
 	}
 }
