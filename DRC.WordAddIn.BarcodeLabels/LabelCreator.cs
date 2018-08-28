@@ -15,13 +15,21 @@ namespace DRC.WordAddIn.BarcodeLabels
 	{
 		public const int FIELD_FONT_SIZE = 8;
 
-		private Word.Document _doc;
+		private Word.Application _app;
 		private string[] _fieldCodes;
 		private object missing = System.Reflection.Missing.Value;
 
-		public LabelCreator(Word.Document doc)
+		public Word.Document ActiveDocument
 		{
-			_doc = doc;
+			get
+			{
+				return _app.ActiveDocument;
+			}
+		}
+
+		public LabelCreator(Word.Application app)
+		{
+			_app = app;
 			_fieldCodes = new string[] {    @" MERGEFIELD Name ",
 											@" MERGEFIELD SerialNumber \b "": "" ",
 											"\v",
@@ -30,20 +38,31 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public void GenerateLabels()
 		{
-			_doc.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdMailingLabels;
-			_doc.Application.MailingLabel.LabelOptions();
+			ActiveDocument.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdMailingLabels;
+			_app.MailingLabel.LabelOptions();
+		}
+
+		public bool HasLabels()
+		{
+			if(GetLabelsTable(false) != null)
+			{
+				return true;
+			} else
+			{
+				return false;
+			}
 		}
 
 		public Word.Table GetLabelsTable(bool resetMailMerge = true)
 		{
-			foreach (Word.Table table in _doc.Tables)
+			foreach (Word.Table table in ActiveDocument.Tables)
 			{
 				return table;
 			}
 			
 			if(resetMailMerge)
 			{
-				_doc.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdNotAMergeDocument;
+				ActiveDocument.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdNotAMergeDocument;
 			}
 			return null;
 		}
@@ -55,7 +74,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 				return;
 			}
 
-			table.set_Style("Table Grid");
+			table.set_Style("Table Grid"); //remove after testing
 
 			InsertIntoCell(table.Range.Cells[1], _fieldCodes);
 			UpdateLabels();
@@ -90,10 +109,10 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void UpdateLabels()
 		{
-			object wordBasic = _doc.Application.GetType().InvokeMember("WordBasic",
+			object wordBasic = _app.GetType().InvokeMember("WordBasic",
 																		System.Reflection.BindingFlags.GetProperty,
-																		null, _doc.Application, null);
-
+																		null, _app, null);
+			//witchcraft?
 			wordBasic.GetType().InvokeMember(	"MailMergePropagateLabel",
 												System.Reflection.BindingFlags.InvokeMethod,
 												null, wordBasic, null);

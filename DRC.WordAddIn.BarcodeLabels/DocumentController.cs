@@ -20,6 +20,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 	{
 		private Word.Application _app;
 		private DataModel _model;
+		private LabelCreator _labelCreator;
 
 		public DataForm DataForm
 		{
@@ -41,16 +42,16 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			_app = app;
 			_model = new DataModel();
+			_labelCreator = new LabelCreator(_app);
 		}
 
 		public ControllerResult CreateLabels()
 		{
 			try
 			{
-				LabelCreator labelCreator = new LabelCreator(ActiveDocument);
-				labelCreator.GenerateLabels();
+				_labelCreator.GenerateLabels();
 
-				Word.Table labelsTable = labelCreator.GetLabelsTable();
+				Word.Table labelsTable = _labelCreator.GetLabelsTable();
 
 				if (labelsTable == null)
 				{
@@ -58,7 +59,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 					return ControllerResult.Nothing;
 				}
 
-				labelCreator.WriteFields(labelsTable);
+				_labelCreator.WriteFields(labelsTable);
 			}
 			catch (Exception ex)
 			{
@@ -73,7 +74,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			if (_model.IsEmpty())
 			{
 				return ControllerResult.EmptyData;
-			} else if(!HasLabels())
+			} else if(!_labelCreator.HasLabels())
 			{
 				return ControllerResult.NoLabels;
 			}
@@ -91,15 +92,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 				return ControllerResult.Failure;
 			}
 			return ControllerResult.Success;
-		}
-
-		private bool HasLabels()
-		{
-			foreach(Word.Table table in ActiveDocument.Tables)
-			{
-				return true;
-			}
-			return false;
 		}
 
 		private void MailMergeExecute(string sourcePath)
