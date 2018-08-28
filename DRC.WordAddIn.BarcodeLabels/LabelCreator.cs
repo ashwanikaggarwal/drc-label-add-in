@@ -32,15 +32,33 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			_doc.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdMailingLabels;
 			_doc.Application.MailingLabel.LabelOptions();
-			_doc.Tables[1].set_Style("Table Grid");
 		}
 
-		public void WriteFields()
+		public Word.Table GetLabelsTable(bool resetMailMerge = true)
 		{
-			Word.Range tableRange = _doc.Tables[1].Range;
+			foreach (Word.Table table in _doc.Tables)
+			{
+				return table;
+			}
+			
+			if(resetMailMerge)
+			{
+				_doc.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdNotAMergeDocument;
+			}
+			return null;
+		}
 
-			InsertIntoCell(tableRange.Cells[1], _fieldCodes);
-			PropagrateLabel();
+		public void WriteFields(Word.Table table)
+		{
+			if (table == null)
+			{
+				return;
+			}
+
+			table.set_Style("Table Grid");
+
+			InsertIntoCell(table.Range.Cells[1], _fieldCodes);
+			UpdateLabels();
 		}
 
 		private void InsertIntoCell(Word.Cell cell, string[] fieldCodes)
@@ -70,13 +88,13 @@ namespace DRC.WordAddIn.BarcodeLabels
 			cell.Range.Fields.Update();
 		}
 
-		private void PropagrateLabel()
+		private void UpdateLabels()
 		{
 			object wordBasic = _doc.Application.GetType().InvokeMember("WordBasic",
 																		System.Reflection.BindingFlags.GetProperty,
 																		null, _doc.Application, null);
 
-			wordBasic.GetType().InvokeMember("MailMergePropagateLabel",
+			wordBasic.GetType().InvokeMember(	"MailMergePropagateLabel",
 												System.Reflection.BindingFlags.InvokeMethod,
 												null, wordBasic, null);
 		}

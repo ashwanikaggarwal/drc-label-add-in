@@ -11,6 +11,11 @@ using Microsoft.Office.Interop.Word;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
+	public enum ControllerResult
+	{
+		Success, Nothing, Failure, SilentFailure, EmptyData, NoLabels
+	}
+
 	public class DocumentController
 	{
 		private Word.Application _app;
@@ -38,41 +43,63 @@ namespace DRC.WordAddIn.BarcodeLabels
 			_model = new DataModel();
 		}
 
-		public string CreateLabels()
+		public ControllerResult CreateLabels()
 		{
 			try
 			{
 				LabelCreator labelCreator = new LabelCreator(ActiveDocument);
 				labelCreator.GenerateLabels();
-				labelCreator.WriteFields();
+
+				Word.Table labelsTable = labelCreator.GetLabelsTable();
+
+				if (labelsTable == null)
+				{
+					//user chose that no labels should be made
+					return ControllerResult.Nothing;
+				}
+
+				labelCreator.WriteFields(labelsTable);
 			}
 			catch (Exception ex)
 			{
-				return ex.Message;
+				System.Windows.Forms.MessageBox.Show($"{ex.ToString()}");
+				return ControllerResult.Failure;
 			}
-			return "OK";
+			return ControllerResult.Success;
 		}
 
-		public string FinishLabels()
+		public ControllerResult FinishLabels()
 		{
-			if (!_model.IsEmpty())
+			if (_model.IsEmpty())
 			{
-				try
-				{
-					string fileName = @"\datasource.csv";
-					string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + fileName;
-
-					MailMergeExecute(sourcePath);
-				}
-				catch (Exception ex)
-				{
-					return ex.Message;
-				}
-			} else
+				return ControllerResult.EmptyData;
+			} else if(!HasLabels())
 			{
-				return "Please add items by clicking \"Manage Data\".";
+				return ControllerResult.NoLabels;
 			}
-			return "OK";
+
+			try
+			{
+				string fileName = @"\datasource.csv";
+				string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + fileName;
+
+				MailMergeExecute(sourcePath);
+			}
+			catch (Exception ex)
+			{
+				System.Windows.Forms.MessageBox.Show($"{ex.ToString()}");
+				return ControllerResult.Failure;
+			}
+			return ControllerResult.Success;
+		}
+
+		private bool HasLabels()
+		{
+			foreach(Word.Table table in ActiveDocument.Tables)
+			{
+				return true;
+			}
+			return false;
 		}
 
 		private void MailMergeExecute(string sourcePath)

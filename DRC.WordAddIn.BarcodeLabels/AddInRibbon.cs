@@ -17,11 +17,37 @@ namespace DRC.WordAddIn.BarcodeLabels
 			_controller = new DocumentController(Globals.ThisAddIn.Application);
 		}
 
-		private void HandleResult(string result)
+		private void HandleResult(ControllerResult result)
 		{
-			if (!result.Equals("OK"))
+			switch(result)
 			{
-				MessageBox.Show(result);
+				case ControllerResult.Success:
+					//everything is fine
+					break;
+
+				case ControllerResult.Nothing:
+					//no error happened, the user just wanted nothing to happen
+					break;
+
+				case ControllerResult.Failure:
+					MessageBox.Show("The add-in has run into an unexpected error.");
+					break;
+
+				case ControllerResult.SilentFailure:
+					//keep the error invisible, maybe report it
+					break;
+					
+				case ControllerResult.EmptyData:
+					MessageBox.Show("Please add data by selecting \"Manage Data\".");
+					break;
+
+				case ControllerResult.NoLabels:
+					MessageBox.Show("Please choose a label style by selecting \"Create Labels\".");
+					break;
+					
+				default:
+					MessageBox.Show($"\"{result.ToString()}\" is an unimplemented result case.");
+					break;
 			}
 		}
 
