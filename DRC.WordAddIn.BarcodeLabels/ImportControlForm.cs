@@ -54,7 +54,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			BarcodeCBox.SelectedIndex	= (barcodeIndex		>= 0)	? barcodeIndex		: 0;
 		}
 
-		private void AcceptButton_Click(object sender, EventArgs e)
+		private void FinishButton_Click(object sender, EventArgs e)
 		{
 			NameField		= (string) NameCBox.SelectedValue;
 			SerialNumField	= (string) SerialNumCBox.SelectedValue;
@@ -66,7 +66,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			Close();
 		}
 
-		private void CancelButton_Click(object sender, EventArgs e)
+		private void ExitButton_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
 			Close();

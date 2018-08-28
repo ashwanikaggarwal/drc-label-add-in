@@ -16,10 +16,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public const int FIELD_FONT_SIZE = 8;
 
 		private Word.Application _app;
-		private string[] _fieldCodes;
-		private object missing = System.Reflection.Missing.Value;
 
-		public Word.Document ActiveDocument
+		private Word.Document ActiveDocument
 		{
 			get
 			{
@@ -30,10 +28,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public LabelCreator(Word.Application app)
 		{
 			_app = app;
-			_fieldCodes = new string[] {    @" MERGEFIELD Name ",
-											@" MERGEFIELD SerialNumber \b "": "" ",
-											"\v",
-											@" MERGEBARCODE Barcode CODE128 " };
 		}
 
 		public void GenerateLabels()
@@ -76,35 +70,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			table.set_Style("Table Grid"); //remove after testing
 
-			InsertIntoCell(table.Range.Cells[1], _fieldCodes);
+			Word.Range cellRange = table.Cell(1, 1).Range;
+			LabelTemplate template = new LabelTemplate(true);
+
+			cellRange.Delete();
+			template.WriteToRange(cellRange);
 			UpdateLabels();
-		}
-
-		private void InsertIntoCell(Word.Cell cell, string[] fieldCodes)
-		{
-			cell.Range.Delete();
-			Word.Range range = cell.Range;
-
-			range.Collapse(WdCollapseDirection.wdCollapseStart);
-
-			foreach (string fieldCode in fieldCodes)
-			{
-				if (fieldCode.Equals("\v"))
-				{
-					range.Text = fieldCode;
-					range.Move(WdUnits.wdCharacter, 1);
-					continue;
-				}
-
-				Word.Field field = cell.Range.Fields.Add(range, missing, missing, missing);
-				field.Code.Text = fieldCode;
-
-				range = field.Result;
-				range.Collapse(WdCollapseDirection.wdCollapseEnd);
-			}
-
-			cell.Range.Font.Size = FIELD_FONT_SIZE;
-			cell.Range.Fields.Update();
 		}
 
 		private void UpdateLabels()

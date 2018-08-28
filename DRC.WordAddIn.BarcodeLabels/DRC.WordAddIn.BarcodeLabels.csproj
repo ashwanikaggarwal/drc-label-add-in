@@ -172,6 +172,8 @@
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LabelCreator.cs" />
+    <Compile Include="ContentItem.cs" />
+    <Compile Include="LabelTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -244,7 +246,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>20C810017A0845DA57E1BB318E02A9BCFADE1782</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>ACBA0BF7A48DD8553F1633C15FE0499364B688B0</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>

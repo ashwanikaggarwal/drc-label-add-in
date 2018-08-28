@@ -35,8 +35,8 @@
 			this.NameCBox = new System.Windows.Forms.ComboBox();
 			this.SerialNumCBox = new System.Windows.Forms.ComboBox();
 			this.BarcodeCBox = new System.Windows.Forms.ComboBox();
-			this.AcceptButton = new System.Windows.Forms.Button();
-			this.CancelButton = new System.Windows.Forms.Button();
+			this.FinishButton = new System.Windows.Forms.Button();
+			this.ExitButton = new System.Windows.Forms.Button();
 			this.ButtonPanel = new System.Windows.Forms.Panel();
 			this.VerticalTable = new System.Windows.Forms.TableLayoutPanel();
 			this.TableViewer = new System.Windows.Forms.DataGridView();
@@ -61,21 +61,23 @@
 			this.ControlTable.Controls.Add(this.SerialNumCBox, 1, 1);
 			this.ControlTable.Controls.Add(this.BarcodeCBox, 2, 1);
 			this.ControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ControlTable.Location = new System.Drawing.Point(3, 3);
+			this.ControlTable.Location = new System.Drawing.Point(4, 5);
+			this.ControlTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.ControlTable.Name = "ControlTable";
 			this.ControlTable.RowCount = 2;
 			this.ControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.ControlTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.ControlTable.Size = new System.Drawing.Size(414, 54);
+			this.ControlTable.Size = new System.Drawing.Size(690, 76);
 			this.ControlTable.TabIndex = 0;
 			// 
 			// NameLabel
 			// 
 			this.NameLabel.AutoSize = true;
 			this.NameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.NameLabel.Location = new System.Drawing.Point(3, 0);
+			this.NameLabel.Location = new System.Drawing.Point(4, 0);
+			this.NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.NameLabel.Name = "NameLabel";
-			this.NameLabel.Size = new System.Drawing.Size(132, 27);
+			this.NameLabel.Size = new System.Drawing.Size(222, 38);
 			this.NameLabel.TabIndex = 0;
 			this.NameLabel.Text = "Item Name Field";
 			this.NameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,9 +86,10 @@
 			// 
 			this.SerialNumLabel.AutoSize = true;
 			this.SerialNumLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SerialNumLabel.Location = new System.Drawing.Point(141, 0);
+			this.SerialNumLabel.Location = new System.Drawing.Point(234, 0);
+			this.SerialNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.SerialNumLabel.Name = "SerialNumLabel";
-			this.SerialNumLabel.Size = new System.Drawing.Size(132, 27);
+			this.SerialNumLabel.Size = new System.Drawing.Size(222, 38);
 			this.SerialNumLabel.TabIndex = 1;
 			this.SerialNumLabel.Text = "Serial Number Field";
 			this.SerialNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,9 +98,10 @@
 			// 
 			this.BarcodeLabel.AutoSize = true;
 			this.BarcodeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.BarcodeLabel.Location = new System.Drawing.Point(279, 0);
+			this.BarcodeLabel.Location = new System.Drawing.Point(464, 0);
+			this.BarcodeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.BarcodeLabel.Name = "BarcodeLabel";
-			this.BarcodeLabel.Size = new System.Drawing.Size(132, 27);
+			this.BarcodeLabel.Size = new System.Drawing.Size(222, 38);
 			this.BarcodeLabel.TabIndex = 2;
 			this.BarcodeLabel.Text = "Barcode Field";
 			this.BarcodeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,9 +110,10 @@
 			// 
 			this.NameCBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.NameCBox.FormattingEnabled = true;
-			this.NameCBox.Location = new System.Drawing.Point(3, 30);
+			this.NameCBox.Location = new System.Drawing.Point(4, 43);
+			this.NameCBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.NameCBox.Name = "NameCBox";
-			this.NameCBox.Size = new System.Drawing.Size(132, 21);
+			this.NameCBox.Size = new System.Drawing.Size(222, 28);
 			this.NameCBox.TabIndex = 3;
 			this.NameCBox.Text = "<name>";
 			// 
@@ -116,9 +121,10 @@
 			// 
 			this.SerialNumCBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SerialNumCBox.FormattingEnabled = true;
-			this.SerialNumCBox.Location = new System.Drawing.Point(141, 30);
+			this.SerialNumCBox.Location = new System.Drawing.Point(234, 43);
+			this.SerialNumCBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.SerialNumCBox.Name = "SerialNumCBox";
-			this.SerialNumCBox.Size = new System.Drawing.Size(132, 21);
+			this.SerialNumCBox.Size = new System.Drawing.Size(222, 28);
 			this.SerialNumCBox.TabIndex = 4;
 			this.SerialNumCBox.Text = "<serial number>";
 			// 
@@ -126,45 +132,50 @@
 			// 
 			this.BarcodeCBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.BarcodeCBox.FormattingEnabled = true;
-			this.BarcodeCBox.Location = new System.Drawing.Point(279, 30);
+			this.BarcodeCBox.Location = new System.Drawing.Point(464, 43);
+			this.BarcodeCBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.BarcodeCBox.Name = "BarcodeCBox";
-			this.BarcodeCBox.Size = new System.Drawing.Size(132, 21);
+			this.BarcodeCBox.Size = new System.Drawing.Size(222, 28);
 			this.BarcodeCBox.TabIndex = 5;
 			this.BarcodeCBox.Text = "<barcode>";
 			// 
-			// AcceptButton
+			// FinishButton
 			// 
-			this.AcceptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.AcceptButton.AutoSize = true;
-			this.AcceptButton.Location = new System.Drawing.Point(254, 3);
-			this.AcceptButton.Name = "AcceptButton";
-			this.AcceptButton.Size = new System.Drawing.Size(76, 23);
-			this.AcceptButton.TabIndex = 0;
-			this.AcceptButton.Text = "Finish Import";
-			this.AcceptButton.UseVisualStyleBackColor = true;
-			this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
+			this.FinishButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.FinishButton.AutoSize = true;
+			this.FinishButton.Location = new System.Drawing.Point(398, 5);
+			this.FinishButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.FinishButton.Name = "FinishButton";
+			this.FinishButton.Size = new System.Drawing.Size(166, 46);
+			this.FinishButton.TabIndex = 0;
+			this.FinishButton.Text = "Finish Import";
+			this.FinishButton.UseVisualStyleBackColor = true;
+			this.FinishButton.Click += new System.EventHandler(this.FinishButton_Click);
 			// 
-			// CancelButton
+			// ExitButton
 			// 
-			this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.CancelButton.AutoSize = true;
-			this.CancelButton.Location = new System.Drawing.Point(336, 3);
-			this.CancelButton.Name = "CancelButton";
-			this.CancelButton.Size = new System.Drawing.Size(75, 23);
-			this.CancelButton.TabIndex = 0;
-			this.CancelButton.Text = "Cancel";
-			this.CancelButton.UseVisualStyleBackColor = true;
-			this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+			this.ExitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.ExitButton.AutoSize = true;
+			this.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.ExitButton.Location = new System.Drawing.Point(574, 5);
+			this.ExitButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.ExitButton.Name = "ExitButton";
+			this.ExitButton.Size = new System.Drawing.Size(112, 46);
+			this.ExitButton.TabIndex = 0;
+			this.ExitButton.Text = "Cancel";
+			this.ExitButton.UseVisualStyleBackColor = true;
+			this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
 			// 
 			// ButtonPanel
 			// 
 			this.ButtonPanel.AutoSize = true;
-			this.ButtonPanel.Controls.Add(this.CancelButton);
-			this.ButtonPanel.Controls.Add(this.AcceptButton);
+			this.ButtonPanel.Controls.Add(this.ExitButton);
+			this.ButtonPanel.Controls.Add(this.FinishButton);
 			this.ButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ButtonPanel.Location = new System.Drawing.Point(3, 63);
+			this.ButtonPanel.Location = new System.Drawing.Point(4, 91);
+			this.ButtonPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.ButtonPanel.Name = "ButtonPanel";
-			this.ButtonPanel.Size = new System.Drawing.Size(414, 29);
+			this.ButtonPanel.Size = new System.Drawing.Size(690, 56);
 			this.ButtonPanel.TabIndex = 1;
 			// 
 			// VerticalTable
@@ -177,12 +188,13 @@
 			this.VerticalTable.Controls.Add(this.TableViewer, 0, 2);
 			this.VerticalTable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.VerticalTable.Location = new System.Drawing.Point(0, 0);
+			this.VerticalTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.VerticalTable.Name = "VerticalTable";
 			this.VerticalTable.RowCount = 3;
 			this.VerticalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.VerticalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.VerticalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.VerticalTable.Size = new System.Drawing.Size(418, 140);
+			this.VerticalTable.Size = new System.Drawing.Size(627, 215);
 			this.VerticalTable.TabIndex = 2;
 			// 
 			// TableViewer
@@ -193,20 +205,22 @@
 			this.TableViewer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
 			this.TableViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.TableViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TableViewer.Location = new System.Drawing.Point(3, 98);
+			this.TableViewer.Location = new System.Drawing.Point(4, 157);
+			this.TableViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.TableViewer.Name = "TableViewer";
 			this.TableViewer.ReadOnly = true;
-			this.TableViewer.Size = new System.Drawing.Size(414, 150);
+			this.TableViewer.Size = new System.Drawing.Size(690, 231);
 			this.TableViewer.TabIndex = 2;
 			// 
 			// ImportControlForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(418, 140);
+			this.ClientSize = new System.Drawing.Size(627, 215);
 			this.Controls.Add(this.VerticalTable);
+			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "ImportControlForm";
 			this.Text = "Select Import Fields";
 			this.Load += new System.EventHandler(this.ImportControlForm_Load);
@@ -231,8 +245,8 @@
 		private System.Windows.Forms.ComboBox NameCBox;
 		private System.Windows.Forms.ComboBox SerialNumCBox;
 		private System.Windows.Forms.ComboBox BarcodeCBox;
-		private System.Windows.Forms.Button CancelButton;
-		private System.Windows.Forms.Button AcceptButton;
+		private System.Windows.Forms.Button ExitButton;
+		private System.Windows.Forms.Button FinishButton;
 		private System.Windows.Forms.Panel ButtonPanel;
 		private System.Windows.Forms.TableLayoutPanel VerticalTable;
 		private System.Windows.Forms.DataGridView TableViewer;
