@@ -12,13 +12,11 @@ namespace DRC.WordAddIn.BarcodeLabels
 	{
 		public List<ContentItem> Contents { get; private set; }
 
-		public Word.Font DefaultFont { get; private set; } = new Word.Font
-		{
-			Size = 8
-		};
+		private Word.Font _defaultFont;
 
-		public LabelTemplate(bool useDefaults = true)
+		public LabelTemplate(Word.Font defaultFont, bool useDefaults = true)
 		{
+			_defaultFont = defaultFont;
 			Contents = new List<ContentItem>();
 
 			if (useDefaults)
@@ -27,15 +25,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 			}
 		}
 
-		public LabelTemplate(Word.Font defaultFont, bool useDefaults = true) : this(useDefaults)
-		{
-			DefaultFont = defaultFont;
-		}
-
 		public void WriteToRange(Word.Range fullRange)
 		{
-			fullRange.Font = DefaultFont;
-
 			Word.Range rangeCursor = fullRange;
 			rangeCursor.Collapse(Word.WdCollapseDirection.wdCollapseStart);
 
@@ -67,7 +58,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public void AddContent(ContentType type, string text)
 		{
-			AddContent(new ContentItem(type, text, DefaultFont));
+			AddContent(new ContentItem(type, text, _defaultFont));
 		}
 
 		public void AddContent(ContentType type, string text, Word.Font font)
@@ -86,7 +77,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 						@" MERGEFIELD SerialNumber \b "": "" ");
 
 			AddContent(	ContentType.RangeText,
-						"\vbeep\v");
+						"\v");
 
 			AddContent(	ContentType.Field,
 						@" MERGEBARCODE Barcode CODE128 ");

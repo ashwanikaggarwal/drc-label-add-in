@@ -67,11 +67,17 @@ namespace DRC.WordAddIn.BarcodeLabels
 			{
 				return;
 			}
+			
+			ActiveDocument.ActiveWindow.View.TableGridlines = true;
 
-			table.set_Style("Table Grid"); //remove after testing
+			Word.Font defaultFont = new Word.Font
+			{
+				Size = 8
+			};
 
 			Word.Range cellRange = table.Cell(1, 1).Range;
-			LabelTemplate template = new LabelTemplate(true);
+
+			LabelTemplate template = new LabelTemplate(defaultFont, true);
 
 			cellRange.Delete();
 			template.WriteToRange(cellRange);
@@ -80,9 +86,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void UpdateLabels()
 		{
-			object wordBasic = _app.GetType().InvokeMember("WordBasic",
-																		System.Reflection.BindingFlags.GetProperty,
-																		null, _app, null);
+			object wordBasic = _app.GetType().InvokeMember(	"WordBasic",
+															System.Reflection.BindingFlags.GetProperty,
+															null, _app, null);
 			//witchcraft?
 			wordBasic.GetType().InvokeMember(	"MailMergePropagateLabel",
 												System.Reflection.BindingFlags.InvokeMethod,
