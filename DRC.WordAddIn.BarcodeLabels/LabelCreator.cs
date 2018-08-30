@@ -13,11 +13,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class LabelCreator
 	{
-		public const int FIELD_FONT_SIZE = 8;
-
 		private Word.Application _app;
 
-		private Word.Document ActiveDocument
+		public Word.Document ActiveDocument
 		{
 			get
 			{
@@ -84,7 +82,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			UpdateLabels();
 		}
 
-		private void UpdateLabels()
+		public void UpdateLabels()
 		{
 			object wordBasic = _app.GetType().InvokeMember(	"WordBasic",
 															System.Reflection.BindingFlags.GetProperty,
