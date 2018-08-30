@@ -1,5 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DRC.WordAddIn.BarcodeLabels.Properties" GeneratedClassName="Settings">
   <Profiles />
-  <Settings />
+  <Settings>
+    <Setting Name="ColumnID_Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Name</Value>
+    </Setting>
+    <Setting Name="ColumnID_SerialNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SerialNumber</Value>
+    </Setting>
+    <Setting Name="ColumnID_Barcode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Barcode</Value>
+    </Setting>
+    <Setting Name="DataModel_MainSet" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data</Value>
+    </Setting>
+    <Setting Name="DataModel_MainTable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Items</Value>
+    </Setting>
+    <Setting Name="DBConnLocal" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Provider=Microsoft.ACE.OLEDB.12.0; Data Source = {0}; Extended Properties = "Text;HDR=YES;FMT=Delimited";</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

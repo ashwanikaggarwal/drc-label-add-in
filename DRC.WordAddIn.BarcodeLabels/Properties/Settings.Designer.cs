@@ -22,5 +22,78 @@ namespace DRC.WordAddIn.BarcodeLabels.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Name")]
+        public string ColumnID_Name {
+            get {
+                return ((string)(this["ColumnID_Name"]));
+            }
+            set {
+                this["ColumnID_Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SerialNumber")]
+        public string ColumnID_SerialNumber {
+            get {
+                return ((string)(this["ColumnID_SerialNumber"]));
+            }
+            set {
+                this["ColumnID_SerialNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Barcode")]
+        public string ColumnID_Barcode {
+            get {
+                return ((string)(this["ColumnID_Barcode"]));
+            }
+            set {
+                this["ColumnID_Barcode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data")]
+        public string DataModel_MainSet {
+            get {
+                return ((string)(this["DataModel_MainSet"]));
+            }
+            set {
+                this["DataModel_MainSet"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Items")]
+        public string DataModel_MainTable {
+            get {
+                return ((string)(this["DataModel_MainTable"]));
+            }
+            set {
+                this["DataModel_MainTable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0; Data Source = {0}; Extended Properties = \"Text" +
+            ";HDR=YES;FMT=Delimited\";")]
+        public string DBConnLocal {
+            get {
+                return ((string)(this["DBConnLocal"]));
+            }
+            set {
+                this["DBConnLocal"] = value;
+            }
+        }
     }
 }

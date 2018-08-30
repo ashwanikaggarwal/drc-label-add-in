@@ -10,29 +10,29 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class DataModel
 	{
-		public const string SET_MAIN = "data";
-		public const string TABLE_MAIN = "items";
+		private readonly string _setMain		= Properties.Settings.Default.DataModel_MainSet;
+		private readonly string _tableMain		= Properties.Settings.Default.DataModel_MainTable;
 
-		public const string COL_NAME = "Name";
-		public const string COL_SERIALNUM = "SerialNumber";
-		public const string COL_BARCODE = "Barcode";
+		private readonly string _colName		= Properties.Settings.Default.ColumnID_Name;
+		private readonly string _colSerialNum	= Properties.Settings.Default.ColumnID_SerialNumber;
+		private readonly string _colBarcode		= Properties.Settings.Default.ColumnID_Barcode;
 
 		private DataSet _data;
 		private DataTable _items;
 
 		public DataModel()
 		{
-			_data = new DataSet(SET_MAIN);
+			_data = new DataSet(_setMain);
 			_items = CreateItemsTable();
 			_data.Tables.Add(_items);
 		}
 
 		private DataTable CreateItemsTable()
 		{
-			DataTable table = new DataTable(TABLE_MAIN);
-			table.Columns.Add(COL_NAME, typeof(string));
-			table.Columns.Add(COL_SERIALNUM, typeof(string));
-			table.Columns.Add(COL_BARCODE, typeof(string));
+			DataTable table = new DataTable(_tableMain);
+			table.Columns.Add(_colName, typeof(string));
+			table.Columns.Add(_colSerialNum, typeof(string));
+			table.Columns.Add(_colBarcode, typeof(string));
 			return table;
 		}
 
@@ -44,9 +44,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public void Add(string name, string serialNum, string barcode, int index)
 		{
 			DataRow row = _items.NewRow();
-			row[COL_NAME] = name;
-			row[COL_SERIALNUM] = serialNum;
-			row[COL_BARCODE] = barcode;
+			row[_colName] = name;
+			row[_colSerialNum] = serialNum;
+			row[_colBarcode] = barcode;
 			_items.Rows.InsertAt(row, index);
 		}
 
@@ -85,8 +85,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			OleDbConnection conn = new OleDbConnection
 			{
-				//Microsoft.Jet.OleDB.4.0 is not registered on most devices
-				ConnectionString = $"Provider=Microsoft.ACE.OLEDB.12.0; Data Source = {strDir}; Extended Properties = \"Text;HDR=YES;FMT=Delimited\";"
+				ConnectionString = String.Format(Properties.Settings.Default.DBConnLocal, strDir)
 			};
 			conn.Open();
 
@@ -114,7 +113,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			using (DataTable selectionTable = new DataTable("SelectionTable"))
 			{
 				adapter.Fill(selectionTable);
-				_data.Tables[TABLE_MAIN].Merge(EnforceTable(selectionTable));
+				_data.Tables[_tableMain].Merge(EnforceTable(selectionTable));
 			}
 			conn.Close();
 		}
@@ -128,9 +127,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 				table.Columns[1].ColumnName = System.Guid.NewGuid().ToString("N");
 				table.Columns[2].ColumnName = System.Guid.NewGuid().ToString("N");
 				//force column naming conventions to match the items table
-				table.Columns[0].ColumnName = COL_NAME;
-				table.Columns[1].ColumnName = COL_SERIALNUM;
-				table.Columns[2].ColumnName = COL_BARCODE;
+				table.Columns[0].ColumnName = _colName;
+				table.Columns[1].ColumnName = _colSerialNum;
+				table.Columns[2].ColumnName = _colBarcode;
 			} catch { /*do nothing*/ }
 			return table;
 		}
@@ -151,7 +150,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public DataTable GetItemsTable()
 		{
-			return _data.Tables[TABLE_MAIN];
+			return _data.Tables[_tableMain];
 		}
 	}
 }
