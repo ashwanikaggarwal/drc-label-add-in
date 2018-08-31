@@ -66,6 +66,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 			HandleResult(_controller.FinishLabels());
 		}
 
+		private void TemplateButton_Click(object sender, RibbonControlEventArgs e)
+		{
+			LabelTemplateForm templateForm = new LabelTemplateForm();
+			templateForm.Show();
+		}
+
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
 		{
 			Globals.ThisAddIn.DisplayStatus();

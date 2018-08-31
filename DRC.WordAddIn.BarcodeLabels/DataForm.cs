@@ -34,27 +34,16 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void ImportButton_Click(object sender, EventArgs e)
 		{
-			string dataPath = null;
-
-			try
+			OpenFileDialog fileDialog = new OpenFileDialog
 			{
-				OpenFileDialog fileDialog = new OpenFileDialog
-				{
-					Filter = "CSV files (*.csv)|*.csv",
-					ValidateNames = true
-				};
+				Filter = "CSV files (*.csv)|*.csv",
+				ValidateNames = true
+			};
 
-				if (fileDialog.ShowDialog() == DialogResult.OK)
-					dataPath = fileDialog.FileName;
-			} catch (Exception ex)
+			if (fileDialog.ShowDialog() == DialogResult.OK)
 			{
-				MessageBox.Show(ex.Message);
+				ProcessImport(fileDialog.FileName);
 			}
-
-			if (String.IsNullOrWhiteSpace(dataPath))
-				return;
-
-			ProcessImport(dataPath);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)

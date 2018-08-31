@@ -44,6 +44,7 @@
 			this.StatusButton = this.Factory.CreateRibbonButton();
 			this.ToggleButton = this.Factory.CreateRibbonButton();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.TemplateButton = this.Factory.CreateRibbonButton();
 			this.LabelsTab.SuspendLayout();
 			this.DataGroup.SuspendLayout();
 			this.LabelsGroup.SuspendLayout();
@@ -76,6 +77,7 @@
 			// 
 			this.LabelsGroup.Items.Add(this.CreateLabelsButton);
 			this.LabelsGroup.Items.Add(this.ExecuteButton);
+			this.LabelsGroup.Items.Add(this.TemplateButton);
 			this.LabelsGroup.Label = "Labels";
 			this.LabelsGroup.Name = "LabelsGroup";
 			// 
@@ -118,6 +120,14 @@
 			this.ToggleButton.ShowImage = true;
 			this.ToggleButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ToggleButton_Click);
 			// 
+			// TemplateButton
+			// 
+			this.TemplateButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+			this.TemplateButton.Label = "Label Templates";
+			this.TemplateButton.Name = "TemplateButton";
+			this.TemplateButton.ShowImage = true;
+			this.TemplateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TemplateButton_Click);
+			// 
 			// AddInRibbon
 			// 
 			this.Name = "AddInRibbon";
@@ -148,6 +158,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton ExecuteButton;
 		internal Microsoft.Office.Tools.Ribbon.RibbonButton ToggleButton;
+		internal Microsoft.Office.Tools.Ribbon.RibbonButton TemplateButton;
 	}
 
 	partial class ThisRibbonCollection
