@@ -12,11 +12,11 @@ namespace DRC.WordAddIn.BarcodeLabels
 	{
 		public List<ContentItem> Contents { get; private set; }
 
-		private Word.Font _defaultFont;
+		public Word.Font DefaultFont { get; set; }
 
 		public LabelTemplate(Word.Font defaultFont, bool useDefaults = true)
 		{
-			_defaultFont = defaultFont;
+			DefaultFont = defaultFont;
 			Contents = new List<ContentItem>();
 
 			if (useDefaults)
@@ -58,7 +58,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public void AddContent(ContentType type, string text)
 		{
-			AddContent(new ContentItem(type, text, _defaultFont));
+			AddContent(new ContentItem(type, text, DefaultFont));
 		}
 
 		public void AddContent(ContentType type, string text, Word.Font font)
@@ -81,6 +81,18 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			AddContent(	ContentType.Field,
 						@" MERGEBARCODE Barcode CODE128 ");
+		}
+
+		public override string ToString()
+		{
+			List<string> strListContents = new List<string>();
+
+			foreach(ContentItem item in Contents)
+			{
+				strListContents.Add(item.ToString());
+			}
+
+			return String.Join("\n", strListContents);
 		}
 	}
 }

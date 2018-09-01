@@ -31,9 +31,10 @@
 			this.FormTable = new System.Windows.Forms.TableLayoutPanel();
 			this.HeaderLabel = new System.Windows.Forms.Label();
 			this.DirControlPanel = new System.Windows.Forms.Panel();
-			this.DirTextBox = new System.Windows.Forms.TextBox();
 			this.SelectDirLabel = new System.Windows.Forms.LinkLabel();
+			this.DirTextBox = new System.Windows.Forms.TextBox();
 			this.TemplateListBox = new System.Windows.Forms.ListBox();
+			this.ReadLabelButton = new System.Windows.Forms.Button();
 			this.FormTable.SuspendLayout();
 			this.DirControlPanel.SuspendLayout();
 			this.SuspendLayout();
@@ -70,6 +71,7 @@
 			// DirControlPanel
 			// 
 			this.DirControlPanel.AutoSize = true;
+			this.DirControlPanel.Controls.Add(this.ReadLabelButton);
 			this.DirControlPanel.Controls.Add(this.SelectDirLabel);
 			this.DirControlPanel.Controls.Add(this.DirTextBox);
 			this.DirControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -77,14 +79,6 @@
 			this.DirControlPanel.Name = "DirControlPanel";
 			this.DirControlPanel.Size = new System.Drawing.Size(378, 26);
 			this.DirControlPanel.TabIndex = 2;
-			// 
-			// DirTextBox
-			// 
-			this.DirTextBox.Location = new System.Drawing.Point(9, 3);
-			this.DirTextBox.Name = "DirTextBox";
-			this.DirTextBox.ReadOnly = true;
-			this.DirTextBox.Size = new System.Drawing.Size(160, 20);
-			this.DirTextBox.TabIndex = 0;
 			// 
 			// SelectDirLabel
 			// 
@@ -97,6 +91,14 @@
 			this.SelectDirLabel.Text = "Select Folder...";
 			this.SelectDirLabel.Click += new System.EventHandler(this.SelectDirLabel_Click);
 			// 
+			// DirTextBox
+			// 
+			this.DirTextBox.Location = new System.Drawing.Point(9, 3);
+			this.DirTextBox.Name = "DirTextBox";
+			this.DirTextBox.ReadOnly = true;
+			this.DirTextBox.Size = new System.Drawing.Size(160, 20);
+			this.DirTextBox.TabIndex = 0;
+			// 
 			// TemplateListBox
 			// 
 			this.TemplateListBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -105,6 +107,17 @@
 			this.TemplateListBox.Name = "TemplateListBox";
 			this.TemplateListBox.Size = new System.Drawing.Size(378, 186);
 			this.TemplateListBox.TabIndex = 3;
+			// 
+			// ReadLabelButton
+			// 
+			this.ReadLabelButton.AutoSize = true;
+			this.ReadLabelButton.Location = new System.Drawing.Point(300, 0);
+			this.ReadLabelButton.Name = "ReadLabelButton";
+			this.ReadLabelButton.Size = new System.Drawing.Size(75, 23);
+			this.ReadLabelButton.TabIndex = 2;
+			this.ReadLabelButton.Text = "Read Label";
+			this.ReadLabelButton.UseVisualStyleBackColor = true;
+			this.ReadLabelButton.Click += new System.EventHandler(this.ReadLabelButton_Click);
 			// 
 			// LabelTemplateForm
 			// 
@@ -130,5 +143,6 @@
 		private System.Windows.Forms.LinkLabel SelectDirLabel;
 		private System.Windows.Forms.TextBox DirTextBox;
 		private System.Windows.Forms.ListBox TemplateListBox;
+		private System.Windows.Forms.Button ReadLabelButton;
 	}
 }

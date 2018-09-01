@@ -1,27 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<label>
+<label name="Basic Labels">
   <item type="Field">
     <text> MERGEFIELD Name </text>
-    <font>
-      <size>8</size>
-    </font>
+    <font size="8"/>
   </item>
   <item type="Field">
     <text> MERGEFIELD SerialNumber \b ": " </text>
-    <font>
-      <size>8</size>
-    </font>
+    <font size="8"/>
   </item>
   <item type="RangeText">
     <text>\v</text>
-    <font>
-      <size>8</size>
-    </font>
+    <font size="8"/>
   </item>
   <item type="Field">
     <text> MERGEBARCODE Barcode CODE128 </text>
-    <font>
-      <size>8</size>
-    </font>
+    <font size="8"/>
   </item>
 </label>

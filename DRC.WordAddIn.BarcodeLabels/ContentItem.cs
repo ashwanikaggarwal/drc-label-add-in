@@ -10,20 +10,30 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public enum ContentType
 	{
-		Field, RangeText
+		RangeText, Field
 	}
 
 	public class ContentItem
 	{
-		public ContentType Type { get; private set; }
-		public string Text { get; private set; }
-		public Word.Font Font { get; private set; }
+		public ContentType Type { get; set; }
+		public string Text { get; set; }
+		public Word.Font Font { get; set; }
+
+		public ContentItem()
+		{
+			Font = new Word.Font();
+		}
 
 		public ContentItem(ContentType type, string text, Word.Font font)
 		{
 			Type = type;
 			Text = text;
 			Font = font;
+		}
+
+		public override string ToString()
+		{
+			return $"{Type.ToString()}: {Text}; Font Size {Font.Size}";
 		}
 	}
 }
