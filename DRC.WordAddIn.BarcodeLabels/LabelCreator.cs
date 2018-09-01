@@ -75,7 +75,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			Word.Range cellRange = table.Cell(1, 1).Range;
 
-			LabelTemplate template = new LabelTemplate(defaultFont, true);
+			LabelTemplate template = new LabelTemplate();
 
 			cellRange.Delete();
 			template.WriteToRange(cellRange);

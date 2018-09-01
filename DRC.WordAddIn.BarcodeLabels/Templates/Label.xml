@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<label name="Basic Labels">
+<label name="Basic Labels" default="true">
   <item type="Field">
     <text> MERGEFIELD Name </text>
     <font size="8"/>

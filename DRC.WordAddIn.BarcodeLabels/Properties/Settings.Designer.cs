@@ -95,5 +95,18 @@ namespace DRC.WordAddIn.BarcodeLabels.Properties {
                 this["DBConnLocal"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\phill_000\\Source\\Repos\\DRC.WordAddIn.BarcodeLabels\\DRC.WordAddIn.Barcode" +
+            "Labels\\Templates\\Label.xsd")]
+        public string LabelSchemaPath {
+            get {
+                return ((string)(this["LabelSchemaPath"]));
+            }
+            set {
+                this["LabelSchemaPath"] = value;
+            }
+        }
     }
 }

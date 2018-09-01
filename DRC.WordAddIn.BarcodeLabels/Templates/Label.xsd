@@ -9,7 +9,7 @@
               <xs:element name="text" type="xs:string" />
               <xs:element name="font">
                 <xs:complexType>
-                  <xs:attribute name="size" type="xs:positiveInteger" use="required" />
+                  <xs:attribute name="size" type="xs:unsignedByte" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -18,6 +18,7 @@
         </xs:element>
       </xs:sequence>
       <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="default" type="xs:boolean" use="optional" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

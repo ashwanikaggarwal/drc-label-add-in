@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="LabelCreator.cs" />
     <Compile Include="ContentItem.cs" />
+    <Compile Include="LabelModel.cs" />
     <Compile Include="LabelTemplate.cs" />
     <Compile Include="LabelTemplateForm.cs">
       <SubType>Form</SubType>

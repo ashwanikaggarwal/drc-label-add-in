@@ -10,19 +10,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class LabelTemplate
 	{
-		public List<ContentItem> Contents { get; private set; }
+		public List<ContentItem> Contents { get; set; }
 
-		public Word.Font DefaultFont { get; set; }
+		public string Name { get; set; }
 
-		public LabelTemplate(Word.Font defaultFont, bool useDefaults = true)
+		public bool Default { get; set; } = false;
+
+		public LabelTemplate()
 		{
-			DefaultFont = defaultFont;
 			Contents = new List<ContentItem>();
-
-			if (useDefaults)
-			{
-				SetupDefaultContents();
-			}
 		}
 
 		public void WriteToRange(Word.Range fullRange)
@@ -56,31 +52,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 			Contents.Add(content);
 		}
 
-		public void AddContent(ContentType type, string text)
-		{
-			AddContent(new ContentItem(type, text, DefaultFont));
-		}
-
 		public void AddContent(ContentType type, string text, Word.Font font)
 		{
 			AddContent(new ContentItem(type, text, font));
-		}
-
-		private void SetupDefaultContents()
-		{
-			Contents.Clear();
-
-			AddContent(	ContentType.Field,
-						@" MERGEFIELD Name ");
-
-			AddContent(	ContentType.Field,
-						@" MERGEFIELD SerialNumber \b "": "" ");
-
-			AddContent(	ContentType.RangeText,
-						"\v");
-
-			AddContent(	ContentType.Field,
-						@" MERGEBARCODE Barcode CODE128 ");
 		}
 
 		public override string ToString()
