@@ -25,10 +25,10 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			try
 			{
-				LabelModel model = new LabelModel();
 				string xsdPath = Path.Combine(dir, "Label.xsd");
+				LabelModel model = new LabelModel(xsdPath);
 
-				model.ProcessDirectory(dir, xsdPath);
+				model.ProcessDirectory(dir);
 
 				foreach(LabelTemplate template in model.Labels)
 				{

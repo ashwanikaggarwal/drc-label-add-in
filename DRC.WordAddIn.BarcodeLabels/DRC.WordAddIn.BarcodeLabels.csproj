@@ -252,7 +252,6 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Templates\BadFile.xml" />
     <Content Include="Templates\Label1.xml" />
     <Content Include="Templates\Label2.xml" />
   </ItemGroup>

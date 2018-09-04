@@ -11,7 +11,10 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	class LabelModel
 	{
-		public List<LabelTemplate> Labels { get; private set; }
+		public List<LabelTemplate> Labels { get; set; }
+
+		public string SchemaPath { get; set; }
+		private XmlReaderSettings _settings; //phase this out
 
 		public LabelTemplate DefaultLabel
 		{
@@ -24,28 +27,29 @@ namespace DRC.WordAddIn.BarcodeLabels
 			}
 		}
 
-		public LabelModel()
+		public LabelModel(string schemaPath)
 		{
 			Labels = new List<LabelTemplate>();
-		}
+			SchemaPath = schemaPath;
 
-		public void ProcessDirectory(string dir, string xsdPath)
+			_settings = GetReaderSettings();
+		}
+		
+		public void ProcessDirectory(string dir)
 		{
 			string[] xmlFiles = Directory.GetFiles(dir, "*.xml", SearchOption.TopDirectoryOnly);
 
-			XmlReaderSettings settings = GetXMLReaderSettings(xsdPath);
-
 			foreach (string xmlPath in xmlFiles)
 			{
-				List<LabelTemplate> templates = ProcessXML(xmlPath, settings);
+				List<LabelTemplate> templates = ProcessXML(xmlPath);
 				Labels.AddRange(templates);
 			}
 		}
 
-		public List<LabelTemplate> ProcessXML(string xmlPath, XmlReaderSettings settings)
+		public List<LabelTemplate> ProcessXML(string xmlPath)
 		{
 			List<LabelTemplate> templates = new List<LabelTemplate>();
-			XmlDocument document = GetXMLDocument(xmlPath, settings);
+			XmlDocument document = GetXMLDocument(xmlPath);
 
 			if (document == null)
 			{
@@ -61,6 +65,27 @@ namespace DRC.WordAddIn.BarcodeLabels
 			}
 
 			return templates;
+		}
+
+		private XmlDocument GetXMLDocument(string xmlPath)
+		{
+			XmlDocument document = new XmlDocument
+			{
+				Schemas = _settings.Schemas
+			};
+
+			document.Load(xmlPath);
+
+			try
+			{
+				document.Validate(null);
+			} catch (XmlSchemaValidationException)
+			{
+				System.Windows.Forms.MessageBox.Show($"The label file \"{Path.GetFileName(xmlPath)}\" is invalid and will be ignored.");
+				return null; //invalid document
+			}
+
+			return document;
 		}
 
 		private LabelTemplate GetLabelTemplate(XmlNode labelNode)
@@ -108,44 +133,31 @@ namespace DRC.WordAddIn.BarcodeLabels
 			return item;
 		}
 
-		private XmlReaderSettings GetXMLReaderSettings(string xsdPath)
+		private XmlReaderSettings GetReaderSettings()
 		{
-			using (FileStream xsdStream = File.OpenRead(xsdPath))
+			XmlReaderSettings settings = new XmlReaderSettings
 			{
-				XmlSchema schema = XmlSchema.Read(xsdStream, SchemaError);
+				ValidationType = ValidationType.Schema,
+				ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings
+			};
 
-				XmlReaderSettings settings = new XmlReaderSettings
-				{
-					ValidationType = ValidationType.Schema,
-					ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings
-				};
+			using (FileStream stream = File.Open(SchemaPath, FileMode.Open, FileAccess.Read))
+			{
+				XmlSchema schema = XmlSchema.Read(stream, SchemaError);
 				settings.Schemas.Add(schema);
-				settings.ValidationEventHandler += SchemaError;
-				return settings;
 			}
-		}
-
-		private XmlDocument GetXMLDocument(string xmlPath, XmlReaderSettings settings)
-		{
-			try
-			{
-				using (XmlReader reader = XmlReader.Create(xmlPath, settings))
-				{
-					XmlDocument document = new XmlDocument();
-					document.Load(reader);
-					document.Validate(SchemaError);
-					return document;
-				}
-			} catch (Exception ex)
-			{
-				System.Windows.Forms.MessageBox.Show(ex.Message);
-				return null;
-			}
+			return settings;
 		}
 
 		private void SchemaError(object sender, ValidationEventArgs args)
 		{
-			System.Windows.Forms.MessageBox.Show($"SENDER: {sender.ToString()}\nMESSAGE: {args.Message}");
+			System.Windows.Forms.MessageBox.Show($"SCHEMA READ ERROR\nSENDER: {sender.ToString()}\nMESSAGE: {args.Message}");
+			//try to remove
+		}
+
+		private void XMLDocumentError(object sender, ValidationEventArgs args)
+		{
+			System.Windows.Forms.MessageBox.Show($"XML DOCUMENT INVALID\nSENDER: {sender.ToString()}\nMESSAGE: {args.Message}");
 		}
 	}
 }
