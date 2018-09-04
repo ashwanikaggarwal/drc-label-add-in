@@ -29,27 +29,48 @@ namespace DRC.WordAddIn.BarcodeLabels
 			Labels = new List<LabelTemplate>();
 		}
 
-		public void ProcessXML(string xsdPath)
+		public void ProcessDirectory(string dir, string xsdPath)
 		{
-			string dir = @"C:\Users\phill_000\Source\Repos\DRC.WordAddIn.BarcodeLabels\DRC.WordAddIn.BarcodeLabels\Templates";
-			string xmlPath = Path.Combine(dir, "Label.xml");
+			string[] xmlFiles = Directory.GetFiles(dir, "*.xml", SearchOption.TopDirectoryOnly);
 
 			XmlReaderSettings settings = GetXMLReaderSettings(xsdPath);
-			XmlDocument document = GetXMLDocument(xmlPath, settings);
-			XmlNode labelNode = document.DocumentElement;
 
-			LabelTemplate template = GetLabelTemplate(labelNode);
-			//do something with the template
+			foreach (string xmlPath in xmlFiles)
+			{
+				List<LabelTemplate> templates = ProcessXML(xmlPath, settings);
+				Labels.AddRange(templates);
+			}
+		}
+
+		public List<LabelTemplate> ProcessXML(string xmlPath, XmlReaderSettings settings)
+		{
+			List<LabelTemplate> templates = new List<LabelTemplate>();
+			XmlDocument document = GetXMLDocument(xmlPath, settings);
+
+			if (document == null)
+			{
+				return templates;
+			}
+
+			XmlNode rootNode = document.DocumentElement;
+
+			foreach (XmlNode labelNode in rootNode.ChildNodes)
+			{
+				LabelTemplate label = GetLabelTemplate(labelNode);
+				templates.Add(label);
+			}
+
+			return templates;
 		}
 
 		private LabelTemplate GetLabelTemplate(XmlNode labelNode)
 		{
-			LabelTemplate template = new LabelTemplate();
 
-			//set template name
-			template.Name = labelNode.Attributes["name"].Value;
+			LabelTemplate template = new LabelTemplate
+			{
+				Name = labelNode.Attributes["name"].Value
+			};
 
-			//set default status
 			string strDefault = labelNode.Attributes["default"].Value;
 			if (strDefault != null)
 			{
@@ -96,30 +117,35 @@ namespace DRC.WordAddIn.BarcodeLabels
 				XmlReaderSettings settings = new XmlReaderSettings
 				{
 					ValidationType = ValidationType.Schema,
+					ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings
 				};
+				settings.Schemas.Add(schema);
 				settings.ValidationEventHandler += SchemaError;
-
 				return settings;
 			}
 		}
 
 		private XmlDocument GetXMLDocument(string xmlPath, XmlReaderSettings settings)
 		{
-			using (XmlReader reader = XmlReader.Create(xmlPath, settings))
+			try
 			{
-				XmlDocument document = new XmlDocument
+				using (XmlReader reader = XmlReader.Create(xmlPath, settings))
 				{
-					//PreserveWhitespace = true
-				};
-
-				document.Load(reader);
-				return document;
+					XmlDocument document = new XmlDocument();
+					document.Load(reader);
+					document.Validate(SchemaError);
+					return document;
+				}
+			} catch (Exception ex)
+			{
+				System.Windows.Forms.MessageBox.Show(ex.Message);
+				return null;
 			}
 		}
 
 		private void SchemaError(object sender, ValidationEventArgs args)
 		{
-			System.Windows.Forms.MessageBox.Show("XSD Validation Error: " + args.Message);
+			System.Windows.Forms.MessageBox.Show($"SENDER: {sender.ToString()}\nMESSAGE: {args.Message}");
 		}
 	}
 }

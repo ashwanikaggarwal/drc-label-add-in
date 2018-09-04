@@ -1,24 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="label">
+  <xs:element name="library">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" name="item">
+        <xs:element maxOccurs="unbounded" name="label">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="text" type="xs:string" />
-              <xs:element name="font">
+              <xs:element maxOccurs="unbounded" name="item">
                 <xs:complexType>
-                  <xs:attribute name="size" type="xs:unsignedByte" use="required" />
+                  <xs:sequence>
+                    <xs:element name="text" type="xs:string" />
+                    <xs:element name="font">
+                      <xs:complexType>
+                        <xs:attribute name="size" type="xs:positiveInteger" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="type" type="xs:string" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <xs:attribute name="type" type="xs:string" use="required" />
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="default" type="xs:boolean" use="required" />
           </xs:complexType>
         </xs:element>
       </xs:sequence>
-      <xs:attribute name="name" type="xs:string" use="required" />
-      <xs:attribute name="default" type="xs:boolean" use="optional" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

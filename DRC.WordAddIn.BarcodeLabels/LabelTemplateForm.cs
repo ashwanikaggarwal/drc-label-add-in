@@ -18,12 +18,27 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public LabelTemplateForm()
 		{
 			InitializeComponent();
+			DirTextBox.Text = Properties.Settings.Default.LabelDirectory;
 		}
 
-		private void PopulateList(string path)
+		private void PopulateList(string dir)
 		{
-			string[] items = Directory.GetFiles(path, "*.xml", SearchOption.TopDirectoryOnly);
-			TemplateListBox.DataSource = items;
+			try
+			{
+				LabelModel model = new LabelModel();
+				string xsdPath = Path.Combine(dir, "Label.xsd");
+
+				model.ProcessDirectory(dir, xsdPath);
+
+				foreach(LabelTemplate template in model.Labels)
+				{
+					TemplateListBox.Items.Add(template.Name);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+			}
 		}
 
 		private void SelectDirLabel_Click(object sender, EventArgs e)
@@ -36,23 +51,30 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 			if (folderDialog.ShowDialog() == DialogResult.OK)
 			{
-				string dir = folderDialog.SelectedPath;
-				DirTextBox.Text = dir;
-				PopulateList(dir);
+				DirTextBox.Text = folderDialog.SelectedPath;
 			}
 		}
 
 		private void ReadLabelButton_Click(object sender, EventArgs e)
 		{
-			try
+			string dir = DirTextBox.Text;
+
+			if(Directory.Exists(dir))
 			{
-				LabelModel labels = new LabelModel();
-				labels.ProcessXML(Properties.Settings.Default.LabelSchemaPath);
-			}
-			catch (Exception ex)
+				PopulateList(dir);
+			} else
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show("The selected folder does not exist or was mistyped.");
 			}
+		}
+
+		private void TemplateListBox_DoubleClick(object sender, EventArgs e)
+		{
+			ListBox box = (ListBox)sender;
+			if (box.SelectedItem == null)
+				return;
+
+			MessageBox.Show(box.SelectedItem.ToString());
 		}
 	}
 }

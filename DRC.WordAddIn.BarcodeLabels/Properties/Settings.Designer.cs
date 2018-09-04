@@ -98,14 +98,14 @@ namespace DRC.WordAddIn.BarcodeLabels.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\phill_000\\Source\\Repos\\DRC.WordAddIn.BarcodeLabels\\DRC.WordAddIn.Barcode" +
-            "Labels\\Templates\\Label.xsd")]
-        public string LabelSchemaPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\phill.DESKTOP-RA8B7OS\\source\\repos\\DRC.WordAddIn.BarcodeLabels\\DRC.WordA" +
+            "ddIn.BarcodeLabels\\Templates")]
+        public string LabelDirectory {
             get {
-                return ((string)(this["LabelSchemaPath"]));
+                return ((string)(this["LabelDirectory"]));
             }
             set {
-                this["LabelSchemaPath"] = value;
+                this["LabelDirectory"] = value;
             }
         }
     }

@@ -20,8 +20,8 @@
     <Setting Name="DBConnLocal" Type="System.String" Scope="User">
       <Value Profile="(Default)">Provider=Microsoft.ACE.OLEDB.12.0; Data Source = {0}; Extended Properties = "Text;HDR=YES;FMT=Delimited";</Value>
     </Setting>
-    <Setting Name="LabelSchemaPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Users\phill_000\Source\Repos\DRC.WordAddIn.BarcodeLabels\DRC.WordAddIn.BarcodeLabels\Templates\Label.xsd</Value>
+    <Setting Name="LabelDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\phill.DESKTOP-RA8B7OS\source\repos\DRC.WordAddIn.BarcodeLabels\DRC.WordAddIn.BarcodeLabels\Templates</Value>
     </Setting>
   </Settings>
 </SettingsFile>

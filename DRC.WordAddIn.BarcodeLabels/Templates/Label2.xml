@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<library>
+  
+  <label name="Name and Serial" default="false">
+    <item type="Field">
+      <text> MERGEFIELD Name </text>
+      <font size="11"/>
+    </item>
+    
+    <item type="Field">
+      <text> MERGEFIELD SerialNumber \b ": " </text>
+      <font size="11"/>
+    </item>
+  </label>
+  
+  <label name="Serial Only" default="false">
+    <item type="Field">
+      <text> MERGEFIELD SerialNumber \b ": " </text>
+      <font size="11"/>
+    </item>
+  </label>
+  
+</library>
