@@ -64,7 +64,7 @@
 			this.HeaderLabel.Location = new System.Drawing.Point(4, 0);
 			this.HeaderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.HeaderLabel.Name = "HeaderLabel";
-			this.HeaderLabel.Padding = new System.Windows.Forms.Padding(18, 18, 18, 18);
+			this.HeaderLabel.Padding = new System.Windows.Forms.Padding(18);
 			this.HeaderLabel.Size = new System.Drawing.Size(568, 56);
 			this.HeaderLabel.TabIndex = 1;
 			this.HeaderLabel.Text = "Select a label template to use and print.\r\n";
@@ -80,16 +80,17 @@
 			this.DirControlPanel.Location = new System.Drawing.Point(4, 61);
 			this.DirControlPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.DirControlPanel.Name = "DirControlPanel";
-			this.DirControlPanel.Size = new System.Drawing.Size(568, 51);
+			this.DirControlPanel.Size = new System.Drawing.Size(568, 38);
 			this.DirControlPanel.TabIndex = 2;
 			// 
 			// ReadLabelButton
 			// 
 			this.ReadLabelButton.AutoSize = true;
-			this.ReadLabelButton.Location = new System.Drawing.Point(450, 0);
+			this.ReadLabelButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ReadLabelButton.Location = new System.Drawing.Point(458, 3);
 			this.ReadLabelButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.ReadLabelButton.Name = "ReadLabelButton";
-			this.ReadLabelButton.Size = new System.Drawing.Size(152, 46);
+			this.ReadLabelButton.Size = new System.Drawing.Size(101, 30);
 			this.ReadLabelButton.TabIndex = 2;
 			this.ReadLabelButton.Text = "Read Label";
 			this.ReadLabelButton.UseVisualStyleBackColor = true;
@@ -121,10 +122,10 @@
 			this.TemplateListBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TemplateListBox.FormattingEnabled = true;
 			this.TemplateListBox.ItemHeight = 20;
-			this.TemplateListBox.Location = new System.Drawing.Point(4, 122);
+			this.TemplateListBox.Location = new System.Drawing.Point(4, 109);
 			this.TemplateListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.TemplateListBox.Name = "TemplateListBox";
-			this.TemplateListBox.Size = new System.Drawing.Size(568, 275);
+			this.TemplateListBox.Size = new System.Drawing.Size(568, 288);
 			this.TemplateListBox.TabIndex = 3;
 			this.TemplateListBox.DoubleClick += new System.EventHandler(this.TemplateListBox_DoubleClick);
 			// 

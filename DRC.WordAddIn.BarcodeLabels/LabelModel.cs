@@ -14,7 +14,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public List<LabelTemplate> Labels { get; set; }
 
 		public string SchemaPath { get; set; }
-		private XmlReaderSettings _settings; //phase this out
+
+		private XmlReaderSettings _settings;
 
 		public LabelTemplate DefaultLabel
 		{
@@ -31,7 +32,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			Labels = new List<LabelTemplate>();
 			SchemaPath = schemaPath;
-
 			_settings = GetReaderSettings();
 		}
 		
@@ -74,6 +74,11 @@ namespace DRC.WordAddIn.BarcodeLabels
 				Schemas = _settings.Schemas
 			};
 
+			if (document.Schemas.Count < 1)
+			{
+				return null; //document cannot be validated without a schema
+			}
+
 			document.Load(xmlPath);
 
 			try
@@ -81,7 +86,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 				document.Validate(null);
 			} catch (XmlSchemaValidationException)
 			{
-				System.Windows.Forms.MessageBox.Show($"The label file \"{Path.GetFileName(xmlPath)}\" is invalid and will be ignored.");
+				string validationErrorMessage = $"The label file \"{Path.GetFileName(xmlPath)}\"" +
+												$"is invalid and will be ignored.";
+				System.Windows.Forms.MessageBox.Show(validationErrorMessage);
 				return null; //invalid document
 			}
 
@@ -90,7 +97,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private LabelTemplate GetLabelTemplate(XmlNode labelNode)
 		{
-
 			LabelTemplate template = new LabelTemplate
 			{
 				Name = labelNode.Attributes["name"].Value
@@ -141,23 +147,21 @@ namespace DRC.WordAddIn.BarcodeLabels
 				ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings
 			};
 
-			using (FileStream stream = File.Open(SchemaPath, FileMode.Open, FileAccess.Read))
+			try
 			{
-				XmlSchema schema = XmlSchema.Read(stream, SchemaError);
-				settings.Schemas.Add(schema);
+				using (FileStream schemaStream = File.Open(SchemaPath, FileMode.Open, FileAccess.Read))
+				{
+					XmlSchema schema = XmlSchema.Read(schemaStream, null);
+					settings.Schemas.Add(schema);
+				}
+			} catch (XmlException)
+			{
+				string schemaErrorMessage = $"The file that validates labels \"{Path.GetFileName(SchemaPath)}\" is broken." +
+											$"\n" +
+											$"You may need to reinstall the add-in or download a working schema file.";
+				System.Windows.Forms.MessageBox.Show(schemaErrorMessage);
 			}
 			return settings;
-		}
-
-		private void SchemaError(object sender, ValidationEventArgs args)
-		{
-			System.Windows.Forms.MessageBox.Show($"SCHEMA READ ERROR\nSENDER: {sender.ToString()}\nMESSAGE: {args.Message}");
-			//try to remove
-		}
-
-		private void XMLDocumentError(object sender, ValidationEventArgs args)
-		{
-			System.Windows.Forms.MessageBox.Show($"XML DOCUMENT INVALID\nSENDER: {sender.ToString()}\nMESSAGE: {args.Message}");
 		}
 	}
 }

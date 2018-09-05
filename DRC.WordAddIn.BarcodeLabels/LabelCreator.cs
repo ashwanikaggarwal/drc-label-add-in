@@ -36,13 +36,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public bool HasLabels()
 		{
-			if(GetLabelsTable(false) != null)
-			{
-				return true;
-			} else
-			{
-				return false;
-			}
+			return (GetLabelsTable(false) != null);
 		}
 
 		public Word.Table GetLabelsTable(bool resetMailMerge = true)
@@ -67,11 +61,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 			}
 			
 			ActiveDocument.ActiveWindow.View.TableGridlines = true;
-
-			Word.Font defaultFont = new Word.Font
-			{
-				Size = 8
-			};
 
 			Word.Range cellRange = table.Cell(1, 1).Range;
 
