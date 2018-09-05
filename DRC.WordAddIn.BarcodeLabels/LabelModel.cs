@@ -1,167 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Xml;
-using System.Xml.Schema;
+﻿using System.Collections.Generic;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
-	class LabelModel
+	public class LabelModel
 	{
 		public List<LabelTemplate> Labels { get; set; }
 
-		public string SchemaPath { get; set; }
+		private XMLLabelParser _parser;
 
-		private XmlReaderSettings _settings;
+		public LabelTemplate CurrentLabel { get; set; }
 
-		public LabelTemplate DefaultLabel
-		{
-			get
-			{
-				foreach (LabelTemplate label in Labels)
-					if (label.Default) //check if label is default
-						return label;
-				return Labels[0] ?? null;
-			}
-		}
-
-		public LabelModel(string schemaPath)
+		public LabelModel()
 		{
 			Labels = new List<LabelTemplate>();
-			SchemaPath = schemaPath;
-			_settings = GetReaderSettings();
-		}
-		
-		public void ProcessDirectory(string dir)
-		{
-			string[] xmlFiles = Directory.GetFiles(dir, "*.xml", SearchOption.TopDirectoryOnly);
-
-			foreach (string xmlPath in xmlFiles)
-			{
-				List<LabelTemplate> templates = ProcessXML(xmlPath);
-				Labels.AddRange(templates);
-			}
+			_parser = new XMLLabelParser();
+			SetupDefaultLabel();
 		}
 
-		public List<LabelTemplate> ProcessXML(string xmlPath)
+		public void AddFromDirectory(string dir)
 		{
-			List<LabelTemplate> templates = new List<LabelTemplate>();
-			XmlDocument document = GetXMLDocument(xmlPath);
-
-			if (document == null)
-			{
-				return templates;
-			}
-
-			XmlNode rootNode = document.DocumentElement;
-
-			foreach (XmlNode labelNode in rootNode.ChildNodes)
-			{
-				LabelTemplate label = GetLabelTemplate(labelNode);
-				templates.Add(label);
-			}
-
-			return templates;
+			List<LabelTemplate> templates = _parser.ProcessDirectory(dir);
+			Labels.AddRange(templates);
+			SetupDefaultLabel();
 		}
 
-		private XmlDocument GetXMLDocument(string xmlPath)
+		private void SetupDefaultLabel()
 		{
-			XmlDocument document = new XmlDocument
+			if(Labels.Count < 1)
 			{
-				Schemas = _settings.Schemas
-			};
-
-			if (document.Schemas.Count < 1)
-			{
-				return null; //document cannot be validated without a schema
+				CurrentLabel = null;
+				return;
 			}
 
-			document.Load(xmlPath);
-
-			try
-			{
-				document.Validate(null);
-			} catch (XmlSchemaValidationException)
-			{
-				string validationErrorMessage = $"The label file \"{Path.GetFileName(xmlPath)}\"" +
-												$"is invalid and will be ignored.";
-				System.Windows.Forms.MessageBox.Show(validationErrorMessage);
-				return null; //invalid document
-			}
-
-			return document;
-		}
-
-		private LabelTemplate GetLabelTemplate(XmlNode labelNode)
-		{
-			LabelTemplate template = new LabelTemplate
-			{
-				Name = labelNode.Attributes["name"].Value
-			};
-
-			string strDefault = labelNode.Attributes["default"].Value;
-			if (strDefault != null)
-			{
-				Boolean.TryParse(strDefault, out bool isDefault);
-				template.Default = isDefault;
-			}
-
-			foreach (XmlNode itemNode in labelNode.ChildNodes)
-			{
-				ContentItem item = GetContentItem(itemNode);
-				template.AddContent(item);
-			}
-
-			return template;
-		}
-
-		private ContentItem GetContentItem(XmlNode itemNode)
-		{
-			ContentItem item = new ContentItem();
-
-			//set item type
-			string strType = itemNode.Attributes["type"].Value;
-			Enum.TryParse(strType, true, out ContentType type);
-			item.Type = type;
-
-			//set item text
-			string strText = itemNode["text"].InnerText;
-			item.Text = strText;
-
-			//set item font size
-			string strFontSize = itemNode["font"].Attributes["size"].Value;
-			Int32.TryParse(strFontSize, out int fontSize);
-			item.Font.Size = fontSize;
-
-			return item;
-		}
-
-		private XmlReaderSettings GetReaderSettings()
-		{
-			XmlReaderSettings settings = new XmlReaderSettings
-			{
-				ValidationType = ValidationType.Schema,
-				ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings
-			};
-
-			try
-			{
-				using (FileStream schemaStream = File.Open(SchemaPath, FileMode.Open, FileAccess.Read))
+			foreach (LabelTemplate label in Labels)
+				if (label.Default)
 				{
-					XmlSchema schema = XmlSchema.Read(schemaStream, null);
-					settings.Schemas.Add(schema);
+					CurrentLabel = label;
+					return;
 				}
-			} catch (XmlException)
-			{
-				string schemaErrorMessage = $"The file that validates labels \"{Path.GetFileName(SchemaPath)}\" is broken." +
-											$"\n" +
-											$"You may need to reinstall the add-in or download a working schema file.";
-				System.Windows.Forms.MessageBox.Show(schemaErrorMessage);
-			}
-			return settings;
+			CurrentLabel = Labels[0];
 		}
 	}
 }

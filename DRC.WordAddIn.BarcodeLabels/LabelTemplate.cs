@@ -44,6 +44,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 						rangeCursor.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
 						break;
+
+					case ContentType.LineBreak:
+						rangeCursor.InsertBreak(Word.WdBreakType.wdLineBreak);
+
+						rangeCursor.Collapse(Word.WdCollapseDirection.wdCollapseEnd);
+						break;
 				}
 		}
 

@@ -171,9 +171,10 @@
     <Compile Include="DataForm.Designer.cs">
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LabelCreator.cs" />
+    <Compile Include="LabelManager.cs" />
     <Compile Include="ContentItem.cs" />
     <Compile Include="LabelModel.cs" />
+    <Compile Include="XMLLabelParser.cs" />
     <Compile Include="LabelTemplate.cs" />
     <Compile Include="LabelTemplateForm.cs">
       <SubType>Form</SubType>

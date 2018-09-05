@@ -19,14 +19,23 @@ namespace DRC.WordAddIn.BarcodeLabels
 	public class DocumentController
 	{
 		private Word.Application _app;
-		private DataModel _model;
-		private LabelCreator _labelCreator;
+		private DataModel _dataModel;
+		private LabelManager _labelManager;
+		private LabelModel _labelModel;
 
 		public DataForm DataForm
 		{
 			get
 			{
-				return new DataForm(_model);
+				return new DataForm(_dataModel);
+			}
+		}
+
+		public LabelTemplateForm TemplateForm
+		{
+			get
+			{
+				return new LabelTemplateForm(_labelModel);
 			}
 		}
 
@@ -41,17 +50,18 @@ namespace DRC.WordAddIn.BarcodeLabels
 		public DocumentController(Word.Application app)
 		{
 			_app = app;
-			_model = new DataModel();
-			_labelCreator = new LabelCreator(_app);
+			_dataModel = new DataModel();
+			_labelManager = new LabelManager(_app);
+			_labelModel = new LabelModel();
 		}
 
 		public ControllerResult CreateLabels()
 		{
 			try
 			{
-				_labelCreator.GenerateLabels();
+				_labelManager.GenerateLabels();
 
-				Word.Table labelsTable = _labelCreator.GetLabelsTable();
+				Word.Table labelsTable = _labelManager.GetLabelsTable();
 
 				if (labelsTable == null)
 				{
@@ -59,7 +69,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 					return ControllerResult.Nothing;
 				}
 
-				_labelCreator.WriteFields(labelsTable);
+				LabelTemplate template = _labelModel.CurrentLabel;
+
+				if(template != null)
+				{
+					_labelManager.WriteLabel(labelsTable, template);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -71,10 +86,10 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public ControllerResult FinishLabels()
 		{
-			if (_model.IsEmpty())
+			if (_dataModel.IsEmpty())
 			{
 				return ControllerResult.EmptyData;
-			} else if(!_labelCreator.HasLabels())
+			} else if(!_labelManager.HasLabels())
 			{
 				return ControllerResult.NoLabels;
 			}
@@ -97,7 +112,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 		private void MailMergeExecute(string sourcePath)
 		{
 			System.IO.File.Create(sourcePath).Close();
-			_model.WriteToFile(sourcePath);
+			_dataModel.WriteToFile(sourcePath);
 
 			Word.MailMerge mailMerge = ActiveDocument.MailMerge;
 

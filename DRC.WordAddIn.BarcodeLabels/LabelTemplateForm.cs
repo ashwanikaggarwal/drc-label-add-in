@@ -15,9 +15,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public partial class LabelTemplateForm : Form
 	{
-		public LabelTemplateForm()
+		private LabelModel _model;
+
+		public LabelTemplateForm(LabelModel model)
 		{
 			InitializeComponent();
+			_model = model;
 			DirTextBox.Text = Properties.Settings.Default.LabelDirectory;
 		}
 
@@ -25,12 +28,9 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			try
 			{
-				string xsdPath = Path.Combine(dir, "Label.xsd");
-				LabelModel model = new LabelModel(xsdPath);
+				_model.AddFromDirectory(dir);
 
-				model.ProcessDirectory(dir);
-
-				foreach(LabelTemplate template in model.Labels)
+				foreach(LabelTemplate template in _model.Labels)
 				{
 					TemplateListBox.Items.Add(template.Name);
 				}

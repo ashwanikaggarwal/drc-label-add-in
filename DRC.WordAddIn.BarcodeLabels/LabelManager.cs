@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//Office and Interop
-using Word = Microsoft.Office.Interop.Word;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Word;
+﻿//Office and Interop
 using Microsoft.Office.Interop.Word;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
-	public class LabelCreator
+	public class LabelManager
 	{
 		private Word.Application _app;
 
@@ -23,7 +16,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			}
 		}
 
-		public LabelCreator(Word.Application app)
+		public LabelManager(Word.Application app)
 		{
 			_app = app;
 		}
@@ -53,7 +46,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			return null;
 		}
 
-		public void WriteFields(Word.Table table)
+		public void WriteLabel(Word.Table table, LabelTemplate template)
 		{
 			if (table == null)
 			{
@@ -63,8 +56,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 			ActiveDocument.ActiveWindow.View.TableGridlines = true;
 
 			Word.Range cellRange = table.Cell(1, 1).Range;
-
-			LabelTemplate template = new LabelTemplate();
 
 			cellRange.Delete();
 			template.WriteToRange(cellRange);

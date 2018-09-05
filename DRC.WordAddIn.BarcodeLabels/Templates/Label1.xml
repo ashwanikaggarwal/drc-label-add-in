@@ -12,8 +12,8 @@
       <font size="8"/>
     </item>
     
-    <item type="RangeText">
-      <text>\v</text>
+    <item type="LineBreak">
+      <text></text>
       <font size="8"/>
     </item>
     

@@ -10,7 +10,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public enum ContentType
 	{
-		RangeText, Field
+		RangeText, Field, LineBreak
 	}
 
 	public class ContentItem
