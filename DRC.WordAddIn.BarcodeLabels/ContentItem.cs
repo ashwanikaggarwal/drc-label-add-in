@@ -30,10 +30,5 @@ namespace DRC.WordAddIn.BarcodeLabels
 			Text = text;
 			Font = font;
 		}
-
-		public override string ToString()
-		{
-			return $"{Type.ToString()}: {Text}; Font Size {Font.Size}";
-		}
 	}
 }

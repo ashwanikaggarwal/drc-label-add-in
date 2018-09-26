@@ -65,14 +65,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		public override string ToString()
 		{
-			List<string> strListContents = new List<string>();
-
-			foreach(ContentItem item in Contents)
-			{
-				strListContents.Add(item.ToString());
-			}
-
-			return String.Join("\n", strListContents);
+            return Name;
 		}
 	}
 }

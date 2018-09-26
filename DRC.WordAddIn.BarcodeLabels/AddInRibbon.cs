@@ -53,7 +53,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void DataButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			_controller.DataForm.Show();
+            HandleResult(_controller.OpenDataForm());
 		}
 
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
@@ -68,17 +68,17 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void TemplateButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			_controller.TemplateForm.Show();
+            HandleResult(_controller.OpenTemplateForm());
 		}
 
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			Globals.ThisAddIn.DisplayStatus();
-		}
+            HandleResult(_controller.DisplayStatus());
+        }
 
 		private void ToggleButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			Globals.ThisAddIn.Application.ActiveDocument.Fields.ToggleShowCodes();
-		}
+            HandleResult(_controller.ToggleFields());
+        }
 	}
 }

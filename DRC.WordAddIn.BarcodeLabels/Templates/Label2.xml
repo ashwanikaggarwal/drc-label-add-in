@@ -15,7 +15,7 @@
   
   <label name="Serial Only" default="false">
     <item type="Field">
-      <text> MERGEFIELD SerialNumber \b ": " </text>
+      <text> MERGEFIELD SerialNumber </text>
       <font size="11"/>
     </item>
   </label>

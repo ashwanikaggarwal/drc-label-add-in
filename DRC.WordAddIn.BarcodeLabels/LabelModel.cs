@@ -4,27 +4,26 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public class LabelModel
 	{
-		public List<LabelTemplate> Labels { get; set; }
+        private XMLLabelParser _parser;
 
-		private XMLLabelParser _parser;
-
+        public List<LabelTemplate> Labels { get; private set; }
 		public LabelTemplate CurrentLabel { get; set; }
 
 		public LabelModel()
 		{
 			Labels = new List<LabelTemplate>();
 			_parser = new XMLLabelParser();
-			SetupDefaultLabel();
+			SetupCurrentLabel();
 		}
 
-		public void AddFromDirectory(string dir)
+		public void LoadFromDirectory(string dir)
 		{
 			List<LabelTemplate> templates = _parser.ProcessDirectory(dir);
-			Labels.AddRange(templates);
-			SetupDefaultLabel();
+            Labels = templates;
+			SetupCurrentLabel();
 		}
 
-		private void SetupDefaultLabel()
+		private void SetupCurrentLabel()
 		{
 			if(Labels.Count < 1)
 			{

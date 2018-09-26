@@ -22,17 +22,6 @@ namespace DRC.WordAddIn.BarcodeLabels
         {
         }
 
-        public void DisplayStatus()
-        {
-            Word.Document activeDocument = this.Application.ActiveDocument;
-            string status = "";
-
-            status += "Mail Merge State: " + activeDocument.MailMerge.State.ToString() + "\n";
-            status += "Data Source: " + activeDocument.MailMerge.DataSource.Type.ToString() + "\n";
-
-            MessageBox.Show(status);
-        }
-
         #region VSTO generated code
 
         /// <summary>

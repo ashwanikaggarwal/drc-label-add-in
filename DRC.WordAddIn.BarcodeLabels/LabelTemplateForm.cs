@@ -15,66 +15,49 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public partial class LabelTemplateForm : Form
 	{
-		private LabelModel _model;
+		private LabelModel _labelModel;
 
-		public LabelTemplateForm(LabelModel model)
+		public LabelTemplateForm(LabelModel labelModel)
 		{
 			InitializeComponent();
-			_model = model;
-			DirTextBox.Text = Properties.Settings.Default.LabelDirectory;
-		}
+			_labelModel = labelModel;
+            PopulateList();
+        }
 
-		private void PopulateList(string dir)
+		private void PopulateList()
 		{
-			try
-			{
-				_model.AddFromDirectory(dir);
+            TemplateListBox.BeginUpdate();
+            foreach (LabelTemplate template in _labelModel.Labels)
+            {
+                TemplateListBox.Items.Add(template);
+            }
+            TemplateListBox.EndUpdate();
 
-				foreach(LabelTemplate template in _model.Labels)
-				{
-					TemplateListBox.Items.Add(template.Name);
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
-			}
+            TemplateListBox.SelectedItem = _labelModel.CurrentLabel;
 		}
 
-		private void SelectDirLabel_Click(object sender, EventArgs e)
-		{
-			FolderBrowserDialog folderDialog = new FolderBrowserDialog
-			{
-				RootFolder = Environment.SpecialFolder.MyComputer,
-				ShowNewFolderButton = false
-			};
+        private void SelectTemplate()
+        {
+            if (TemplateListBox.SelectedItem == null)
+                return;
 
-			if (folderDialog.ShowDialog() == DialogResult.OK)
-			{
-				DirTextBox.Text = folderDialog.SelectedPath;
-			}
-		}
-
-		private void ReadLabelButton_Click(object sender, EventArgs e)
-		{
-			string dir = DirTextBox.Text;
-
-			if(Directory.Exists(dir))
-			{
-				PopulateList(dir);
-			} else
-			{
-				MessageBox.Show("The selected folder does not exist or was mistyped.");
-			}
-		}
+            _labelModel.CurrentLabel = (LabelTemplate) TemplateListBox.SelectedItem;
+            this.Close();
+        }
 
 		private void TemplateListBox_DoubleClick(object sender, EventArgs e)
 		{
-			ListBox box = (ListBox)sender;
-			if (box.SelectedItem == null)
-				return;
-
-			MessageBox.Show(box.SelectedItem.ToString());
+            SelectTemplate();
 		}
-	}
+
+        private void OKButton_Click(object sender, EventArgs e)
+        {
+            SelectTemplate();
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
 }
