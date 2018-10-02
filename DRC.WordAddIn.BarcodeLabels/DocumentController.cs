@@ -14,15 +14,15 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
 	public enum ControllerResult
 	{
-		Success, Nothing, Failure, SilentFailure, EmptyData, NoLabels
+		Success, Nothing, Failure, SilentFailure, EmptyData, NoLabels, NoTemplate
 	}
 
 	public class DocumentController
 	{
 		private Word.Application _app;
 		private DataModel _dataModel;
-		private LabelManager _labelManager;
-		private LabelModel _labelModel;
+        private LabelModel _labelModel;
+        private LabelWriter _labelWriter;
 
 		public Word.Document ActiveDocument
 		{
@@ -36,8 +36,8 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			_app = app;
 			_dataModel = new DataModel();
-            _labelManager = new LabelManager(_app);
-			_labelModel = new LabelModel();
+            _labelModel = new LabelModel();
+            _labelWriter = new LabelWriter(_app);
 
             try
             {
@@ -49,72 +49,92 @@ namespace DRC.WordAddIn.BarcodeLabels
             }
         }
 
-		public ControllerResult CreateLabels()
+        public ControllerResult CreateLabels()
+        {
+            try
+            {
+                _labelWriter.GenerateLabels();
+                return WriteLabels();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.ToString()}");
+                return ControllerResult.Failure;
+            }
+        }
+
+        private ControllerResult WriteLabels()
+        {
+            Word.Table labelsTable = _labelWriter.GetLabelsTable();
+
+            if (labelsTable == null)
+            {
+                //user chose that no labels should be made
+                return ControllerResult.Nothing;
+            }
+
+            LabelTemplate template = _labelModel.CurrentLabel;
+
+            if (template == null)
+            {
+                return ControllerResult.NoTemplate;
+            }
+
+            _labelWriter.WriteLabel(labelsTable, template);
+            return ControllerResult.Success;
+        }
+
+        public ControllerResult FinishLabels()
 		{
-			try
-			{
-				_labelManager.GenerateLabels();
+            if(_dataModel.IsEmpty())
+            {
+                return ControllerResult.EmptyData;
+            } else if (!_labelWriter.HasLabels)
+            {
+                return ControllerResult.NoLabels;
+            }
 
-				Word.Table labelsTable = _labelManager.GetLabelsTable();
-
-				if (labelsTable == null)
-				{
-					//user chose that no labels should be made
-					return ControllerResult.Nothing;
-				}
-
-				LabelTemplate template = _labelModel.CurrentLabel;
-
-				if(template != null)
-				{
-					_labelManager.WriteLabel(labelsTable, template);
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show($"{ex.ToString()}");
-				return ControllerResult.Failure;
-			}
-			return ControllerResult.Success;
+            return MailMergeExecute();
 		}
 
-		public ControllerResult FinishLabels()
-		{
-			if (_dataModel.IsEmpty())
-			{
-				return ControllerResult.EmptyData;
-			} else if(!_labelManager.HasLabels())
-			{
-				return ControllerResult.NoLabels;
-			}
+        private ControllerResult MailMergeExecute()
+        {
+            try
+            {
+                string fileName = @"\datasource.csv";
+                string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + fileName;
 
-			try
-			{
-				string fileName = @"\datasource.csv";
-				string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + fileName;
+                System.IO.File.Create(sourcePath).Close();
+                _dataModel.WriteToFile(sourcePath);
 
-				MailMergeExecute(sourcePath);
-			}
-			catch (Exception ex)
-			{
-				System.Windows.Forms.MessageBox.Show($"{ex.ToString()}");
-				return ControllerResult.Failure;
-			}
-			return ControllerResult.Success;
-		}
+                Word.MailMerge mailMerge = ActiveDocument.MailMerge;
+
+                mailMerge.OpenDataSource(sourcePath, Word.WdOpenFormat.wdOpenFormatAuto);
+                mailMerge.Execute(true);
+                mailMerge.DataSource.Close();
+                System.IO.File.Delete(sourcePath);
+
+                return ControllerResult.Success;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show($"{ex.ToString()}");
+                return ControllerResult.Failure;
+            }
+        }
 
         public ControllerResult OpenTemplateForm()
         {
             try
             {
                 LabelTemplateForm tForm = new LabelTemplateForm(_labelModel);
-                tForm.Show();
+                tForm.ShowDialog();
+
+                return WriteLabels();
             } catch
             {
                 return ControllerResult.SilentFailure;
             }
-
-            return ControllerResult.Success;
         }
 
         public ControllerResult OpenDataForm()
@@ -122,7 +142,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             try
             {
                 DataForm dForm = new DataForm(_dataModel);
-                dForm.Show();
+                dForm.ShowDialog();
             }
             catch
             {
@@ -142,7 +162,6 @@ namespace DRC.WordAddIn.BarcodeLabels
             {
                 return ControllerResult.SilentFailure;
             }
-
             return ControllerResult.Success;
         }
 
@@ -159,21 +178,7 @@ namespace DRC.WordAddIn.BarcodeLabels
             {
                 return ControllerResult.SilentFailure;
             }
-
             return ControllerResult.Success;
         }
-
-        private void MailMergeExecute(string sourcePath)
-		{
-			System.IO.File.Create(sourcePath).Close();
-			_dataModel.WriteToFile(sourcePath);
-
-			Word.MailMerge mailMerge = ActiveDocument.MailMerge;
-
-			mailMerge.OpenDataSource(sourcePath, WdOpenFormat.wdOpenFormatAuto);
-			mailMerge.Execute(true);
-			mailMerge.DataSource.Close();
-			System.IO.File.Delete(sourcePath);
-		}
 	}
 }

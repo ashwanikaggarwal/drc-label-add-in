@@ -10,12 +10,12 @@ namespace DRC.WordAddIn.BarcodeLabels
 {
     public partial class AddInRibbon
     {
-		private DocumentController _controller;
+		private DocumentController _documentController;
 
         private void AddInRibbon_Load(object sender, RibbonUIEventArgs e)
         {
-			_controller = new DocumentController(Globals.ThisAddIn.Application);
-		}
+			_documentController = new DocumentController(Globals.ThisAddIn.Application);
+        }
 
 		private void HandleResult(ControllerResult result)
 		{
@@ -44,6 +44,10 @@ namespace DRC.WordAddIn.BarcodeLabels
 				case ControllerResult.NoLabels:
 					MessageBox.Show("Please choose a label style by selecting \"Create Labels\".");
 					break;
+
+                case ControllerResult.NoTemplate:
+                    MessageBox.Show("Please select a label template by selecting \"Label Templates\".");
+                    break;
 					
 				default:
 					MessageBox.Show($"\"{result.ToString()}\" is an unimplemented result case.");
@@ -53,32 +57,32 @@ namespace DRC.WordAddIn.BarcodeLabels
 
 		private void DataButton_Click(object sender, RibbonControlEventArgs e)
 		{
-            HandleResult(_controller.OpenDataForm());
+            HandleResult(_documentController.OpenDataForm());
 		}
 
         private void CreateLabelsButton_Click(object sender, RibbonControlEventArgs e)
         {
-			HandleResult(_controller.CreateLabels());
+			HandleResult(_documentController.CreateLabels());
 		}
 
 		private void ExecuteButton_Click(object sender, RibbonControlEventArgs e)
 		{
-			HandleResult(_controller.FinishLabels());
+			HandleResult(_documentController.FinishLabels());
 		}
 
 		private void TemplateButton_Click(object sender, RibbonControlEventArgs e)
 		{
-            HandleResult(_controller.OpenTemplateForm());
+            HandleResult(_documentController.OpenTemplateForm());
 		}
 
 		private void StatusButton_Click(object sender, RibbonControlEventArgs e)
 		{
-            HandleResult(_controller.DisplayStatus());
+            HandleResult(_documentController.DisplayStatus());
         }
 
 		private void ToggleButton_Click(object sender, RibbonControlEventArgs e)
 		{
-            HandleResult(_controller.ToggleFields());
+            HandleResult(_documentController.ToggleFields());
         }
 	}
 }

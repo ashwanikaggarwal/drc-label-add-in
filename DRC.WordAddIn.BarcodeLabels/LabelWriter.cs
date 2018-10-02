@@ -4,11 +4,19 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace DRC.WordAddIn.BarcodeLabels
 {
-	public class LabelManager
+	public class LabelWriter
 	{
 		private Word.Application _app;
 
-		public Word.Document ActiveDocument
+        public bool HasLabels
+        {
+            get
+            {
+                return (GetLabelsTable(false) != null);
+            }
+        }
+
+        public Word.Document ActiveDocument
 		{
 			get
 			{
@@ -16,7 +24,7 @@ namespace DRC.WordAddIn.BarcodeLabels
 			}
 		}
 
-		public LabelManager(Word.Application app)
+		public LabelWriter(Word.Application app)
 		{
 			_app = app;
 		}
@@ -25,11 +33,6 @@ namespace DRC.WordAddIn.BarcodeLabels
 		{
 			ActiveDocument.MailMerge.MainDocumentType = WdMailMergeMainDocType.wdMailingLabels;
 			_app.MailingLabel.LabelOptions();
-		}
-
-		public bool HasLabels()
-		{
-			return (GetLabelsTable(false) != null);
 		}
 
 		public Word.Table GetLabelsTable(bool resetMailMerge = true)
